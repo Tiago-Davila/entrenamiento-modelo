@@ -2,12 +2,40 @@
 # Eva — pipeline de reconocimiento de LSA
 # Dependencias para: preprocess_tasks.py, augment.py, train_keras_tflite.py
 #
-# Combinacion verificada en Python 3.12. Los tres modulos conviven en un solo
-# entorno: no hace falta separar venvs.
+# REQUIERE PYTHON 3.9 A 3.13. Recomendado: 3.12 (es donde se verifico todo).
 #
-#   python -m venv venv
-#   venv\Scripts\activate          (Windows)   |   source venv/bin/activate (Linux)
-#   pip install -r requirements.txt
+# El techo lo pone TensorFlow, que no publica wheels para 3.14. Como muchas
+# distribuciones ya traen 3.14 por defecto, `python -m venv venv` toma esa
+# version y la instalacion falla con un mensaje que no explica nada:
+#
+#     ERROR: Could not find a version that satisfies the requirement
+#            tensorflow-cpu<3.0,>=2.17 (from versions: none)
+#
+# Ese "from versions: none" NO es un conflicto entre paquetes: significa que
+# para tu interprete no existe ninguna wheel. La guarda de abajo convierte eso
+# en un mensaje entendible. Verificado por version:
+#
+#     3.9   tensorflow-cpu 2.20.0   ok
+#     3.10  tensorflow-cpu 2.21.0   ok
+#     3.11  tensorflow-cpu 2.21.0   ok
+#     3.12  tensorflow-cpu 2.21.0   ok   <- recomendada
+#     3.13  tensorflow-cpu 2.21.0   ok
+#     3.14  ninguna                 FALLA
+#
+# mediapipe 0.10.33 si tiene wheel para 3.14, asi que el error aparece solo
+# al llegar a tensorflow y confunde: el problema es el interprete, no la lista.
+#
+# Crear el entorno con una version soportada:
+#
+#   python3.12 -m venv venv                    (si tenes 3.12 instalado)
+#   uv venv --python 3.12 venv                 (uv lo descarga solo)
+#
+#   source venv/bin/activate                   (Linux/macOS)
+#   venv\Scripts\activate                      (Windows)
+#   python -m pip install -r requirements.txt
+#
+# Confirmar la version del entorno antes de instalar:
+#   python --version     -> debe decir 3.9.x a 3.13.x
 #
 # Verificar la instalacion:
 #   python -c "import mediapipe as mp; from mediapipe.tasks.python import vision; \
@@ -15,6 +43,14 @@
 #     'HolisticLandmarker' in dir(vision))"
 #   -> debe imprimir la version y True
 # =============================================================================
+
+# --- Guarda de version de Python ---------------------------------------------
+# Estos paquetes no existen. Son un mecanismo para abortar con un mensaje
+# legible cuando el interprete esta fuera del rango soportado: el nombre del
+# paquete ES el mensaje de error. Sin esto, pip falla mas adelante culpando a
+# tensorflow-cpu y parece un problema de dependencias.
+ERROR-este-proyecto-requiere-python-3-9-a-3-13-y-tu-python-es-3-14-o-superior; python_version >= "3.14"
+ERROR-este-proyecto-requiere-python-3-9-a-3-13-y-tu-python-es-demasiado-viejo; python_version < "3.9"
 
 # --- Extraccion de keypoints (preprocess_tasks.py) ---------------------------
 # Holistic es la misma task que corre en Android, por eso entrenamiento e
