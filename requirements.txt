@@ -17,12 +17,23 @@
 # =============================================================================
 
 # --- Extraccion de keypoints (preprocess_tasks.py) ---------------------------
-# 0.10.33+ es el minimo: es donde Tasks expone HolisticLandmarker en Python.
-# NO bajar a 0.10.21 (la que usaba la POC): ahi Tasks todavia no lo tenia y
-# solo existia mp.solutions.holistic, que ya fue eliminado.
 # Holistic es la misma task que corre en Android, por eso entrenamiento e
 # inferencia comparten productor de keypoints.
-mediapipe>=0.10.33,<2.0
+#
+# FIJADA EN 0.10.33, NO usar rango abierto.
+# 0.10.33 es el minimo donde Tasks expone HolisticLandmarker en Python; no
+# bajar a 0.10.21 (la de la POC), que solo tenia mp.solutions.holistic, ya
+# eliminado. El techo tambien importa: con `mediapipe<2.0` pip resuelve a
+# 1.0.1, y ahi create_from_options(HolisticLandmarkerOptions) muere por
+# SIGKILL, sin traceback ni excepcion, con este mismo holistic_landmarker.task.
+# Verificado en la misma maquina: 0.10.33 crea el landmarker en ~500 MB y
+# devuelve exit 0; 1.0.1 llega a 682 MB y recibe SIGKILL. No es falta de
+# memoria (oom_kill 0 en el cgroup, 14 GB libres) ni el archivo del modelo
+# (bundle ZIP valido con los 7 .tflite): es una regresion de la 1.0.x.
+# Peor todavia: dentro de multiprocessing.Pool el worker muere en el
+# initializer y Pool lo respawnea en bucle infinito, sin error visible.
+# Antes de mover este pin, probar create_from_options a mano.
+mediapipe==0.10.33
 
 # OpenCV NO se declara aca: mediapipe ya depende de opencv-contrib-python, que
 # es un superconjunto de opencv-python y provee el mismo modulo 'cv2'.
