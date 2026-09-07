@@ -1,0 +1,62 @@
+# ---------------------------------------------------------------------------
+# Entorno virtual
+# ---------------------------------------------------------------------------
+venv/
+.venv/
+env/
+
+# ---------------------------------------------------------------------------
+# Python
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# ---------------------------------------------------------------------------
+# Modelo de MediaPipe (13 MB, binario, NO es un paquete de pip)
+#
+# holistic_landmarker.task se descarga de la documentacion oficial de MediaPipe
+# (Holistic landmark detection > Models) y se pasa con --model:
+#
+#     python preprocess_tasks.py --videos ./lsa64 --out ./data_tasks \
+#            --model ./holistic_landmarker.task
+#
+# IMPORTANTE: el MISMO archivo tiene que ir a los assets de Android. Que el
+# extractor de keypoints sea identico en entrenamiento e inferencia es parte
+# del contrato del proyecto, asi que la version usada debe quedar registrada
+# (checksum + fecha de descarga) aunque el binario no se versione aca.
+# ---------------------------------------------------------------------------
+holistic_landmarker.task
+*.task
+
+# ---------------------------------------------------------------------------
+# Dataset de video y keypoints preprocesados
+# preprocess_tasks.py --out escribe X.npy, y.npy, subjects.npy, reps.npy,
+# meta.json. Son regenerables desde los videos + el .task.
+# ---------------------------------------------------------------------------
+lsa64/
+data_tasks/
+data_64*/
+*.npy
+
+# ---------------------------------------------------------------------------
+# Artefactos de entrenamiento
+# train_keras_tflite.py --out escribe modelo_lsa.tflite, catalogo_senas.json,
+# fixture_android.json y metricas.json. Se publican por release, no por commit.
+# ---------------------------------------------------------------------------
+export/
+*.tflite
+*.keras
+*.h5
+checkpoints/
+logs/
+
+# ---------------------------------------------------------------------------
+# Editores y sistema operativo
+# ---------------------------------------------------------------------------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
