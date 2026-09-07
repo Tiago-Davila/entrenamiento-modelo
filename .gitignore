@@ -37,9 +37,11 @@ holistic_landmarker.task
 # meta.json. Son regenerables desde los videos + el .task.
 # ---------------------------------------------------------------------------
 lsa64/
+lsa64_raw/
 data_tasks/
 data_64*/
 *.npy
+*.mp4
 
 # ---------------------------------------------------------------------------
 # Artefactos de entrenamiento
