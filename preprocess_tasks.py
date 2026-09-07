@@ -41,6 +41,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from multiprocessing import Pool, cpu_count
 from pathlib import Path
 
@@ -129,6 +130,29 @@ def _init_worker(model_path: str, min_conf: float):
     reusarlo entre videos rompe el contrato de timestamps del modo VIDEO.
     """
     global _CFG
+
+    # Silenciar el ruido de inicializacion de MediaPipe.
+    #
+    # Como se crea un landmarker por video, cada uno emite ~11 lineas (EGL,
+    # GL version y siete inference_feedback_manager): sobre 3200 videos son
+    # ~35 mil lineas. Ademas salen por stderr, que es donde tqdm dibuja la
+    # barra, asi que la pisan constantemente.
+    #
+    # No alcanza con GLOG_minloglevel ni TF_CPP_MIN_LOG_LEVEL: esos mensajes
+    # son 'W0000'/'I0000' de absl, que se emiten desde la capa C++ y no
+    # consultan esas variables. La unica forma confiable de callarlos es
+    # redirigir el descriptor 2 del proceso worker.
+    #
+    # Esto NO oculta fallas de video: los errores de cada uno viajan por el
+    # valor de retorno de _procesar y se imprimen al final. Tampoco afecta la
+    # barra de progreso, que la dibuja el proceso padre, no los workers.
+    #
+    # Para depurar y recuperar los logs nativos: EVA_MEDIAPIPE_LOGS=1
+    if os.environ.get("EVA_MEDIAPIPE_LOGS") != "1":
+        devnull = os.open(os.devnull, os.O_WRONLY)
+        os.dup2(devnull, 2)
+        os.close(devnull)          # fd 2 ya es una copia; este sobra
+
     _CFG = (model_path, min_conf)
 
 
@@ -243,8 +267,13 @@ def main() -> int:
 
     with Pool(processes=workers, initializer=_init_worker,
               initargs=(str(modelo), args.min_conf)) as pool:
+        # chunksize=1: los resultados vuelven de a un video, asi la barra avanza
+        # de forma continua. Con chunksize=4 el worker no devolvia nada hasta
+        # terminar los cuatro, y la barra quedaba clavada en 0 durante ~86s,
+        # con pinta de proceso colgado. Repartir de a uno no cuesta nada frente
+        # a tareas de ~20s por video, y ademas balancea mejor el final.
         for r in tqdm(pool.imap_unordered(_procesar, [str(v) for v in videos],
-                                          chunksize=4), total=len(videos)):
+                                          chunksize=1), total=len(videos)):
             if r[0] != "ok":
                 errores.append((r[1], r[2]))
                 continue
