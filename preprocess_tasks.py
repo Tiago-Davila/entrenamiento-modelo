@@ -58,7 +58,7 @@ OFF_POSE = 126
 IDX_HOMBRO_IZQ = OFF_POSE + 11 * 3
 IDX_HOMBRO_DER = OFF_POSE + 12 * 3
 
-_LANDMARKER = None             # una instancia por proceso worker
+_CFG = None                    # (model_path, min_conf) por proceso worker
 
 
 # --------------------------------------------------------------------------
@@ -123,12 +123,22 @@ def vector_de_resultado(res) -> np.ndarray:
 # --------------------------------------------------------------------------
 
 def _init_worker(model_path: str, min_conf: float):
-    global _LANDMARKER
-    import mediapipe as mp
+    """Guarda la configuracion. NO crea el landmarker.
+
+    El landmarker se crea por video en _procesar(). Ver el comentario ahi:
+    reusarlo entre videos rompe el contrato de timestamps del modo VIDEO.
+    """
+    global _CFG
+    _CFG = (model_path, min_conf)
+
+
+def _crear_landmarker():
+    """Landmarker nuevo, con estado limpio, para un unico video."""
     from mediapipe.tasks.python import BaseOptions
     from mediapipe.tasks.python import vision
 
-    _LANDMARKER = vision.HolisticLandmarker.create_from_options(
+    model_path, min_conf = _CFG
+    return vision.HolisticLandmarker.create_from_options(
         vision.HolisticLandmarkerOptions(
             base_options=BaseOptions(model_asset_path=model_path),
             running_mode=vision.RunningMode.VIDEO,
@@ -146,6 +156,21 @@ def _procesar(path_str: str):
     import mediapipe as mp
 
     path = Path(path_str)
+
+    # Un landmarker NUEVO por video, y se cierra al terminar.
+    #
+    # No se puede reusar entre videos: en modo VIDEO los timestamps tienen que
+    # crecer monotonamente durante toda la vida del landmarker. Como cada video
+    # arranca en ts=0, el segundo video que tocara la misma instancia falla con
+    # "Input timestamp must be monotonically increasing", asi que solo se
+    # salvaba el primer video de cada worker (~7 de 3200 con los defaults).
+    #
+    # Compensar con un offset acumulado evitaria el error pero no alcanza: el
+    # modo VIDEO arrastra el ROI de los frames previos, y ese estado del video
+    # anterior contaminaria los primeros frames del siguiente. Instancia limpia
+    # por video equivale a una sesion nueva en Android, que es el contrato.
+    landmarker = _crear_landmarker()
+
     cap = cv2.VideoCapture(str(path))
     fps = cap.get(cv2.CAP_PROP_FPS) or 30.0
     frames: list[np.ndarray] = []
@@ -159,13 +184,14 @@ def _procesar(path_str: str):
             imagen = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb)
             # VIDEO mode exige timestamps en ms estrictamente crecientes
             ts = int(n * 1000.0 / fps)
-            res = _LANDMARKER.detect_for_video(imagen, ts)
+            res = landmarker.detect_for_video(imagen, ts)
             frames.append(vector_de_resultado(res))
             n += 1
     except Exception as e:
-        cap.release()
         return ("error", path.name, str(e)[:120])
-    cap.release()
+    finally:
+        cap.release()
+        landmarker.close()
 
     if not frames:
         return ("vacio", path.name, "sin frames")
