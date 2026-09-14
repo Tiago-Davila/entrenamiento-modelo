@@ -1,0 +1,59 @@
+# ============================================================
+# requirements.txt — Proyecto LSA (entrenamiento y exportacion)
+# ============================================================
+#
+# REQUISITOS DEL SISTEMA (hacer ANTES de este archivo):
+#
+#   sudo dnf install -y level-zero level-zero-devel intel-compute-runtime
+#
+# PYTHON: Usar Python 3.12 (IPEX no soporta 3.14 aun)
+#
+#   sudo dnf install -y python3.12 python3.12-venv
+#   python3.12 -m venv venv312
+#   source venv312/bin/activate
+#
+# INSTALACION COMPLETA (en orden):
+#
+#   1. PyTorch con XPU nativo (desde PyTorch oficial, no el servidor de Intel):
+#      Desde PyTorch 2.7+, XPU para Intel Arc esta integrado. No hace falta IPEX.
+#
+#      pip uninstall torch torchvision torchaudio -y
+#      pip install torch torchvision torchaudio \
+#          --index-url https://download.pytorch.org/whl/xpu
+#
+#      # Verificar: debe mostrar +xpu y XPU: True
+#      python -c "import torch; print(torch.__version__); print(torch.xpu.is_available())"
+#
+#   2. Este archivo:
+#      pip install -r requirements.txt
+#
+# Para Kaggle/Colab (CUDA): solo hacer el paso 2, torch ya viene con CUDA
+# ============================================================
+
+# ── Datos ────────────────────────────────────────────────────
+huggingface_hub>=0.24.0   # Descargar annotations.csv y poses/*.pose (LSA-T)
+pose-format>=0.3.0        # Leer archivos .pose (GloSL format)
+h5py>=3.10.0              # Leer archivos .h5 (LSA-X Zenodo)
+numpy>=1.24.0
+pandas>=2.0.0
+tqdm>=4.66.0
+
+# ── Evaluacion ───────────────────────────────────────────────
+sacrebleu>=2.3.1          # BLEU-4
+jiwer>=3.0.3              # WER (Word Error Rate)
+rouge-score>=0.1.2        # ROUGE-L
+
+# ── Exportacion / ONNX ───────────────────────────────────────
+onnx>=1.15.0
+onnxruntime>=1.17.0       # CPU inference + cuantizacion
+onnxruntime-extensions>=0.9.0
+
+# ── Conversion a TFLite ──────────────────────────────────────
+onnx2tf>=1.20.0           # ONNX -> TFLite (requiere tensorflow)
+tensorflow>=2.15.0        # Para onnx2tf y verificacion TFLite
+# Alternativa sin TF: ai-edge-torch (mas liviano, solo exportacion)
+# ai-edge-torch>=0.2.0
+
+# ── Utilidades ───────────────────────────────────────────────
+requests>=2.31.0          # Descarga de archivos Zenodo
+pyzes                     # Requerido por torch.xpu para enumerar GPUs Intel via Sysman API
