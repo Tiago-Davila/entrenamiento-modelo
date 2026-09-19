@@ -1,0 +1,106 @@
+{
+  "artifactVersion": "lsa-t-seq2seq-v1-experimental",
+  "capturedAtUtc": "2026-09-17T02:16:30.435493+00:00",
+  "repository": "/home/tiagoashe/entrenamiento-modelo",
+  "codeDirectory": "/home/tiagoashe/entrenamiento-modelo/lsa",
+  "dataDirectory": "/home/tiagoashe/entrenamiento-modelo/data",
+  "checkpointsDirectory": "/home/tiagoashe/entrenamiento-modelo/checkpoints",
+  "exportsDirectory": "/home/tiagoashe/entrenamiento-modelo/exports",
+  "git": {
+    "branch": "codex/001-lsa-t-phase0",
+    "head": "fe952d04088db0eb2bfb4a56c5a64ea3b45cbf96",
+    "statusPorcelain": "M lsa/config.py\n?? =0.1.2\n?? =0.24.0\n?? =0.3.0\n?? =0.9.0\n?? =1.15.0\n?? =1.17.0\n?? =1.20.0\n?? =1.24.0\n?? =2.0.0\n?? =2.15.0\n?? =2.3.1\n?? =2.31.0\n?? =3.0.3\n?? =3.10.0\n?? =4.66.0\n?? brecha_dominio.py\n?? data/\n?? inspeccionar_lsat.py\n?? lsa-test.log\n?? lsa/00_freeze_baseline.py\n?? lsa/05_audit_data.py\n?? node_modules/\n?? package.json\n?? pnpm-lock.yaml\n?? reports/"
+  },
+  "canonicalCandidate": {
+    "path": "/home/tiagoashe/entrenamiento-modelo/checkpoints/phase_b_best.pt",
+    "role": "checkpoint candidato oficial para la próxima exportación",
+    "reason": "está junto al dataset raíz, coincide con la configuración vigente y es más reciente que las copias bajo lsa/checkpoints"
+  },
+  "notSelectedAlternatives": [
+    {
+      "path": "/home/tiagoashe/entrenamiento-modelo/lsa/checkpoints/phase_b_best.pt",
+      "reason": "copia anterior bajo lsa/checkpoints; se conserva para comparación"
+    },
+    {
+      "path": "/home/tiagoashe/entrenamiento-modelo/lsa/checkpoints/phase_c_best.pt",
+      "reason": "checkpoint de otra fase; no corresponde al candidato phase_b"
+    }
+  ],
+  "files": [
+    {
+      "path": "/home/tiagoashe/entrenamiento-modelo/data/vocab.json",
+      "exists": true,
+      "sha256": "5c3e8130d1bdb5b3595a36c9a0ba84533c83f62df3cc67da3b34abf12ad85d8b",
+      "bytes": 69258,
+      "modifiedUtc": "2026-09-17T01:37:30.098330+00:00"
+    },
+    {
+      "path": "/home/tiagoashe/entrenamiento-modelo/checkpoints/phase_b_best.pt",
+      "exists": true,
+      "sha256": "6770c4ad43003e8f3a29cf241727b9174544ec0dfca001dba5d05db577bff7c2",
+      "bytes": 47578942,
+      "modifiedUtc": "2026-09-17T00:12:16.998515+00:00"
+    },
+    {
+      "path": "/home/tiagoashe/entrenamiento-modelo/checkpoints/phase_b_last.pt",
+      "exists": true,
+      "sha256": "9417a40b401498de9e6e8ba94323d39aea2053a8e622468e1a917ef7322e25d6",
+      "bytes": 47578942,
+      "modifiedUtc": "2026-09-17T00:12:26.485542+00:00"
+    },
+    {
+      "path": "/home/tiagoashe/entrenamiento-modelo/checkpoints/phase_b_history.json",
+      "exists": true,
+      "sha256": "79b3f97fe168d0c8bb46d05a7e3205f1560e6e6e3d696d9d8cfaa4e2d9bc423e",
+      "bytes": 6433,
+      "modifiedUtc": "2026-09-17T00:12:17.430083+00:00"
+    },
+    {
+      "path": "/home/tiagoashe/entrenamiento-modelo/lsa/checkpoints/phase_b_best.pt",
+      "exists": true,
+      "sha256": "acce8ecd397b8ed34ee691fe32a547024a244e098757c343c88883fdeef8a84c",
+      "bytes": 47578942,
+      "modifiedUtc": "2026-09-14T12:26:57+00:00"
+    },
+    {
+      "path": "/home/tiagoashe/entrenamiento-modelo/lsa/checkpoints/phase_c_best.pt",
+      "exists": true,
+      "sha256": "54f2be0136e4c531f722bc8a188db019352dd8649fdbcb0323b196e0382a9d43",
+      "bytes": 47578942,
+      "modifiedUtc": "2026-09-14T12:34:45+00:00"
+    },
+    {
+      "path": "/home/tiagoashe/entrenamiento-modelo/lsa/exports/encoder_int8.tflite",
+      "exists": true,
+      "sha256": "1a52f3952ba3f7900930dd2347e48874fcb7fbfcc1d4aa2ba9eff70246b9a41f",
+      "bytes": 13152536,
+      "modifiedUtc": "2026-09-14T13:02:29+00:00"
+    },
+    {
+      "path": "/home/tiagoashe/entrenamiento-modelo/lsa/exports/decoder_int8.tflite",
+      "exists": true,
+      "sha256": "d6c171d8e2504172f2ec7c0b7252012faa1c610355fb38d4f542c07902ee187b",
+      "bytes": 22008080,
+      "modifiedUtc": "2026-09-14T13:02:37+00:00"
+    }
+  ],
+  "environment": {
+    "python": "Python 3.12.14",
+    "pythonExecutable": "/home/tiagoashe/entrenamiento-modelo/venv/bin/python",
+    "packagesFromActiveVenv": {
+      "numpy": "2.5.3",
+      "torch": null,
+      "tensorflow": null,
+      "onnx": null,
+      "onnxruntime": null,
+      "onnx2tf": null,
+      "huggingface_hub": "1.30.0",
+      "pandas": "3.0.5",
+      "pose-format": "0.14.1",
+      "sacrebleu": null,
+      "jiwer": null,
+      "rouge-score": null,
+      "tqdm": "4.70.0"
+    }
+  }
+}
