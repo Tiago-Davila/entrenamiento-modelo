@@ -56,6 +56,17 @@ checkpoints/
 logs/
 
 # ---------------------------------------------------------------------------
+# Artefactos locales de la copia de trabajo
+# El dataset raíz, exports y dependencias se regeneran o se publican por
+# release; no deben entrar accidentalmente en un commit.
+# ---------------------------------------------------------------------------
+/data/
+/exports/
+/node_modules/
+/=*
+/lsa-test.log
+
+# ---------------------------------------------------------------------------
 # Editores y sistema operativo
 # ---------------------------------------------------------------------------
 .vscode/
