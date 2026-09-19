@@ -439,7 +439,10 @@ def write_artifact_manifest(
                 "per-frame mean of all 42 hand landmarks over x/y, including zeros; "
                 "global max absolute x/y scale; z unchanged"
             ),
-            "temporal": "uniform numpy.linspace downsample; zero-pad at end to 75 frames",
+            "temporal": (
+                "integer floor sampling idx[i]=(i*(T-1))//(75-1); "
+                "zero-pad at end to 75 frames"
+            ),
         },
         "encoder": {
             "file": encoder_model.name,

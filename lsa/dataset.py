@@ -14,6 +14,7 @@ from config import (
     PAD_ID, BOS_ID, EOS_ID, UNK_ID,
     MAX_DEC_LEN, BATCH_SIZE,
 )
+from sequence_contract import normalize_keypoints, pad_or_crop
 
 
 # ── Vocabulario ───────────────────────────────────────────────────────────────
@@ -45,59 +46,6 @@ class Vocabulary:
             if 0 <= i < len(self.tokens):
                 out.append(self.tokens[i])
         return " ".join(out)
-
-
-# ── Normalizacion de keypoints ────────────────────────────────────────────────
-
-def normalize_keypoints(kps: np.ndarray) -> np.ndarray:
-    """
-    Normalizacion shoulder-relative: hace el modelo invariante a
-    posicion y tamano del signante.
-
-    kps: [T, N_joints, 3] en coordenadas absolutas de MediaPipe.
-    Los landmarks de hombros (MediaPipe Pose) son: izq=11, der=12.
-    Dado que usamos solo keypoints de manos (42 landmarks), esta funcion
-    recibe el array de keypoints completo de pose (33 pts) separado.
-
-    Para manos-only: normalizamos relativo al primer frame (escala fija).
-    """
-    if kps.ndim == 2:
-        kps = kps.reshape(kps.shape[0], -1, 3)  # [T, N, 3]
-
-    # Normalizar cada frame relativo a la posicion media de manos en ese frame
-    # y escalar por la distancia maxima
-    T = kps.shape[0]
-    kps_norm = kps.copy().astype(np.float32)
-
-    for t in range(T):
-        frame = kps_norm[t]  # [N, 3]
-        # solo usar x,y para centrar; z mantener relativo
-        center = frame[:, :2].mean(axis=0)
-        kps_norm[t, :, :2] -= center
-
-    # Escala global por el maximo del primer frame no-cero
-    scale = np.abs(kps_norm[:, :, :2]).max()
-    if scale > 1e-6:
-        kps_norm[:, :, :2] /= scale
-
-    return kps_norm
-
-
-def pad_or_crop(kps: np.ndarray, max_frames: int = MAX_FRAMES) -> np.ndarray:
-    """
-    Ajusta la secuencia de frames a exactamente max_frames.
-    - Si es mas larga: sample uniforme (no recorte brusco).
-    - Si es mas corta: padding con ceros al final.
-    """
-    T = kps.shape[0]
-    if T == max_frames:
-        return kps
-    if T > max_frames:
-        idx = np.linspace(0, T - 1, max_frames, dtype=int)
-        return kps[idx]
-    # Padding
-    pad = np.zeros((max_frames - T, *kps.shape[1:]), dtype=kps.dtype)
-    return np.concatenate([kps, pad], axis=0)
 
 
 # ── Augmentacion ─────────────────────────────────────────────────────────────
