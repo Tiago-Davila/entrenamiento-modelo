@@ -25,6 +25,7 @@ Uso:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -33,34 +34,16 @@ os.environ.setdefault("TF_CPP_MIN_LOG_LEVEL", "2")
 
 import numpy as np
 import tensorflow as tf
+from augment import AugmentConfig, Augmenter
+from eva_contract import CATALOG_PATH, COORDS, FRAMES, load_catalog
 
 tf.get_logger().setLevel("ERROR")
-
-FRAMES = 40
-COORDS = 201
-
-# Catalogo de las 64 senas de LSA64, en orden oficial (indice de clase 1..64).
-# CRITICO: este catalogo esta acoplado al modelo. Los indices que devuelve el
-# clasificador solo tienen sentido contra el catalogo de la misma version.
-SENAS = [
-    "Opaco", "Rojo", "Verde", "Amarillo", "Brillante", "Celeste", "Colores",
-    "Rosa", "Mujer", "Enemigo", "Hijo", "Hombre", "Lejos", "Dibujar", "Nacer",
-    "Aprender", "Llamar", "Skimmer", "Ubicacion", "Atrapar", "Gracias",
-    "Aceptar", "Sordo", "Cuchillo", "Otro", "Ninguno", "Nombre", "Paciencia",
-    "Perfume", "Deporte", "Cafe", "Uruguay", "Argentina", "Pais", "A_pesar_de",
-    "Preguntar", "Cumpleanos", "Desayuno", "Foto", "Hambre", "Mapa",
-    "Moneda", "Musica", "Barco", "Despues", "Duro", "Comida", "Aceite",
-    "Fideos", "Pescado", "Acuerdo", "Duda", "Argolla", "Comprar", "Copa",
-    "Bailar", "Novia", "Cerveza", "Guardar", "Candado", "Aguja", "Sur",
-    "Aspirina", "Cruz",
-]
-
 
 # --------------------------------------------------------------------------
 # Datos
 # --------------------------------------------------------------------------
 
-def cargar(data_dir: Path):
+def cargar(data_dir: Path, catalog: list[str]):
     X = np.load(data_dir / "X.npy").astype(np.float32)
     y = np.load(data_dir / "y.npy")
     ruta_suj = data_dir / "subjects.npy"
@@ -77,9 +60,26 @@ def cargar(data_dir: Path):
             f"El contrato de keypoints no coincide.")
 
     clases = sorted(set(y.tolist()))
+    expected = list(range(1, len(catalog) + 1))
+    if clases != expected:
+        raise SystemExit(
+            "Las etiquetas del dataset no son las clases oficiales 1..64. "
+            f"Llegaron {clases}; no se puede asociar un índice a una glosa con seguridad.")
     mapa = {c: i for i, c in enumerate(clases)}     # etiquetas 1..64 -> 0..63
     y0 = np.array([mapa[v] for v in y], dtype=np.int32)
     return X, y0, sujetos, clases
+
+
+def expandir_entrenamiento(X: np.ndarray, y: np.ndarray, factor: int, seed: int) -> tuple[np.ndarray, np.ndarray]:
+    """Agrega copias aumentadas solo al split de entrenamiento."""
+    if factor <= 0:
+        return X, y
+    augmenter = Augmenter(AugmentConfig(n_frames=FRAMES))
+    rng = np.random.default_rng(seed)
+    copias = [X]
+    for _ in range(factor):
+        copias.append(np.stack([augmenter(sample, rng) for sample in X]))
+    return np.concatenate(copias), np.tile(y, factor + 1)
 
 
 def split_por_sujeto(X, y, sujetos, val_s, test_s):
@@ -167,7 +167,7 @@ def verificar_equivalencia(modelo, blob: bytes, X: np.ndarray, n: int = 24):
     return maxdiff, coinciden, len(muestras)
 
 
-def escribir_fixture(destino: Path, blob: bytes, X, y, clases, n=8, seed=0):
+def escribir_fixture(destino: Path, blob: bytes, X, y, catalog, n=8, seed=0):
     """Fixture para el test instrumentado de Android.
 
     Es la pieza clave de la etapa 1: permite verificar el modelo en el
@@ -191,7 +191,7 @@ def escribir_fixture(destino: Path, blob: bytes, X, y, clases, n=8, seed=0):
         casos.append({
             "indiceMuestra": int(i),
             "claseEsperada": pred,                       # lo que debe predecir
-            "senaEsperada": SENAS[pred] if pred < len(SENAS) else f"clase_{pred}",
+            "senaEsperada": catalog[pred] if pred < len(catalog) else f"clase_{pred}",
             "etiquetaReal": int(y[i]),                   # verdad del dataset
             "acierta": bool(pred == int(y[i])),
             "logitsEsperados": [round(float(v), 5) for v in logits],
@@ -219,8 +219,12 @@ def main() -> int:
     ap.add_argument("--batch", type=int, default=16)
     ap.add_argument("--hidden", type=int, default=128)
     ap.add_argument("--dropout", type=float, default=0.3)
+    ap.add_argument("--augment-factor", type=int, default=2,
+                    help="copias aumentadas por muestra de entrenamiento; 0 desactiva")
     ap.add_argument("--paciencia", type=int, default=15)
     ap.add_argument("--seed", type=int, default=42)
+    ap.add_argument("--catalog", type=Path, default=CATALOG_PATH)
+    ap.add_argument("--model-version", default="eva-lsa64-v2")
     ap.add_argument("--val-subjects", nargs="*", type=int, default=[9])
     ap.add_argument("--test-subjects", nargs="*", type=int, default=[10])
     args = ap.parse_args()
@@ -229,7 +233,8 @@ def main() -> int:
     data_dir, out_dir = Path(args.data), Path(args.out)
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    X, y, sujetos, clases = cargar(data_dir)
+    catalog_version, catalog = load_catalog(args.catalog)
+    X, y, sujetos, clases = cargar(data_dir, catalog)
     n_clases = len(clases)
     print(f"Datos: X={X.shape}  clases={n_clases}  sujetos={sorted(set(sujetos.tolist()))}")
 
@@ -239,6 +244,8 @@ def main() -> int:
     (Xtr, ytr), (Xva, yva), (Xte, yte) = split_por_sujeto(X, y, sujetos, val_s, test_s)
     print(f"Split POR SUJETO -> train={len(ytr)}  val={len(yva)} (suj {sorted(val_s)})  "
           f"test={len(yte)} (suj {sorted(test_s)})")
+    Xtr, ytr = expandir_entrenamiento(Xtr, ytr, args.augment_factor, args.seed)
+    print(f"Augmentación: {args.augment_factor} copias por muestra -> train={len(ytr)}")
 
     modelo = construir(n_clases, args.hidden, args.dropout)
     modelo.compile(
@@ -280,8 +287,8 @@ def main() -> int:
     for i in range(n_clases):
         for j in range(n_clases):
             if i != j and cm[i, j] > 0:
-                confusiones.append((int(cm[i, j]), SENAS[i] if i < len(SENAS) else str(i),
-                                    SENAS[j] if j < len(SENAS) else str(j)))
+                confusiones.append((int(cm[i, j]), catalog[i] if i < len(catalog) else str(i),
+                                    catalog[j] if j < len(catalog) else str(j)))
     confusiones.sort(reverse=True)
     if confusiones:
         print("\nPares mas confundidos (real -> predicho):")
@@ -300,17 +307,21 @@ def main() -> int:
     if maxdiff > 1e-3 or ok != tot:
         raise SystemExit("El .tflite NO es equivalente al modelo entrenado.")
 
-    n_fix = escribir_fixture(out_dir / "fixture_android.json", blob, Xte, yte, clases)
+    n_fix = escribir_fixture(out_dir / "fixture_android.json", blob, Xte, yte, catalog)
     print(f"  fixture_android.json: {n_fix} casos")
 
-    (out_dir / "catalogo_senas.json").write_text(json.dumps({
-        "version": "1.0",
-        "cantidadClases": n_clases,
-        "nota": "Los indices son 0..N-1 y corresponden a la salida del modelo. "
-                "Acoplado al .tflite de la misma version.",
-        "senas": [{"indice": i, "claseDataset": int(c),
-                   "nombre": SENAS[i] if i < len(SENAS) else f"clase_{i}"}
-                  for i, c in enumerate(clases)],
+    catalog_bytes = json.dumps({"version": catalog_version, "glosas": catalog},
+                               ensure_ascii=False, indent=2).encode("utf-8")
+    (out_dir / "catalogo_senas.json").write_bytes(catalog_bytes)
+    (out_dir / "lsa-manifest.json").write_text(json.dumps({
+        "modelVersion": args.model_version,
+        "catalogVersion": catalog_version,
+        "modelSha256": hashlib.sha256(blob).hexdigest(),
+        "catalogSha256": hashlib.sha256(catalog_bytes).hexdigest(),
+        "numClasses": n_clases,
+        "outputsProbabilities": False,
+        "frames": FRAMES,
+        "coords": COORDS,
     }, ensure_ascii=False, indent=2), encoding="utf-8")
 
     (out_dir / "metricas.json").write_text(json.dumps({
@@ -326,15 +337,17 @@ def main() -> int:
             "lr": args.lr, "batch": args.batch, "hidden": args.hidden,
             "dropout": args.dropout, "epochs": args.epochs,
             "paciencia": args.paciencia, "unroll": True,
+            "augmentFactor": args.augment_factor,
         },
+        "contrato": {"frames": FRAMES, "coords": COORDS, "poseFuente": "11..24"},
+        "catalogo": {"version": catalog_version, "archivo": str(args.catalog)},
         "tfVersion": tf.__version__,
         "paresMasConfundidos": [
             {"veces": c, "real": a, "predicho": b} for c, a, b in confusiones[:15]],
     }, ensure_ascii=False, indent=2), encoding="utf-8")
 
     print(f"\nListo. Archivos en {out_dir.resolve()}")
-    print("  modelo_lsa.tflite      -> app/src/main/assets/")
-    print("  catalogo_senas.json    -> app/src/main/assets/")
+    print("  modelo_lsa.tflite, catalogo_senas.json y lsa-manifest.json -> assets/lsa/")
     print("  fixture_android.json   -> app/src/androidTest/assets/")
     return 0
 

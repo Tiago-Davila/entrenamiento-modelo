@@ -35,14 +35,11 @@ os.environ.setdefault("TF_CPP_MIN_LOG_LEVEL", "2")
 
 import numpy as np
 import tensorflow as tf
+from eva_contract import COORDS, FRAMES, LEFT_HAND_OFFSET, POSE_OFFSET, RIGHT_HAND_OFFSET
 
 tf.get_logger().setLevel("ERROR")
 
-FRAMES = 40
-COORDS = 201
-OFF_MANO_IZQ, OFF_MANO_DER, OFF_POSE = 0, 63, 126
-IDX_HOMBRO_IZQ = OFF_POSE + 11 * 3
-IDX_HOMBRO_DER = OFF_POSE + 12 * 3
+OFF_MANO_IZQ, OFF_MANO_DER, OFF_POSE = LEFT_HAND_OFFSET, RIGHT_HAND_OFFSET, POSE_OFFSET
 
 
 # --------------------------------------------------------------------------
@@ -50,7 +47,7 @@ IDX_HOMBRO_DER = OFF_POSE + 12 * 3
 # --------------------------------------------------------------------------
 
 def a_puntos(x):
-    """(T, 201) -> (T, 67, 3)"""
+    """(T, 168) -> (T, 56, 3)"""
     return x.reshape(x.shape[0], COORDS // 3, 3)
 
 
@@ -74,12 +71,11 @@ def drop_mano(x, rng, p_izq, p_der):
     return out
 
 
-# Pares izquierda/derecha de MediaPipe Pose dentro de los landmarks 0..24.
+# Pares izquierda/derecha del bloque reducido Pose 11..24.
 # Al espejar hay que intercambiarlos: si no, el bloque de mano izquierda queda
 # con la mano derecha mientras el landmark de muñeca izquierda sigue siendo el
 # izquierdo negado, y ambos dejan de corresponderse.
-PARES_POSE = [(1, 4), (2, 5), (3, 6), (7, 8), (9, 10), (11, 12),
-              (13, 14), (15, 16), (17, 18), (19, 20), (21, 22), (23, 24)]
+PARES_POSE = [(0, 1), (2, 3), (4, 5), (6, 7), (8, 9), (10, 11), (12, 13)]
 
 
 def espejar(x):
@@ -109,8 +105,9 @@ def jitter(x, rng, sigma):
     Los keypoints sin guantes son más ruidosos. No se toca lo que está en cero.
     """
     out = x.copy()
-    mask = out != 0.0
-    out[mask] += rng.normal(0.0, sigma, size=int(mask.sum())).astype(np.float32)
+    puntos = out.reshape(out.shape[0], -1, 3)
+    presentes = np.any(puntos != 0.0, axis=-1)
+    puntos[presentes] += rng.normal(0.0, sigma, size=(int(presentes.sum()), 3)).astype(np.float32)
     return out
 
 
