@@ -9,8 +9,8 @@ Dos cambios respecto de la version anterior. Los dos INVALIDAN el dataset
 viejo, hay que regenerar:
 
 1. Productor de keypoints: Tasks HolisticLandmarker en vez del Holistic legacy.
-   Es la MISMA task que corre en Android, asi que entrenamiento e inferencia
-   comparten implementacion.
+   Es la misma task que deberá usar Android al integrar Eva v2, asi que
+   entrenamiento e inferencia comparten productor.
 
 2. Muestreo temporal con ARITMETICA ENTERA EXACTA:
        idx[i] = (i * (T-1)) // (N-1)
@@ -19,10 +19,11 @@ viejo, hay que regenerar:
    el entero da 15, porque 13*45/39 = 14.999999999999998 en float).
    La version entera es reproducible bit a bit entre Python, Kotlin y JS.
 
-CONTRATO DE 201 COORDENADAS (no negociable):
+CONTRATO EVA v2 — 168 COORDENADAS:
     [  0: 63)  mano izquierda  21 landmarks x (x,y,z)
     [ 63:126)  mano derecha    21 landmarks x (x,y,z)
-    [126:201)  pose 0..24      25 landmarks x (x,y,z)   (sin piernas)
+    [126:168)  pose 11..24     14 landmarks x (x,y,z)
+                 (sin cara: pose 0..10; sin piernas: pose 25..32)
     centrado: se resta el punto medio de los hombros (pose 11 y 12) a x e y.
     z NO se centra.
     no detectado -> ceros.
@@ -33,8 +34,9 @@ Modelo requerido: holistic_landmarker.task
 
 Uso:
     pip install "mediapipe>=1.0" opencv-python numpy tqdm
-    python preprocess_tasks.py --videos ./lsa64 --out ./data_tasks \
-           --model ./holistic_landmarker.task
+    cd lsa64
+    python preprocess_tasks.py --videos ./data/raw/all --out ./data/processed \
+           --model ./assets/holistic_landmarker.task
 """
 
 from __future__ import annotations
@@ -48,16 +50,20 @@ from pathlib import Path
 import cv2
 import numpy as np
 from tqdm import tqdm
+from eva_contract import (
+    COORDS,
+    FRAMES,
+    LEFT_HAND_OFFSET,
+    POSE_OFFSET,
+    POSE_SOURCE_INDICES,
+    RIGHT_HAND_OFFSET,
+    center_sequence,
+    sample_indices,
+)
 
 # --- Contrato ---
-FRAMES_FIJOS = 40
-N_COORDS = 201
-POSE_N = 25                    # landmarks 0..24 (descartamos piernas 25..32)
-OFF_MANO_IZQ = 0
-OFF_MANO_DER = 63
-OFF_POSE = 126
-IDX_HOMBRO_IZQ = OFF_POSE + 11 * 3
-IDX_HOMBRO_DER = OFF_POSE + 12 * 3
+FRAMES_FIJOS = FRAMES
+N_COORDS = COORDS
 
 _CFG = None                    # (model_path, min_conf) por proceso worker
 
@@ -72,37 +78,26 @@ def indices_muestreo(total: int, n: int = FRAMES_FIJOS) -> list[int]:
     Reproducible bit a bit en cualquier lenguaje con division entera.
     Equivalente en Kotlin:  idx[i] = (i * (T - 1)) / (N - 1)   // Int division
     """
-    if total <= 0:
-        return []
-    if n == 1:
-        return [0]
-    if total >= n:
-        return [(i * (total - 1)) // (n - 1) for i in range(n)]
-    # secuencia mas corta que n: se repite el ultimo frame (padding)
-    return list(range(total)) + [total - 1] * (n - total)
+    if n != FRAMES_FIJOS:
+        raise ValueError("Eva v2 siempre usa 40 cuadros")
+    return sample_indices(total)
 
 
 def centrar(seq: np.ndarray) -> np.ndarray:
-    """Resta el punto medio de los hombros a x e y de todas las coordenadas."""
-    out = seq.copy()
-    for f in range(out.shape[0]):
-        cx = (out[f, IDX_HOMBRO_IZQ] + out[f, IDX_HOMBRO_DER]) / 2.0
-        cy = (out[f, IDX_HOMBRO_IZQ + 1] + out[f, IDX_HOMBRO_DER + 1]) / 2.0
-        out[f, 0::3] -= cx
-        out[f, 1::3] -= cy
-    return out
+    """Centra en hombros sin convertir landmarks ausentes en datos falsos."""
+    return center_sequence(seq)
 
 
 def vector_de_resultado(res) -> np.ndarray:
-    """HolisticLandmarkerResult -> vector de 201 coordenadas.
+    """HolisticLandmarkerResult -> vector Eva v2 de 168 coordenadas.
 
     Tasks devuelve left/right_hand_landmarks explicitos: no hay que resolver
     la mano por handedness (que en la POC web era fuente de dudas).
     """
     v = np.zeros(N_COORDS, dtype=np.float32)
 
-    for lms, off in ((getattr(res, "left_hand_landmarks", None), OFF_MANO_IZQ),
-                     (getattr(res, "right_hand_landmarks", None), OFF_MANO_DER)):
+    for lms, off in ((getattr(res, "left_hand_landmarks", None), LEFT_HAND_OFFSET),
+                     (getattr(res, "right_hand_landmarks", None), RIGHT_HAND_OFFSET)):
         if lms:
             for i, lm in enumerate(lms[:21]):
                 v[off + i * 3] = lm.x
@@ -111,10 +106,13 @@ def vector_de_resultado(res) -> np.ndarray:
 
     pose = getattr(res, "pose_landmarks", None)
     if pose:
-        for i, lm in enumerate(pose[:POSE_N]):
-            v[OFF_POSE + i * 3] = lm.x
-            v[OFF_POSE + i * 3 + 1] = lm.y
-            v[OFF_POSE + i * 3 + 2] = lm.z
+        for local_index, source_index in enumerate(POSE_SOURCE_INDICES):
+            if source_index >= len(pose):
+                break
+            lm = pose[source_index]
+            v[POSE_OFFSET + local_index * 3] = lm.x
+            v[POSE_OFFSET + local_index * 3 + 1] = lm.y
+            v[POSE_OFFSET + local_index * 3 + 2] = lm.z
 
     return v
 
@@ -300,8 +298,9 @@ def main() -> int:
         "muestreo": "entero_exacto: idx[i] = (i*(T-1))//(N-1)",
         "frames": FRAMES_FIJOS,
         "coordenadas": N_COORDS,
-        "bloques": {"mano_izq": [0, 63], "mano_der": [63, 126], "pose_0_24": [126, 201]},
-        "centrado": "punto medio hombros (pose 11,12) restado a x,y. z sin centrar.",
+        "bloques": {"mano_izq": [0, 63], "mano_der": [63, 126], "pose_11_24": [126, 168]},
+        "poseDescartada": "0..10 (cara) y 25..32 (piernas)",
+        "centrado": "punto medio hombros (pose fuente 11,12) restado a x,y solo en landmarks detectados. z sin centrar.",
         "minConfianza": args.min_conf,
         "videos": int(len(X)),
         "errores": len(errores),
@@ -324,7 +323,7 @@ def main() -> int:
     por_bloque = {
         "mano_izq": float(np.mean(X[..., 0:63] == 0)),
         "mano_der": float(np.mean(X[..., 63:126] == 0)),
-        "pose": float(np.mean(X[..., 126:201] == 0)),
+        "pose": float(np.mean(X[..., 126:168] == 0)),
     }
     for k, v in por_bloque.items():
         print(f"  ceros {k:9s}: {v:5.1%}")

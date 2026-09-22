@@ -1,13 +1,13 @@
 """
 augment.py — Aumentación en espacio de puntos clave para Eva (Helpi).
 
-Opera sobre el contrato de 201 coordenadas del proyecto:
+Opera sobre el contrato Eva v2 de 168 coordenadas:
 
     [  0: 63)  mano izquierda   21 landmarks x 3
     [ 63:126)  mano derecha     21 landmarks x 3
-    [126:201)  pose 0..24       25 landmarks x 3
+    [126:168)  pose 11..24      14 landmarks x 3 (sin cara)
 
-Internamente todo se trabaja como (T, 67, 3), donde 67 = 21 + 21 + 25.
+Internamente todo se trabaja como (T, 56, 3), donde 56 = 21 + 21 + 14.
 
 Reglas que el módulo respeta y que NO deben relajarse sin pensarlo:
 
@@ -22,7 +22,7 @@ Uso típico:
 
     aug = Augmenter(AugmentConfig())
     rng = np.random.default_rng(1234)
-    x_aug = aug(x, rng)          # x: (T, 201) float32
+    x_aug = aug(x, rng)          # x: (T, 168) float32
 
 Nota sobre aritmética entera: el contrato de submuestreo con división entera
 rige el camino de INFERENCIA, donde hace falta reproducibilidad bit a bit
@@ -36,42 +36,36 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 import numpy as np
+from eva_contract import COORDS, FRAMES, POSE_LANDMARKS
 
 # ---------------------------------------------------------------------------
 # Layout del contrato
 # ---------------------------------------------------------------------------
 
 N_HAND = 21
-N_POSE = 25
-N_POINTS = N_HAND * 2 + N_POSE          # 67
-N_COORDS = N_POINTS * 3                 # 201
+N_POSE = POSE_LANDMARKS
+N_POINTS = N_HAND * 2 + N_POSE          # 56
+N_COORDS = COORDS
 
 IDX_LEFT_HAND = slice(0, N_HAND)                       # 0..20
 IDX_RIGHT_HAND = slice(N_HAND, 2 * N_HAND)             # 21..41
-IDX_POSE = slice(2 * N_HAND, N_POINTS)                 # 42..66
+IDX_POSE = slice(2 * N_HAND, N_POINTS)                 # 42..55
 
 POSE_OFFSET = 2 * N_HAND                # los landmarks de pose arrancan acá
 
-# Índices de pose de MediaPipe usados para el centrado del contrato.
-POSE_LEFT_SHOULDER = 11
-POSE_RIGHT_SHOULDER = 12
+# Pose fuente 11 y 12 son los puntos locales 0 y 1 del bloque reducido.
+POSE_LEFT_SHOULDER = 0
+POSE_RIGHT_SHOULDER = 1
 
-# Pares simétricos de MediaPipe Pose (landmarks 0..24). El 0 (nariz) es su
-# propio espejo. Si este mapa está mal, el espejado produce datos inválidos
-# sin ningún error visible.
+# Pares simétricos del bloque de pose reducido (fuente 11..24).
 POSE_MIRROR_PAIRS = (
-    (1, 4),    # ojo interno izq / der
-    (2, 5),    # ojo izq / der
-    (3, 6),    # ojo externo izq / der
-    (7, 8),    # oreja
-    (9, 10),   # comisura de la boca
-    (11, 12),  # hombro
-    (13, 14),  # codo
-    (15, 16),  # muñeca
-    (17, 18),  # meñique
-    (19, 20),  # índice
-    (21, 22),  # pulgar
-    (23, 24),  # cadera
+    (0, 1),    # hombro
+    (2, 3),    # codo
+    (4, 5),    # muñeca
+    (6, 7),    # meñique
+    (8, 9),    # índice
+    (10, 11),  # pulgar
+    (12, 13),  # cadera
 )
 
 
@@ -101,14 +95,14 @@ MIRROR_PERMUTATION = _build_mirror_permutation()
 # ---------------------------------------------------------------------------
 
 def to_points(x: np.ndarray) -> np.ndarray:
-    """(T, 201) -> (T, 67, 3)."""
+    """(T, 168) -> (T, 56, 3)."""
     if x.ndim != 2 or x.shape[1] != N_COORDS:
         raise ValueError(f"Se esperaba (T, {N_COORDS}), se recibió {x.shape}")
     return x.reshape(x.shape[0], N_POINTS, 3)
 
 
 def to_flat(p: np.ndarray) -> np.ndarray:
-    """(T, 67, 3) -> (T, 201)."""
+    """(T, 56, 3) -> (T, 168)."""
     return p.reshape(p.shape[0], N_COORDS)
 
 
@@ -121,7 +115,9 @@ def recenter(p: np.ndarray) -> np.ndarray:
     rs = p[:, POSE_OFFSET + POSE_RIGHT_SHOULDER, :2]
     mid = ((ls + rs) * 0.5)[:, None, :]        # (T, 1, 2)
     p = p.copy()
-    p[:, :, :2] -= mid
+    present = np.any(p != 0.0, axis=-1)
+    p[:, :, 0][present] -= np.broadcast_to(mid[..., 0], present.shape)[present]
+    p[:, :, 1][present] -= np.broadcast_to(mid[..., 1], present.shape)[present]
     return p
 
 
@@ -185,7 +181,7 @@ def translate_z(p: np.ndarray, dz: float) -> np.ndarray:
     un no-op disfrazado de aumentación.
     """
     out = p.copy()
-    out[..., 2] += dz
+    out[..., 2][np.any(out != 0.0, axis=-1)] += dz
     return out
 
 
@@ -218,7 +214,10 @@ def jitter(p: np.ndarray, sigma: np.ndarray | float, rng: np.random.Generator) -
         noise = rng.normal(0.0, float(sigma), size=p.shape)
     else:
         noise = rng.normal(0.0, 1.0, size=p.shape) * sigma.reshape(1, 1, 3)
-    return p + noise.astype(p.dtype)
+    out = p.copy()
+    present = np.any(out != 0.0, axis=-1)
+    out[present] += noise.astype(p.dtype)[present]
+    return out
 
 
 def drop_hand(
@@ -323,7 +322,7 @@ class AugmentConfig:
     es la forma más común de degradar el entrenamiento en silencio.
     """
 
-    n_frames: int = 32                  # largo de salida; alinear con el pipeline
+    n_frames: int = FRAMES              # largo de salida; contrato Eva v2
 
     # Espaciales
     p_rotate: float = 0.8
@@ -437,7 +436,7 @@ class Augmenter:
 # ---------------------------------------------------------------------------
 
 def assert_contract(x: np.ndarray, tol: float = 1e-4) -> None:
-    """Verifica que la salida sigue cumpliendo el contrato de 201 coordenadas.
+    """Verifica que la salida sigue cumpliendo el contrato Eva v2.
 
     Pensada para correr en CI junto con las pruebas existentes del contrato.
     """

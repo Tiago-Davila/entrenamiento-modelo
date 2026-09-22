@@ -1,0 +1,4275 @@
+{
+  "createdAtUtc": "2026-09-17T02:54:23.591824+00:00",
+  "dataDirectory": "/home/tiagoashe/entrenamiento-modelo/data",
+  "processedDirectory": "/home/tiagoashe/entrenamiento-modelo/data/processed",
+  "quarantineDirectory": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1",
+  "rules": {
+    "allZero": "zeroRatio >= 1.0",
+    "longLabel": "labelWords > 62"
+  },
+  "totalMoved": 266,
+  "bySplit": {
+    "test": 54,
+    "train": 165,
+    "val": 47
+  },
+  "records": [
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00074.npz",
+      "split": "test",
+      "reasons": [
+        "allZero",
+        "longLabel"
+      ],
+      "frames": 2185,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 125,
+      "labelPreview": "luego del escándalo que sacudió al gobierno nacional por los privilegios de algunos para acceder a las vacunas, el consejo argentino para la inclusión de las pe",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00074.npz",
+      "sha256Before": "db4ab6716398c84e063ea45f69dde5f63de9b30c743b011ac8d58022707ffd89",
+      "bytes": 2166,
+      "sha256After": "db4ab6716398c84e063ea45f69dde5f63de9b30c743b011ac8d58022707ffd89"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00081.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 287,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 20,
+      "labelPreview": "en julio van a ser cuatro que estoy en la comisión directiva, es mi segundo mandato. cuatro años en total.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00081.npz",
+      "sha256Before": "6639fc95d7341800f5b3010c530a1699aa123d95d995ee1837ac1149f0462cd9",
+      "bytes": 700,
+      "sha256After": "6639fc95d7341800f5b3010c530a1699aa123d95d995ee1837ac1149f0462cd9"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00088.npz",
+      "split": "test",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 786,
+      "zeroRatio": 0.1117169514116079,
+      "validFrameRatio": 0.9541984732824428,
+      "labelWords": 65,
+      "labelPreview": "estuvimos organizándonos, preparando la asociación hasta que llegó un hombre, jefe del equipo de la municipalidad, que nos pide disculpas y nos dijo que mayra n",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00088.npz",
+      "sha256Before": "851b39bfa14d2a96d5f4fafe3f70c085437bb75b3962fc1ed67e9dcb04be6c2a",
+      "bytes": 243014,
+      "sha256After": "851b39bfa14d2a96d5f4fafe3f70c085437bb75b3962fc1ed67e9dcb04be6c2a"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00176.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 45,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 2,
+      "labelPreview": "bien, buenísimo.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00176.npz",
+      "sha256Before": "5c288014049f109eb6cfda1ac91e4b69059e2a1c08adc2cfdb5dc9f836ee4964",
+      "bytes": 482,
+      "sha256After": "5c288014049f109eb6cfda1ac91e4b69059e2a1c08adc2cfdb5dc9f836ee4964"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00234.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 348,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 20,
+      "labelPreview": "ella seleccionó tres o cuatro personas que se fueron contactando con otras, y en el 2004 se formó el grupo.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00234.npz",
+      "sha256Before": "7a4c5cd12c917c488f969839a1837aafaf468f914ef10591c4cadeb98f04c6be",
+      "bytes": 732,
+      "sha256After": "7a4c5cd12c917c488f969839a1837aafaf468f914ef10591c4cadeb98f04c6be"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00235.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 306,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 8,
+      "labelPreview": "respecto del chamamé, también se realizaban distintos bailes.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00235.npz",
+      "sha256Before": "3b98dfe893112792cb97340d847c1d22756ddc64896ac92fe481c799198d4bd9",
+      "bytes": 672,
+      "sha256After": "3b98dfe893112792cb97340d847c1d22756ddc64896ac92fe481c799198d4bd9"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00240.npz",
+      "split": "test",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 889,
+      "zeroRatio": 0.9981252343457068,
+      "validFrameRatio": 0.0022497187851518562,
+      "labelWords": 70,
+      "labelPreview": "era un festival en una escuela, contaba la historia de sufrimiento de la comunidad sorda y a la obra se sumaba un grupo de baile, en el cual estaba yo que no er",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00240.npz",
+      "sha256Before": "3e2a55bfc3c2ae8013079b8ec6fcab856832b235b3d2c9c809672a1f9d8ea1eb",
+      "bytes": 1746,
+      "sha256After": "3e2a55bfc3c2ae8013079b8ec6fcab856832b235b3d2c9c809672a1f9d8ea1eb"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00244.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 210,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 10,
+      "labelPreview": "el año pasado, ¿en el 2019? en el 2019, sí.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00244.npz",
+      "sha256Before": "6c5836d8a275013d5818d095f009ede42fea56df220faaaa0916c45733c86c2f",
+      "bytes": 592,
+      "sha256After": "6c5836d8a275013d5818d095f009ede42fea56df220faaaa0916c45733c86c2f"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00253.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 571,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 45,
+      "labelPreview": "por ejemplo, si yo estoy pensando que la otra persona me está diciendo algo, algo que no es bueno, que no me gusta o algo con lo que no estoy de acuerdo, algún ",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00253.npz",
+      "sha256Before": "18e598a61e32713935d8cb301d2213c1763a480a6855bd6c4737c8fdf0f6bdc9",
+      "bytes": 939,
+      "sha256After": "18e598a61e32713935d8cb301d2213c1763a480a6855bd6c4737c8fdf0f6bdc9"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00254.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 330,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 12,
+      "labelPreview": "por ejemplo, una forma de estrés puede ser de corto plazo, natural.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00254.npz",
+      "sha256Before": "7c039cfd3060c3e8eb0d7d7cabb877ecf75285f001e6a42f35069525aca55db4",
+      "bytes": 685,
+      "sha256After": "7c039cfd3060c3e8eb0d7d7cabb877ecf75285f001e6a42f35069525aca55db4"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00255.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 253,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 21,
+      "labelPreview": "es un estrés necesario que me da la posibilidad de estar en movimiento, me da cosas positivas, me estimula a avanzar.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00255.npz",
+      "sha256Before": "b93f7241504df3bb338083b27cf583eb65b5b9ed0851c0ca6b05481d9543b798",
+      "bytes": 683,
+      "sha256After": "b93f7241504df3bb338083b27cf583eb65b5b9ed0851c0ca6b05481d9543b798"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00259.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 103,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 11,
+      "labelPreview": "no vamos a encontrar una solución, no va a tener solución.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00259.npz",
+      "sha256Before": "21a8c1329aea2c81824d3baf0e128b33e1b4264c4e2667f36efd82d7f1960678",
+      "bytes": 555,
+      "sha256After": "21a8c1329aea2c81824d3baf0e128b33e1b4264c4e2667f36efd82d7f1960678"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00260.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 79,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 8,
+      "labelPreview": "simplemente por tener ese pensamiento me puedo estresar.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00260.npz",
+      "sha256Before": "cabbcbd564b7319d8285d6e53ce95425243d30f1c19d99698ea647f46578d253",
+      "bytes": 543,
+      "sha256After": "cabbcbd564b7319d8285d6e53ce95425243d30f1c19d99698ea647f46578d253"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00261.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 162,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 9,
+      "labelPreview": "entonces esto es una alarma que genera el cuerpo.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00261.npz",
+      "sha256Before": "cfdbf320f98797718df4b6312d071e93d8556c695aea35f2749e43f464719c60",
+      "bytes": 579,
+      "sha256After": "cfdbf320f98797718df4b6312d071e93d8556c695aea35f2749e43f464719c60"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00281.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 183,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 9,
+      "labelPreview": "es la primera vez que se realiza esta reunión.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00281.npz",
+      "sha256Before": "54429f1159faffd6bf4b2a58804b3247b1f4e4946bbbc09114de9b44f3b1b57f",
+      "bytes": 591,
+      "sha256After": "54429f1159faffd6bf4b2a58804b3247b1f4e4946bbbc09114de9b44f3b1b57f"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00315.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 158,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 15,
+      "labelPreview": "además reclamamos por el acuerdo con china sobre las mega granjas porcinas que sigue avanzando.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00315.npz",
+      "sha256Before": "8d222c2a5c6c7e2e5f1ec37f0780842b875afeb585ddc9795ff68bb5dcd2c714",
+      "bytes": 628,
+      "sha256After": "8d222c2a5c6c7e2e5f1ec37f0780842b875afeb585ddc9795ff68bb5dcd2c714"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00316.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 61,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 12,
+      "labelPreview": "aún hay gente humilde que continúa sin tener acceso al agua potable.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00316.npz",
+      "sha256Before": "6dc7b811bd2b6b6e3d2627cd01cb27f93b1a21844ebe88353d901ced5e6cecde",
+      "bytes": 556,
+      "sha256After": "6dc7b811bd2b6b6e3d2627cd01cb27f93b1a21844ebe88353d901ced5e6cecde"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00324.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 387,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 32,
+      "labelPreview": "las autoridades informaron que se debe recibir la segunda dosis de vacuna dentro de las 12 semanas posteriores a la primera, en lugar de dentro de tres semanas ",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00324.npz",
+      "sha256Before": "6673a83ccb5b07168cda031887fe55e009d3f7b9c5f2a010b3365d64ca87cdde",
+      "bytes": 817,
+      "sha256After": "6673a83ccb5b07168cda031887fe55e009d3f7b9c5f2a010b3365d64ca87cdde"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00332.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 317,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 14,
+      "labelPreview": "por ejemplo, si una persona quiere empezar un emprendimiento, ¿por dónde comienza? cómo empieza?",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00332.npz",
+      "sha256Before": "44aa5accc1474e07ecd66ce817053970bc7bb5491265bf90dee70a6d7a368fc5",
+      "bytes": 701,
+      "sha256After": "44aa5accc1474e07ecd66ce817053970bc7bb5491265bf90dee70a6d7a368fc5"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00336.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 218,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 16,
+      "labelPreview": "por eso debemos saber, investigar y estudiar bien cuál es tu público objetivo para tu idea.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00336.npz",
+      "sha256Before": "44b69dfdb79b74ff4d10c2f16fc8493269006e309fec7537747f56a5173ea51a",
+      "bytes": 658,
+      "sha256After": "44b69dfdb79b74ff4d10c2f16fc8493269006e309fec7537747f56a5173ea51a"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00340.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 413,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 11,
+      "labelPreview": "fortalezas y oportunidades que tengo, oportunidades y debilidades son de afuera.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00340.npz",
+      "sha256Before": "dcee979d7f8f46819c03a5b79e7716cf54402519c98e24b497a52939719af621",
+      "bytes": 722,
+      "sha256After": "dcee979d7f8f46819c03a5b79e7716cf54402519c98e24b497a52939719af621"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00359.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 348,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 19,
+      "labelPreview": "sí, justo yo antes de todo esto había viajado a otro país y conocí las bicicletas dobles. me enamoré.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00359.npz",
+      "sha256Before": "6ef61d464ed34d911e82e00a71793e3e25d95319ca8d64fc68db757fd925ca46",
+      "bytes": 729,
+      "sha256After": "6ef61d464ed34d911e82e00a71793e3e25d95319ca8d64fc68db757fd925ca46"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00386.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 161,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 8,
+      "labelPreview": "necesitamos encontrar la verdad. pedimos justicia, por favor.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00386.npz",
+      "sha256Before": "5468a182535d23a804b16330d618a6952879bd09c4a921b99d5c15f4dc60be16",
+      "bytes": 597,
+      "sha256After": "5468a182535d23a804b16330d618a6952879bd09c4a921b99d5c15f4dc60be16"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00413.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 657,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 23,
+      "labelPreview": "la semana pasada pasó algo que los analistas políticos no tenían previsto, el gobierno y la oposición se pusieron de acuerdo en algo.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00413.npz",
+      "sha256Before": "a54bbedee1d22f212286011a4dee45e1573323af3e933481a9108f32b1eef6de",
+      "bytes": 904,
+      "sha256After": "a54bbedee1d22f212286011a4dee45e1573323af3e933481a9108f32b1eef6de"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00428.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 401,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 14,
+      "labelPreview": "los profesionales, a través del intérprete, nos explicaron estos conceptos desde la perspectiva oyente.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00428.npz",
+      "sha256Before": "896ea9583565e9aeed975e290574554f92051c243da28e5c803f4c43aeb500d5",
+      "bytes": 757,
+      "sha256After": "896ea9583565e9aeed975e290574554f92051c243da28e5c803f4c43aeb500d5"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00432.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 156,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 10,
+      "labelPreview": "¿cómo es posible que nunca se abandonó siendo tan antiguo?",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00432.npz",
+      "sha256Before": "7dd8e0ec00c53d3f21df64eb121d721242bbd642f12f6d44232d091cb86e07f8",
+      "bytes": 596,
+      "sha256After": "7dd8e0ec00c53d3f21df64eb121d721242bbd642f12f6d44232d091cb86e07f8"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00435.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 83,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 5,
+      "labelPreview": "muchos no estaban de acuerdo.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00435.npz",
+      "sha256Before": "d26466f050b75e835f68087aa2faab68ceca3ae90ac992e3ed6ccd131974fa93",
+      "bytes": 522,
+      "sha256After": "d26466f050b75e835f68087aa2faab68ceca3ae90ac992e3ed6ccd131974fa93"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00436.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 69,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 11,
+      "labelPreview": "personas a las que les gustaba y a las que no.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00436.npz",
+      "sha256Before": "874357978074a3fa7af2652c212154a74c18f51f07701c83b80eb5dee531fa54",
+      "bytes": 517,
+      "sha256After": "874357978074a3fa7af2652c212154a74c18f51f07701c83b80eb5dee531fa54"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00437.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 181,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 10,
+      "labelPreview": "¿requieren el mismo trabajo de traducción que tuvo el himno?",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00437.npz",
+      "sha256Before": "999ae94e9b93088d55e73216f8b9c0661705b4c196be6357bcbcfe888772b4ba",
+      "bytes": 602,
+      "sha256After": "999ae94e9b93088d55e73216f8b9c0661705b4c196be6357bcbcfe888772b4ba"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00537.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 292,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 21,
+      "labelPreview": "soy testigo de la lucha que lleva adelante cas y la búsqueda constante por el reconocimiento de la lengua de señas.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00537.npz",
+      "sha256Before": "1f6cb366dbbfdf1abbf7fb51965ae95708193912f38acf02a742ee650691fde9",
+      "bytes": 707,
+      "sha256After": "1f6cb366dbbfdf1abbf7fb51965ae95708193912f38acf02a742ee650691fde9"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00556.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 143,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 12,
+      "labelPreview": "también tengan en cuenta la forma del vaso, ya que hay diferencias.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00556.npz",
+      "sha256Before": "ece730e001e824bdd2541d9c12f500d92009dfddc063949d480be5789713e72e",
+      "bytes": 597,
+      "sha256After": "ece730e001e824bdd2541d9c12f500d92009dfddc063949d480be5789713e72e"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00610.npz",
+      "split": "test",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 866,
+      "zeroRatio": 0.01260126837494043,
+      "validFrameRatio": 0.9965357967667436,
+      "labelWords": 65,
+      "labelPreview": "algunos de los detalles que solicitaron desde las relatorías a la santa sede son, resultados de investigaciones recientes, tanto judiciales como de otro tipo, y",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00610.npz",
+      "sha256Before": "adad2e0af24e963d8f8428ab54d822016c78b29fe40e84238c770fef09fe2746",
+      "bytes": 335112,
+      "sha256After": "adad2e0af24e963d8f8428ab54d822016c78b29fe40e84238c770fef09fe2746"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00727.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 409,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 23,
+      "labelPreview": "caixas no es san pablo, ni porto alegre o río de janeiro, donde se llevaron a cabo las últimas olimpíadas en el 2016.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00727.npz",
+      "sha256Before": "75d67fb74f027e0d3c677fa54719428b719931d1f165a63d547b6b67173d919a",
+      "bytes": 775,
+      "sha256After": "75d67fb74f027e0d3c677fa54719428b719931d1f165a63d547b6b67173d919a"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00728.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 243,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 4,
+      "labelPreview": "¿se presentó algún problema?",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00728.npz",
+      "sha256Before": "1d48bba36b4428158e8d4bcd9be81a8297ae87eafc592b35ef5e71dc31999cdc",
+      "bytes": 598,
+      "sha256After": "1d48bba36b4428158e8d4bcd9be81a8297ae87eafc592b35ef5e71dc31999cdc"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00750.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 134,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 9,
+      "labelPreview": "los mostramos y algunos de ellos tomarán la palabra.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00750.npz",
+      "sha256Before": "c7f6c14a7fbfdbcef1c18e3b6c289cce68dab5480de5d75ed3c3c901e4f28f63",
+      "bytes": 570,
+      "sha256After": "c7f6c14a7fbfdbcef1c18e3b6c289cce68dab5480de5d75ed3c3c901e4f28f63"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00837.npz",
+      "split": "test",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 1727,
+      "zeroRatio": 0.053947114456668596,
+      "validFrameRatio": 0.971627099015634,
+      "labelWords": 65,
+      "labelPreview": "en esas mismas tierras, el llamado camino real de la yerba mate, cuatro siglos màs tarde, comienza el proceso de modernización de lo que es nuestra infusión nac",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00837.npz",
+      "sha256Before": "5d8c9742e827c74e41b0484becdeda6765c21cc6ba7edfe3a841dd4d825fd397",
+      "bytes": 632653,
+      "sha256After": "5d8c9742e827c74e41b0484becdeda6765c21cc6ba7edfe3a841dd4d825fd397"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00881.npz",
+      "split": "test",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 837,
+      "zeroRatio": 0.03204945857275606,
+      "validFrameRatio": 0.980884109916368,
+      "labelWords": 71,
+      "labelPreview": "la menor circulación humana generada por la pandemia y las excepcionales condiciones ambientales relacionadas con la sequía extrema, la histórica bajante del rí",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_00881.npz",
+      "sha256Before": "f916e4cde33127b077a2799876d27c0ae8dc15c80e670d4c42e2b805b9c1f92b",
+      "bytes": 323844,
+      "sha256After": "f916e4cde33127b077a2799876d27c0ae8dc15c80e670d4c42e2b805b9c1f92b"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_01020.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 141,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 13,
+      "labelPreview": "a ver, ¿me podrían mostrar un ejemplo de algún término astronómico en lsa?",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_01020.npz",
+      "sha256Before": "ed914856942fe5ee8c935b93df435235b568b8f8d5ba16549e8cfac832fc3a8b",
+      "bytes": 610,
+      "sha256After": "ed914856942fe5ee8c935b93df435235b568b8f8d5ba16549e8cfac832fc3a8b"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_01043.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 937,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 43,
+      "labelPreview": "esta señora se llama gabriela, es productora cultural y enóloga, y marcelo que también es enólogo, esta es su seña, de casualidad me encontré con ellos y vi la ",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_01043.npz",
+      "sha256Before": "fc97a847c09034482bf593c577f850c96f9bf73a3c6aac975e49a3075f089678",
+      "bytes": 1140,
+      "sha256After": "fc97a847c09034482bf593c577f850c96f9bf73a3c6aac975e49a3075f089678"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_01044.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 267,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 23,
+      "labelPreview": "obviamente primero tenían que capacitarse y saber de qué se trataba, conocer en profundidad todo lo que tenía que ver con el vino.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_01044.npz",
+      "sha256Before": "a592e580d698b68fa999a49a3f53efba174f94e27e6e58a20a2a5345622021e0",
+      "bytes": 711,
+      "sha256After": "a592e580d698b68fa999a49a3f53efba174f94e27e6e58a20a2a5345622021e0"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_01045.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 378,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 29,
+      "labelPreview": "por eso les pedimos trabajar juntos, con el instituto, con la bodega, con las asociaciones, agruparnos y hacer un equipo de trabajo que pudiera avanzar en toda ",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_01045.npz",
+      "sha256Before": "d2608ca0c90e09f2d37a01192b124c95c111e7da76ef7b56b21716aee9e3ad9b",
+      "bytes": 812,
+      "sha256After": "d2608ca0c90e09f2d37a01192b124c95c111e7da76ef7b56b21716aee9e3ad9b"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_01046.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 60,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 7,
+      "labelPreview": "esto es con respecto a la aplicación.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_01046.npz",
+      "sha256Before": "bad9a3d014aec72099c5a5562ed76377065d7a48e21b9a871a8b0c244a2a58ba",
+      "bytes": 511,
+      "sha256After": "bad9a3d014aec72099c5a5562ed76377065d7a48e21b9a871a8b0c244a2a58ba"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_01047.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 292,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 18,
+      "labelPreview": "el objetivo es acercarnos, atraer a la gente, poder enseñar y que puedan incorporar conocimiento relacionado al vino.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_01047.npz",
+      "sha256Before": "b10e1585643a4804fa546df1df65f67fea204b8de68652eadbf734e44083674b",
+      "bytes": 716,
+      "sha256After": "b10e1585643a4804fa546df1df65f67fea204b8de68652eadbf734e44083674b"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_01067.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 328,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 22,
+      "labelPreview": "hubo cierto disgusto con este asunto, no podíamos expulsarlos del establecimiento, pero con el tiempo fueron ellos los que se dieron cuenta.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_01067.npz",
+      "sha256Before": "d34c11312654ccd025b0aa77c461fb8213368b3c8bcd213ab27f2c4bc41bc401",
+      "bytes": 744,
+      "sha256After": "d34c11312654ccd025b0aa77c461fb8213368b3c8bcd213ab27f2c4bc41bc401"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_01068.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 69,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 7,
+      "labelPreview": "finalmente se decidió por dejar la carrera.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_01068.npz",
+      "sha256Before": "6f526e3d30963e5f55b644f6bfef107a168a41a13cff8a9d1b877ab97a512646",
+      "bytes": 528,
+      "sha256After": "6f526e3d30963e5f55b644f6bfef107a168a41a13cff8a9d1b877ab97a512646"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_01087.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 116,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 8,
+      "labelPreview": "fue difícil en un principio, me fui acostumbrando.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_01087.npz",
+      "sha256Before": "7ce7d41801fb98bc95233ca738dff66cb54962b8dacdc379fe8a890bc5db288a",
+      "bytes": 567,
+      "sha256After": "7ce7d41801fb98bc95233ca738dff66cb54962b8dacdc379fe8a890bc5db288a"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_01375.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 115,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 7,
+      "labelPreview": "gracias por tu tiempo, por esta entrevista.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_01375.npz",
+      "sha256Before": "4b318a0e490968b9d393cac50168c4f14972985f53c86c9e99a491eb000bf8e2",
+      "bytes": 548,
+      "sha256After": "4b318a0e490968b9d393cac50168c4f14972985f53c86c9e99a491eb000bf8e2"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_01380.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 228,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 12,
+      "labelPreview": "en esta convocatoria, los participantes sordos, ¿en qué promedio de edad estaban?",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_01380.npz",
+      "sha256Before": "87acc41f58922e6e6431784081f2fb52ef0005d52a5f68a7ab2eff5e36d164b4",
+      "bytes": 653,
+      "sha256After": "87acc41f58922e6e6431784081f2fb52ef0005d52a5f68a7ab2eff5e36d164b4"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_01382.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 128,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 5,
+      "labelPreview": "muy interesante las diferentes perspectivas.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_01382.npz",
+      "sha256Before": "dd34cf133ff12e9bf921aaf7734fe75f8ce7726891b1dcdb41b1a302e4d25799",
+      "bytes": 554,
+      "sha256After": "dd34cf133ff12e9bf921aaf7734fe75f8ce7726891b1dcdb41b1a302e4d25799"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_01383.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 92,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 3,
+      "labelPreview": "había asesores también.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_01383.npz",
+      "sha256Before": "bc2266073023d33011584c4ba07287c3b77ae870ac9e98a9c8c2c1c6096312ac",
+      "bytes": 515,
+      "sha256After": "bc2266073023d33011584c4ba07287c3b77ae870ac9e98a9c8c2c1c6096312ac"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_01384.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 105,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 12,
+      "labelPreview": "por eso es lo mismo que te decía antes, un gran impacto.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_01384.npz",
+      "sha256Before": "120d74466322ed13dbe132613cca21dd81103a7c610b3aa8e66b4e0dff8776ae",
+      "bytes": 566,
+      "sha256After": "120d74466322ed13dbe132613cca21dd81103a7c610b3aa8e66b4e0dff8776ae"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_01388.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 84,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 7,
+      "labelPreview": "si está la intérprete nos da seguridad.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_01388.npz",
+      "sha256Before": "b82f2ef7c9b0a30c74fb032cd3e76f2f699a6509f989d359db7fc15f2096de98",
+      "bytes": 536,
+      "sha256After": "b82f2ef7c9b0a30c74fb032cd3e76f2f699a6509f989d359db7fc15f2096de98"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_01390.npz",
+      "split": "test",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 151,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 11,
+      "labelPreview": "me alegro, esta primera convocatoria me doy cuenta que muy positiva.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_01390.npz",
+      "sha256Before": "11964784e71d6fe0a76c51db707ee455b5af2d3fd70c8144bbd7d718d3be2013",
+      "bytes": 597,
+      "sha256After": "11964784e71d6fe0a76c51db707ee455b5af2d3fd70c8144bbd7d718d3be2013"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_01544.npz",
+      "split": "test",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 1657,
+      "zeroRatio": 0.005785939400906209,
+      "validFrameRatio": 1.0,
+      "labelWords": 113,
+      "labelPreview": "en este momento estoy muy feliz por nuestro país. tambien por nuestros sordos chilenos sus familias , los oyentes, codas , por todos. estamos contentos porque d",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/test/test_01544.npz",
+      "sha256Before": "171a31fad17196ec81484ac64b0fc1a8a7f7100651bfa050d8943986be07e45e",
+      "bytes": 668494,
+      "sha256After": "171a31fad17196ec81484ac64b0fc1a8a7f7100651bfa050d8943986be07e45e"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00241.npz",
+      "split": "train",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 1022,
+      "zeroRatio": 0.05856086726928214,
+      "validFrameRatio": 0.974559686888454,
+      "labelWords": 82,
+      "labelPreview": "en el año 2019 en parís hubo un congreso mundial de personas sordas, en ese momento se encontraron mujeres sordas de distintos lugares, que tenían ganas de comp",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00241.npz",
+      "sha256Before": "7fe89249aa91bdcd33d0f70ff6050ffe4be50840862df5455769f87b75cd0e7d",
+      "bytes": 377587,
+      "sha256After": "7fe89249aa91bdcd33d0f70ff6050ffe4be50840862df5455769f87b75cd0e7d"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00257.npz",
+      "split": "train",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 959,
+      "zeroRatio": 0.12186967244318651,
+      "validFrameRatio": 0.940563086548488,
+      "labelWords": 68,
+      "labelPreview": "y va mejorando, pero es un trabajo que fuimos haciendo solos hasta que tuvimos un momento en el que nos emocionó mucho, que es que es la primera vez en la histo",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00257.npz",
+      "sha256Before": "aac22e650a47f0daa5a150247c9b31148f7ca9a5437d0124150a9b87731e3c63",
+      "bytes": 295431,
+      "sha256After": "aac22e650a47f0daa5a150247c9b31148f7ca9a5437d0124150a9b87731e3c63"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00259.npz",
+      "split": "train",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 843,
+      "zeroRatio": 0.08056073358564461,
+      "validFrameRatio": 0.9561091340450771,
+      "labelWords": 69,
+      "labelPreview": "siempre se hacían acá en un lugar que no es tan lindo, que está bastante arruinado, que es chico, que estaba en construcción, que no estaba en condiciones. buen",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00259.npz",
+      "sha256Before": "4374b6dfc4cfa0ddbf55753dd2bbb81d92f38b82f306c1ef7305e68a88b08b7e",
+      "bytes": 289385,
+      "sha256After": "4374b6dfc4cfa0ddbf55753dd2bbb81d92f38b82f306c1ef7305e68a88b08b7e"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00366.npz",
+      "split": "train",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 930,
+      "zeroRatio": 0.019090288445127154,
+      "validFrameRatio": 0.9967741935483871,
+      "labelWords": 84,
+      "labelPreview": "según se estableció por decreto, “en atención a las condiciones epidemiológicas y a la evaluación de riesgo y de expansión de covid-19, y partidos de la jurisdi",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00366.npz",
+      "sha256Before": "44056f67183aeaafbf3158bde6ceccad74c322181d19d1c2282d2b439d0e3d88",
+      "bytes": 360424,
+      "sha256After": "44056f67183aeaafbf3158bde6ceccad74c322181d19d1c2282d2b439d0e3d88"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00413.npz",
+      "split": "train",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 649,
+      "zeroRatio": 0.006713625357693155,
+      "validFrameRatio": 1.0,
+      "labelWords": 67,
+      "labelPreview": "la normativa establece que con el fin de satisfacer la demanda de comunicación en las diversas tramitaciones oficiales de la provincia se deberá diseñar un proy",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00413.npz",
+      "sha256Before": "2d5a35a2d3fda82dfba7fc19575206afb89e21a1484abe3d10df4bdfff7a08ad",
+      "bytes": 258976,
+      "sha256After": "2d5a35a2d3fda82dfba7fc19575206afb89e21a1484abe3d10df4bdfff7a08ad"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00482.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 55,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 4,
+      "labelPreview": "ese es el objetivo.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00482.npz",
+      "sha256Before": "83e5cbfab9bb9e6badd5a14c4a930c7f16954db079386d10d34a156aaf44bdf4",
+      "bytes": 488,
+      "sha256After": "83e5cbfab9bb9e6badd5a14c4a930c7f16954db079386d10d34a156aaf44bdf4"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00599.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 75,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 1,
+      "labelPreview": "¡hola!",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00599.npz",
+      "sha256Before": "8bcfd3e25f9766d16d7e834c6651c995792dc1e2dcb742cc4043d0290d11503f",
+      "bytes": 479,
+      "sha256After": "8bcfd3e25f9766d16d7e834c6651c995792dc1e2dcb742cc4043d0290d11503f"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00607.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 138,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 8,
+      "labelPreview": "silencio, llegamos a lo de mi mamá. silencio.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00607.npz",
+      "sha256Before": "35a6422e7db45680dc95ad9fe4deb2c3b67e9f8bc06a5649352d2ba531d37520",
+      "bytes": 560,
+      "sha256After": "35a6422e7db45680dc95ad9fe4deb2c3b67e9f8bc06a5649352d2ba531d37520"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00608.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 89,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 3,
+      "labelPreview": "tocá la puerta.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00608.npz",
+      "sha256Before": "41453af531b758794cf760c9f3284127905e6aed4933a30fff3bf07e1e4ec83b",
+      "bytes": 504,
+      "sha256After": "41453af531b758794cf760c9f3284127905e6aed4933a30fff3bf07e1e4ec83b"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00684.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 120,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 11,
+      "labelPreview": "una profesora oyente realizó la convocatoria, su nombre es marta erazú.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00684.npz",
+      "sha256Before": "7d43ee444033f4a7bdf4b151f7e86e3a56cb55a124cd4766f46845fdce39140b",
+      "bytes": 595,
+      "sha256After": "7d43ee444033f4a7bdf4b151f7e86e3a56cb55a124cd4766f46845fdce39140b"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00685.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 133,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 7,
+      "labelPreview": "realizamos distintas presentaciones en festivales y eventos.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00685.npz",
+      "sha256Before": "eb7264ed83a61549377c1a36c1493aaa6cc2ca7560d7fa7ce80109a89b8b3602",
+      "bytes": 575,
+      "sha256After": "eb7264ed83a61549377c1a36c1493aaa6cc2ca7560d7fa7ce80109a89b8b3602"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00686.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 402,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 16,
+      "labelPreview": "ese grupo no era solo de folklore, también se bailaba tango, danzas latinoamericanas y danzas españolas.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00686.npz",
+      "sha256Before": "6a7df07ef8839ac87bb72b5ea9eaa87e34916cd9c83f33ad49cc6dd0f67bae82",
+      "bytes": 754,
+      "sha256After": "6a7df07ef8839ac87bb72b5ea9eaa87e34916cd9c83f33ad49cc6dd0f67bae82"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00687.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 663,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 24,
+      "labelPreview": "nuestro grupo no sigue, se disolvió en el año 2007/2008 por distintos motivos, trabajo, estudio, quedaron algunas parejas, y después se disolvió por completo.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00687.npz",
+      "sha256Before": "1fc923def24b92f03b6c65e3a37408e6c21627148a697ba8f9bee8768ecd3b01",
+      "bytes": 936,
+      "sha256After": "1fc923def24b92f03b6c65e3a37408e6c21627148a697ba8f9bee8768ecd3b01"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00688.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 109,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 8,
+      "labelPreview": "por supuesto que nos queda siempre el recuerdo.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00688.npz",
+      "sha256Before": "f9f58fc1de819990289ad4bd0dac283977dde161d6663fb865ea16ef94ec9de6",
+      "bytes": 551,
+      "sha256After": "f9f58fc1de819990289ad4bd0dac283977dde161d6663fb865ea16ef94ec9de6"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00701.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 210,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 15,
+      "labelPreview": "yo también ingresé a la comunidad sorda de adolescente, a los 18 años, era joven.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00701.npz",
+      "sha256Before": "37b8a3cf357ed7c03ca83fba383c4eb4a64a0d8f0db6ab01161b34c11414c611",
+      "bytes": 646,
+      "sha256After": "37b8a3cf357ed7c03ca83fba383c4eb4a64a0d8f0db6ab01161b34c11414c611"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00703.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 240,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 20,
+      "labelPreview": "y justo en ese momento me invitaron a ver, a compartir una actividad teatral con chicos sordos y con oyentes.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00703.npz",
+      "sha256Before": "c0f503c42218e796778809f5a46ba0d5b7a5a77ae98c70aeb448e9b841195c8d",
+      "bytes": 674,
+      "sha256After": "c0f503c42218e796778809f5a46ba0d5b7a5a77ae98c70aeb448e9b841195c8d"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00706.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 69,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 2,
+      "labelPreview": "¿respondés vos?",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00706.npz",
+      "sha256Before": "261854dde84f87801cc851b46754d4563f8932fe7f793947ba9671d3fd88f66e",
+      "bytes": 494,
+      "sha256After": "261854dde84f87801cc851b46754d4563f8932fe7f793947ba9671d3fd88f66e"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00707.npz",
+      "split": "train",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 1105,
+      "zeroRatio": 0.15292681175034117,
+      "validFrameRatio": 0.8714932126696833,
+      "labelWords": 73,
+      "labelPreview": "sí, cuando se creó el grupo, y empezamos a ser conocidos, nos llamaban para algunos eventos y presencias dentro de la comunidad sorda, incluso hemos viajado a m",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00707.npz",
+      "sha256Before": "a53e598a7bf186a3ff8fb08eca13bf7ec1a5c46d9f92a1948c48b94beba3eced",
+      "bytes": 339177,
+      "sha256After": "a53e598a7bf186a3ff8fb08eca13bf7ec1a5c46d9f92a1948c48b94beba3eced"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00715.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 151,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 9,
+      "labelPreview": "si el grupo volviera, y me gustaría que volviera...",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00715.npz",
+      "sha256Before": "aa9d69c7a9142552c27abb0be48eb152194905b55392455a14deab55f7cf26cf",
+      "bytes": 575,
+      "sha256After": "aa9d69c7a9142552c27abb0be48eb152194905b55392455a14deab55f7cf26cf"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00716.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 660,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 44,
+      "labelPreview": "la ley nacional de inclusión del folklore, con la ley 27535, falta que esa ley la ratifique salta, pero bueno, es un motivo más para poder generar espacios de f",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00716.npz",
+      "sha256Before": "22aab7aea054476552e1484e3f1bc4a620b371cf800eed4796a173daf1ceef24",
+      "bytes": 996,
+      "sha256After": "22aab7aea054476552e1484e3f1bc4a620b371cf800eed4796a173daf1ceef24"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00718.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 440,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 26,
+      "labelPreview": "muy bien, mi última pregunta es, ¿qué pasa con las personas sordas a las que les interesa el chamamé o cualquier otro tipo de baile folklórico?",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00718.npz",
+      "sha256Before": "ddd0550879b54ab8c9880035a81168d202642962fa291b57ed00976332b3e0f4",
+      "bytes": 819,
+      "sha256After": "ddd0550879b54ab8c9880035a81168d202642962fa291b57ed00976332b3e0f4"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00719.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 162,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 8,
+      "labelPreview": "¿qué mensaje podrían darle a la comunidad sorda?",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00719.npz",
+      "sha256Before": "82d61171632a207fca3fd3fe9831493c874d4bb3d08991a6991fec341ad45a3b",
+      "bytes": 591,
+      "sha256After": "82d61171632a207fca3fd3fe9831493c874d4bb3d08991a6991fec341ad45a3b"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00728.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 510,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 39,
+      "labelPreview": "en las provincias hay personas sordas que quizá tienen distintos sentimientos que no pueden mostrar o expresar, entonces es interesante esto para poder estimula",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00728.npz",
+      "sha256Before": "5fda5e6929de71a5b0e0124ceb98d2ba3aa75b72b0bdb3584ecd5381004c313a",
+      "bytes": 926,
+      "sha256After": "5fda5e6929de71a5b0e0124ceb98d2ba3aa75b72b0bdb3584ecd5381004c313a"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00729.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 241,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 19,
+      "labelPreview": "también como mensaje para la comunidad sorda, el folklore no es solo para las personas oyentes, es importante sentirlo.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00729.npz",
+      "sha256Before": "3d691ad2b02638f90975bc1b2718e1e2f27a38ba1584b22d6245cc99281e4973",
+      "bytes": 688,
+      "sha256After": "3d691ad2b02638f90975bc1b2718e1e2f27a38ba1584b22d6245cc99281e4973"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00730.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 384,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 23,
+      "labelPreview": "si a ustedes les interesa, busquen un lugar, una escuela, interesensé por la cultura del folklore y comiencen a apropiarse de este conocimiento.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00730.npz",
+      "sha256Before": "31d33b7b1005ab71f5e6aa65708f780b49f8e5de8ab751bf5bef684a166a5487",
+      "bytes": 777,
+      "sha256After": "31d33b7b1005ab71f5e6aa65708f780b49f8e5de8ab751bf5bef684a166a5487"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00732.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 342,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 22,
+      "labelPreview": "una cosita más, quiero agradecer a cada uno de nuestros compañeros del exballet folklórico porque no somos solo nosotros, también están ellos.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00732.npz",
+      "sha256Before": "a59f5583be7e5ad1a76d939fc8a9af687c5b2be4349253c70f696d6c658989ff",
+      "bytes": 771,
+      "sha256After": "a59f5583be7e5ad1a76d939fc8a9af687c5b2be4349253c70f696d6c658989ff"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00733.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 84,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 7,
+      "labelPreview": "somos un grupo donde ellos también participan.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00733.npz",
+      "sha256Before": "3100fcacff7a61734deaec73ff7dcacd600d42359253eaf7731e2c6d8c3dae56",
+      "bytes": 542,
+      "sha256After": "3100fcacff7a61734deaec73ff7dcacd600d42359253eaf7731e2c6d8c3dae56"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00739.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 93,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 4,
+      "labelPreview": "hola, ivan, ¿cómo estás?",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00739.npz",
+      "sha256Before": "d1ce0ea623d7d4dbbc269554dc8211feab73e404ed9d7650a4e700d8a683bb68",
+      "bytes": 523,
+      "sha256After": "d1ce0ea623d7d4dbbc269554dc8211feab73e404ed9d7650a4e700d8a683bb68"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00746.npz",
+      "split": "train",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 1092,
+      "zeroRatio": 0.05865893365893366,
+      "validFrameRatio": 0.9761904761904762,
+      "labelWords": 78,
+      "labelPreview": "en estas fechas es muy común que la gente tenga mayores gastos por la compra de regalos, porque no les alcanza para comer, o distintos gastos que hacen que fin ",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00746.npz",
+      "sha256Before": "4f20ecf4118c7414d69a75e40706d36b855e8790a5adf2829b247fd9a6f3e6e2",
+      "bytes": 383224,
+      "sha256After": "4f20ecf4118c7414d69a75e40706d36b855e8790a5adf2829b247fd9a6f3e6e2"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00763.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 545,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 44,
+      "labelPreview": "por ejemplo, si no sabemos qué significa o qué es el estrés, no podemos darnos cuenta que estamos viviendo una situación de estrés ni tampoco solucionarla. es i",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00763.npz",
+      "sha256Before": "c173ad7a542116af78742157bce1ee652453b923476a41d4263b49309f87b19c",
+      "bytes": 961,
+      "sha256After": "c173ad7a542116af78742157bce1ee652453b923476a41d4263b49309f87b19c"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00764.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 199,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 9,
+      "labelPreview": "por ejemplo, puede ser una situación externa o interna.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00764.npz",
+      "sha256Before": "c0cce627b0f37a354f9c426cb857733043482b75c1196fe786ef0ead9637fd88",
+      "bytes": 607,
+      "sha256After": "c0cce627b0f37a354f9c426cb857733043482b75c1196fe786ef0ead9637fd88"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00765.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 732,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 51,
+      "labelPreview": "por ejemplo, nosotros estamos conversando y es una situación estrés porque estamos reflexionando, y las preguntas tienen que ser correctas, mis respuestas tiene",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00765.npz",
+      "sha256Before": "79c61adbb3c417c8cf115e19acc2cf38e282ccd132daa5ff878386338cb18676",
+      "bytes": 1063,
+      "sha256After": "79c61adbb3c417c8cf115e19acc2cf38e282ccd132daa5ff878386338cb18676"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00766.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 433,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 14,
+      "labelPreview": "entonces, si uno se siente amenazado, o presionado, ahí es cuando aparece el estrés.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00766.npz",
+      "sha256Before": "7ef9e28f06dd2fb8caf6a4dc7f8ee2379994240dc671ee97927dd277d8981c4c",
+      "bytes": 748,
+      "sha256After": "7ef9e28f06dd2fb8caf6a4dc7f8ee2379994240dc671ee97927dd277d8981c4c"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00768.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 271,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 11,
+      "labelPreview": "tenemos que saber que hay distintas situaciones y formas de estrés.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00768.npz",
+      "sha256Before": "3c62253f3f2ec56e4ed6ec2269d78bde3bfa00d18ba8f34b91802c11448d0e48",
+      "bytes": 657,
+      "sha256After": "3c62253f3f2ec56e4ed6ec2269d78bde3bfa00d18ba8f34b91802c11448d0e48"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00769.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 60,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 5,
+      "labelPreview": "hay distintas formas de estrés.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00769.npz",
+      "sha256Before": "0a35bc24bd2400fe820977c5c5eb0c6b3e793b391fc72cd3aac70f24e9dd1735",
+      "bytes": 511,
+      "sha256After": "0a35bc24bd2400fe820977c5c5eb0c6b3e793b391fc72cd3aac70f24e9dd1735"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00770.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 181,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 18,
+      "labelPreview": "nosotros estamos hablando y nos sentimos un poco estresados, pero esto se pasa en cuanto termine la entrevista.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00770.npz",
+      "sha256Before": "d1300f6c06aa22325025f3bcc20e139a026484fa76987afb226011970ee13c4d",
+      "bytes": 644,
+      "sha256After": "d1300f6c06aa22325025f3bcc20e139a026484fa76987afb226011970ee13c4d"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00780.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 60,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 6,
+      "labelPreview": "realmente vamos a estar muy cansados.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00780.npz",
+      "sha256Before": "d2bf822dc4c0cf0757bd678a188fc67f6531e6716472951692628beae5fd459d",
+      "bytes": 519,
+      "sha256After": "d2bf822dc4c0cf0757bd678a188fc67f6531e6716472951692628beae5fd459d"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00781.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 318,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 25,
+      "labelPreview": "el cuerpo se va a enfermar, nos vamos a sentir agotados, deprimidos, vamos a estar mucho más estresados porque no vamos a poder pensar bien.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00781.npz",
+      "sha256Before": "544720ec4b42780bcbad40b153494a32c4207a774ac4dc4c15a1c1aff879aa91",
+      "bytes": 737,
+      "sha256After": "544720ec4b42780bcbad40b153494a32c4207a774ac4dc4c15a1c1aff879aa91"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00782.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 150,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 14,
+      "labelPreview": "yo puedo generar mi propio estrés también con un pensamiento que tuve, por ejemplo.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00782.npz",
+      "sha256Before": "7947e7f999f44038a27d389b662e9393ef353cadb21b09db2a6cca70fb123840",
+      "bytes": 616,
+      "sha256After": "7947e7f999f44038a27d389b662e9393ef353cadb21b09db2a6cca70fb123840"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00783.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 126,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 8,
+      "labelPreview": "por ejemplo, si ahora me pongo a pensar...",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00783.npz",
+      "sha256Before": "7dcbc47c1f0cbff1dea10d56fbb502277345a83a175ea19576aeba00d9ee11ce",
+      "bytes": 558,
+      "sha256After": "7dcbc47c1f0cbff1dea10d56fbb502277345a83a175ea19576aeba00d9ee11ce"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00784.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 132,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 10,
+      "labelPreview": "imaginate si estuviera en un trabajo que no me gusta.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00784.npz",
+      "sha256Before": "cf1b52bf133a9cf4d7a61458c347bbbc1549f1dbf2de12786c0035d6263270b0",
+      "bytes": 574,
+      "sha256After": "cf1b52bf133a9cf4d7a61458c347bbbc1549f1dbf2de12786c0035d6263270b0"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00785.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 265,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 28,
+      "labelPreview": "estoy en un trabajo que no me gusta, y estoy en mi casa, pero estoy pensando o me acuerdo de ese trabajo, e inmediatamente me estreso. es automático.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00785.npz",
+      "sha256Before": "692699c360f5e5ec5b291d24c60c784e10a1458ab5073ce08e8825827f55a337",
+      "bytes": 720,
+      "sha256After": "692699c360f5e5ec5b291d24c60c784e10a1458ab5073ce08e8825827f55a337"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00787.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 499,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 39,
+      "labelPreview": "o por ejemplo si una persona me dice algo que no me gusta, o veo una situación que no me gusta, o me enojo, o algo que va en contra de mi pensamiento, de mis cr",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00787.npz",
+      "sha256Before": "bb35e0f0384f8caea797bf5a07c4a51f7ea924eef9903c37fb345966365fa22f",
+      "bytes": 847,
+      "sha256After": "bb35e0f0384f8caea797bf5a07c4a51f7ea924eef9903c37fb345966365fa22f"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00788.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 481,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 17,
+      "labelPreview": "en segundo lugar, hay dos cuestiones que tienen que ver con la resistencia o con la adaptación.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00788.npz",
+      "sha256Before": "85fbfba26a7c0c8fdaf022138d91aeb816ca7b07a276e10d5522f9fecbc7f237",
+      "bytes": 781,
+      "sha256After": "85fbfba26a7c0c8fdaf022138d91aeb816ca7b07a276e10d5522f9fecbc7f237"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00789.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 630,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 44,
+      "labelPreview": "en relación a la adaptación, podemos decir que en realidad si soy flexible, si no me siento atacado, si puedo comprender, o si estoy en un trabajo que me gusta ",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00789.npz",
+      "sha256Before": "220220acd724f9ec8df7d7e9452a46ed2b61a928babb6a74225ef370b13a0674",
+      "bytes": 970,
+      "sha256After": "220220acd724f9ec8df7d7e9452a46ed2b61a928babb6a74225ef370b13a0674"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00790.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 336,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 21,
+      "labelPreview": "si busco soluciones a mis problemas o si acepto con amor las cosas negativas, las puedo cambiar. eso por un lado.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00790.npz",
+      "sha256Before": "16cefa4dbaa7749f171bc3df3cb229575384e49621a6420b3df1033db410d414",
+      "bytes": 728,
+      "sha256After": "16cefa4dbaa7749f171bc3df3cb229575384e49621a6420b3df1033db410d414"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00791.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 732,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 49,
+      "labelPreview": "por otro lado, la resistencia que tiene que ver con otra forma de pensarlo, de cambiar o pensar que una persona es una hija de puta, en el momento en que una pe",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00791.npz",
+      "sha256Before": "40cf89569b8882f5ea3e903f043756ca84ac91e8bdf46224831fc7b73ba84389",
+      "bytes": 1011,
+      "sha256After": "40cf89569b8882f5ea3e903f043756ca84ac91e8bdf46224831fc7b73ba84389"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00813.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 163,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 9,
+      "labelPreview": "vos podés mirarte y decidir cómo cambiar tu vida.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00813.npz",
+      "sha256Before": "f7dc935ba90d0d7c35bae8cc61ac4c1182b78e6da5464bc5d07bc78edf890d75",
+      "bytes": 585,
+      "sha256After": "f7dc935ba90d0d7c35bae8cc61ac4c1182b78e6da5464bc5d07bc78edf890d75"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00814.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 138,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 13,
+      "labelPreview": "es difícil, no es fácil, pero el mundo no está en tu contra.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00814.npz",
+      "sha256Before": "c76c5f29471da1410b82d66e346f00c936319644acba82562a765eb46806c3e3",
+      "bytes": 580,
+      "sha256After": "c76c5f29471da1410b82d66e346f00c936319644acba82562a765eb46806c3e3"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00815.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 151,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 9,
+      "labelPreview": "hay que mirarnos, nosotros decidimos cómo ver el mundo.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00815.npz",
+      "sha256Before": "cec49b5222c5e0f983f6788696c8ee09328dfe02e701c6f38aa29af2c5caad8c",
+      "bytes": 589,
+      "sha256After": "cec49b5222c5e0f983f6788696c8ee09328dfe02e701c6f38aa29af2c5caad8c"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00869.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 185,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 10,
+      "labelPreview": "vivo en la capital de la provincia de la rioja.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00869.npz",
+      "sha256Before": "ce14108e55b7c2acb2775aee35bba0c4ccfad82ce821446e4ff0d84a46765dfe",
+      "bytes": 584,
+      "sha256After": "ce14108e55b7c2acb2775aee35bba0c4ccfad82ce821446e4ff0d84a46765dfe"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00875.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 296,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 19,
+      "labelPreview": "es muy importante que a través de video llamadas podamos debatir sobre el proyecto de ley federal de lsa.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00875.npz",
+      "sha256Before": "40c2953e37163d7b57c5f61fd28590d7b068a8932e5d443c8b88ceb04c3c735e",
+      "bytes": 705,
+      "sha256After": "40c2953e37163d7b57c5f61fd28590d7b068a8932e5d443c8b88ceb04c3c735e"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00889.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 238,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 7,
+      "labelPreview": "lograr una igualdad de condiciones en educación.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00889.npz",
+      "sha256Before": "a42a03fe5f400456e7f773c2208c1d390d82f9764b2130ca63cca8a94b7b1598",
+      "bytes": 620,
+      "sha256After": "a42a03fe5f400456e7f773c2208c1d390d82f9764b2130ca63cca8a94b7b1598"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00980.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 149,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 13,
+      "labelPreview": "hola. nos encontramos hoy en la manifestación por el día mundial del agua.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00980.npz",
+      "sha256Before": "cc5fc9dd9dcc1171071c25047dccd090b0de264c65a81f9fac54df4664d7c4b3",
+      "bytes": 602,
+      "sha256After": "cc5fc9dd9dcc1171071c25047dccd090b0de264c65a81f9fac54df4664d7c4b3"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00982.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 76,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 6,
+      "labelPreview": "buscamos poner en alerta esta problemática.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00982.npz",
+      "sha256Before": "8e14e38ba0f91a87cc8ba22a3a79e1e95ab1db07a7da6aaaa4bc71540aa84bbd",
+      "bytes": 533,
+      "sha256After": "8e14e38ba0f91a87cc8ba22a3a79e1e95ab1db07a7da6aaaa4bc71540aa84bbd"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00985.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 60,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 8,
+      "labelPreview": "el estado hace caso omiso a la situación.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_00985.npz",
+      "sha256Before": "5c8e90ebb21b51385dad5bece7ad50bd808425016a05b52e92bfbe992429a975",
+      "bytes": 523,
+      "sha256After": "5c8e90ebb21b51385dad5bece7ad50bd808425016a05b52e92bfbe992429a975"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01024.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 136,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 13,
+      "labelPreview": "bueno, voy a hacerte preguntas ya que sos una experta en el tema.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01024.npz",
+      "sha256Before": "5b3e442d337806e315ce929754c7f68f47a0f70dd14f9a5426c238d181a7e0f1",
+      "bytes": 589,
+      "sha256After": "5b3e442d337806e315ce929754c7f68f47a0f70dd14f9a5426c238d181a7e0f1"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01033.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 365,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 18,
+      "labelPreview": "cuando el bebé nace, aparecen muchos sentimientos, temores, nos desespera no sabemos qué hacer, alegría, muchas emociones mezcladas.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01033.npz",
+      "sha256Before": "0e5704afd5058dda83727ea69591137d6016b117d73069322a699cacaa17b034",
+      "bytes": 759,
+      "sha256After": "0e5704afd5058dda83727ea69591137d6016b117d73069322a699cacaa17b034"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01035.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 433,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 21,
+      "labelPreview": "un emprendimiento necesita del cuidado igual que un bebé, por ejemplo, difundirlo, hacer contactos, vender, comprar, como si fuera nuestro bebé.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01035.npz",
+      "sha256Before": "62e7294a47f08172acaa4384bce8f106fb2e6ff77d6c58054f370ed4b73882bd",
+      "bytes": 803,
+      "sha256After": "62e7294a47f08172acaa4384bce8f106fb2e6ff77d6c58054f370ed4b73882bd"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01039.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 270,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 16,
+      "labelPreview": "ahí es donde yo, siendo de relaciones públicas, los ayudo y empujo dándoles herramientas de difusión.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01039.npz",
+      "sha256Before": "e88681e10bd77c92a53c0461d6310887e535e04fa69bb042192cc469e65727d8",
+      "bytes": 693,
+      "sha256After": "e88681e10bd77c92a53c0461d6310887e535e04fa69bb042192cc469e65727d8"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01040.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 211,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 17,
+      "labelPreview": "por ejemplo, si yo vendo cosas para bebés, el público objetivo serán las mamás de los bebés.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01040.npz",
+      "sha256Before": "d7472d3c10bbae28ce5d4c399639c6e188b9ee4f68838dd338b2b26db67d94a4",
+      "bytes": 655,
+      "sha256After": "d7472d3c10bbae28ce5d4c399639c6e188b9ee4f68838dd338b2b26db67d94a4"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01041.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 205,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 13,
+      "labelPreview": "seguramente si enfoco en las solteras, pierdo en contactos que no les interesa.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01041.npz",
+      "sha256Before": "0c6da4af16d14307162b1776006ad5fcc8d9b039c715a0f10ab7d2a7650071df",
+      "bytes": 632,
+      "sha256After": "0c6da4af16d14307162b1776006ad5fcc8d9b039c715a0f10ab7d2a7650071df"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01046.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 298,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 16,
+      "labelPreview": "si vendo ropa, será más por instagram o tik tok, porque lo utilizan más los jóvenes.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01046.npz",
+      "sha256Before": "26005c9d7eb19528d900846d183f40c83e0bea6e4b2b934627baa43c796d455c",
+      "bytes": 689,
+      "sha256After": "26005c9d7eb19528d900846d183f40c83e0bea6e4b2b934627baa43c796d455c"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01049.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 294,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 15,
+      "labelPreview": "si no nos mostramos seguros, esto se nota y el emprendimiento no se ve confiable.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01049.npz",
+      "sha256Before": "8cdf2d3134b63f68ec01c47db4dd5e78baa9e236822fbb1692b6628c7ce5eb84",
+      "bytes": 675,
+      "sha256After": "8cdf2d3134b63f68ec01c47db4dd5e78baa9e236822fbb1692b6628c7ce5eb84"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01050.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 109,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 4,
+      "labelPreview": "tenemos que estar seguros.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01050.npz",
+      "sha256Before": "6f478d1dd73a6110cf29fba961fd44748bde06b16633dbb7f9b7455d3a2a2b3b",
+      "bytes": 529,
+      "sha256After": "6f478d1dd73a6110cf29fba961fd44748bde06b16633dbb7f9b7455d3a2a2b3b"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01052.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 81,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 5,
+      "labelPreview": "mucho trabajo, atención y paciencia.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01052.npz",
+      "sha256Before": "d16869cf1b33525443ca95ec704196cdb8f4781919f788c9745979382458fece",
+      "bytes": 528,
+      "sha256After": "d16869cf1b33525443ca95ec704196cdb8f4781919f788c9745979382458fece"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01075.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 197,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 11,
+      "labelPreview": "acá es donde me voy a aplicar la vacuna, aquí estamos.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01075.npz",
+      "sha256Before": "6a554d643626b6444a295879efc3e955428f09e140283de931f90d4842d3de39",
+      "bytes": 609,
+      "sha256After": "6a554d643626b6444a295879efc3e955428f09e140283de931f90d4842d3de39"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01122.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 292,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 11,
+      "labelPreview": "vimos en el video el lanzamiento de la campaña, ¡qué bueno!",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01122.npz",
+      "sha256Before": "d88610afa161ab097c28aa51528d1569367f600bdf44707044313ecd847bbc53",
+      "bytes": 656,
+      "sha256After": "d88610afa161ab097c28aa51528d1569367f600bdf44707044313ecd847bbc53"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01123.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 391,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 28,
+      "labelPreview": "queremos preguntarte cómo surge la alianza entre la agrupación btt y el grupo prótáctil, ¿están asociados, son grupos separados o trabajan juntos? ¿qué objetivo",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01123.npz",
+      "sha256Before": "652cee2532f2c9431df0f916f9af794f8f55b7c6b7d379a4eba61ee0da94d92f",
+      "bytes": 834,
+      "sha256After": "652cee2532f2c9431df0f916f9af794f8f55b7c6b7d379a4eba61ee0da94d92f"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01129.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 153,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 9,
+      "labelPreview": "anduve con una amiga, ¡y se puede andar perfectamente!",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01129.npz",
+      "sha256Before": "6ae2ab3ca1c705b613a8d38c19aebdbca4a9603c20bcaa56b6cee5dee2da6ecf",
+      "bytes": 589,
+      "sha256After": "6ae2ab3ca1c705b613a8d38c19aebdbca4a9603c20bcaa56b6cee5dee2da6ecf"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01131.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 382,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 18,
+      "labelPreview": "justo sabía del grupo btt de ciclistas sordos y los contacté, le pedí de sumarnos, y accedieron enseguida.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01131.npz",
+      "sha256Before": "847d46736d243c06b46913a3a7d408cda8a5d38bbc7667ff0a7dd31f303ef5de",
+      "bytes": 753,
+      "sha256After": "847d46736d243c06b46913a3a7d408cda8a5d38bbc7667ff0a7dd31f303ef5de"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01154.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 615,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 35,
+      "labelPreview": "para las personas sordociegas, nuestro equipo está trabajando para mejorar y avanzar en accesibilidad, para que ellos puedan animarse a realizar más actividades",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01154.npz",
+      "sha256Before": "7b00b6312a76e05318c98f6dca03d95040b6c9318e0c80b05849ad96975617f8",
+      "bytes": 978,
+      "sha256After": "7b00b6312a76e05318c98f6dca03d95040b6c9318e0c80b05849ad96975617f8"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01229.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 260,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 16,
+      "labelPreview": "según la causa, se trató de un siniestro vial, pero la familia no está de acuerdo.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01229.npz",
+      "sha256Before": "e3f2fabea776dfddb981e024a77affd1f75d6ff4d9f6833310493b54da247532",
+      "bytes": 668,
+      "sha256After": "e3f2fabea776dfddb981e024a77affd1f75d6ff4d9f6833310493b54da247532"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01232.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 220,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 12,
+      "labelPreview": "todos nosotros y otras personas sordas fuimos a la escuela en gálvez.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01232.npz",
+      "sha256Before": "1145291e677a222fc049a4a3384759f02b0e68b5d33c0bfda394fd292502ea2a",
+      "bytes": 625,
+      "sha256After": "1145291e677a222fc049a4a3384759f02b0e68b5d33c0bfda394fd292502ea2a"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01242.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 239,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 7,
+      "labelPreview": "por favor, por mauricio. 341 356 7150.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01242.npz",
+      "sha256Before": "2af789e36743e9700f057e52eaaa17f1ebbb263acfe2b9f4b2139fb0480a6846",
+      "bytes": 605,
+      "sha256After": "2af789e36743e9700f057e52eaaa17f1ebbb263acfe2b9f4b2139fb0480a6846"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01397.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 268,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 5,
+      "labelPreview": "además un profesor de letras.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01397.npz",
+      "sha256Before": "22a81077282e70f2f4badd909879d4ffa939b829514d6dd66c22f9393c612408",
+      "bytes": 615,
+      "sha256After": "22a81077282e70f2f4badd909879d4ffa939b829514d6dd66c22f9393c612408"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01399.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 185,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 14,
+      "labelPreview": "ese tiempo nos llevó recolectar e incorporar todos esos conocimientos sobre el himno nacional.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01399.npz",
+      "sha256Before": "813e90cb5873ed6d8bdc335c313345d0733b6ab04fe156ad5181b3d76d62b102",
+      "bytes": 637,
+      "sha256After": "813e90cb5873ed6d8bdc335c313345d0733b6ab04fe156ad5181b3d76d62b102"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01400.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 167,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 10,
+      "labelPreview": "en la capacitación aprendimos las nueve, el himno original completo.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01400.npz",
+      "sha256Before": "63ad8f1ce17c24f48278fee7f36c040345f306f54ef31dc1f0d783ebdbadc8bb",
+      "bytes": 606,
+      "sha256After": "63ad8f1ce17c24f48278fee7f36c040345f306f54ef31dc1f0d783ebdbadc8bb"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01402.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 58,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 1,
+      "labelPreview": "exacto.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01402.npz",
+      "sha256Before": "64cdebf50363ae77d1081695baa8d47b40437aec4f7555344785730f0b0d1239",
+      "bytes": 473,
+      "sha256After": "64cdebf50363ae77d1081695baa8d47b40437aec4f7555344785730f0b0d1239"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01403.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 491,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 25,
+      "labelPreview": "una vez incorporado todo esto pasamos a investigar el por qué se mantiene en uso desde 1800 a la actualidad incluso, en el año 2021.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01403.npz",
+      "sha256Before": "b730f431f17c5f00980bda2c3da7ab362d339b643ba8521435fb735b3c7efe6e",
+      "bytes": 830,
+      "sha256After": "b730f431f17c5f00980bda2c3da7ab362d339b643ba8521435fb735b3c7efe6e"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01405.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 71,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 4,
+      "labelPreview": "nunca pasó de moda.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01405.npz",
+      "sha256Before": "5e4a217534cbfb2b335bebc79a75846e80873e93016d772cfa6c2a36fd84b2d6",
+      "bytes": 501,
+      "sha256After": "5e4a217534cbfb2b335bebc79a75846e80873e93016d772cfa6c2a36fd84b2d6"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01406.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 152,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 14,
+      "labelPreview": "es algo que continúa en el tiempo. es una marca significativa en la historia.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01406.npz",
+      "sha256Before": "f021bb1ca6b789922f09a13a2b8f27b4653c1b0dde0fd148bbbf3873fd2c4e47",
+      "bytes": 609,
+      "sha256After": "f021bb1ca6b789922f09a13a2b8f27b4653c1b0dde0fd148bbbf3873fd2c4e47"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01408.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 90,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 5,
+      "labelPreview": "un trabajo constante en equipo.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01408.npz",
+      "sha256Before": "ba56cb383dd63bc7ee48866274bbc0bec761108af34f596f4df662566edb8245",
+      "bytes": 528,
+      "sha256After": "ba56cb383dd63bc7ee48866274bbc0bec761108af34f596f4df662566edb8245"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01418.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 315,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 21,
+      "labelPreview": "cuando surgió la primera idea en 2012 se buscaba que represente a la cultura sorda y la gramática de la lsa.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01418.npz",
+      "sha256Before": "b3443b1dd40acf15e5de0aa206d6b3613b95362b4828cc9891d9766d7b9223e1",
+      "bytes": 727,
+      "sha256After": "b3443b1dd40acf15e5de0aa206d6b3613b95362b4828cc9891d9766d7b9223e1"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01423.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 340,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 15,
+      "labelPreview": "puedo darte mi opinión personal, pero quiero aclarar que la cas tiene su postura tomada.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01423.npz",
+      "sha256Before": "d195ff3a11c3cf35cacf020b25685e0e1d1dec87629a029e45e556757bb5acbd",
+      "bytes": 708,
+      "sha256After": "d195ff3a11c3cf35cacf020b25685e0e1d1dec87629a029e45e556757bb5acbd"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01425.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 335,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 16,
+      "labelPreview": "el gobierno argentino de ese momento, 1812 /1813 le pagó para la composición de la música.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01425.npz",
+      "sha256Before": "15c2d2c3dbec24bd93521f51083499767720487c9165d7d5ea1a1a1f95c58a77",
+      "bytes": 709,
+      "sha256After": "15c2d2c3dbec24bd93521f51083499767720487c9165d7d5ea1a1a1f95c58a77"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01426.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 179,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 12,
+      "labelPreview": "vicente lópez por el contrario trabajó de forma gratuita en la redacción.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01426.npz",
+      "sha256Before": "aa06e1b98c2fb91cf972bfa61e7317d89db398731c89ecaf1626224d3b487836",
+      "bytes": 624,
+      "sha256After": "aa06e1b98c2fb91cf972bfa61e7317d89db398731c89ecaf1626224d3b487836"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01428.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 609,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 27,
+      "labelPreview": "desde su estreno y a lo largo de los años hasta el 1900, durante ese período, no fue bien recibido en su totalidad por la sociedad argentina.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01428.npz",
+      "sha256Before": "d5285db0e6617695d2d31f720efc3e38cbe964e3152aca0d9dd4aaa618e24cf4",
+      "bytes": 887,
+      "sha256After": "d5285db0e6617695d2d31f720efc3e38cbe964e3152aca0d9dd4aaa618e24cf4"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01429.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 78,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 8,
+      "labelPreview": "los que estaban y no estaban de acuerdo.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01429.npz",
+      "sha256Before": "a3de999bea4a80c5949de888d86f0929c5e0eeba03549b79f96eebfa3fd03c9b",
+      "bytes": 522,
+      "sha256After": "a3de999bea4a80c5949de888d86f0929c5e0eeba03549b79f96eebfa3fd03c9b"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01430.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 370,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 18,
+      "labelPreview": "los años previos, desde 1813 hasta 1900, todavía había disconformidad por parte de algunos miembros de la población.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01430.npz",
+      "sha256Before": "f6dc3e6395022abc727b8ccbf065c11153c666d8977cc79fc5066040c73c0a25",
+      "bytes": 760,
+      "sha256After": "f6dc3e6395022abc727b8ccbf065c11153c666d8977cc79fc5066040c73c0a25"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01432.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 109,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 5,
+      "labelPreview": "argentina es un país democrático.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01432.npz",
+      "sha256Before": "1e8c62aca93b67532e277792ecedc38b9cd393ba1e3e62e3c991c143ba773776",
+      "bytes": 539,
+      "sha256After": "1e8c62aca93b67532e277792ecedc38b9cd393ba1e3e62e3c991c143ba773776"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01433.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 152,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 11,
+      "labelPreview": "existen opiniones diversas y es difícil llegar todos a un acuerdo.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01433.npz",
+      "sha256Before": "3ec0a08b759d45b9378bba99bee323cd7dea7ff4ec26d657995b5defa5f00b05",
+      "bytes": 599,
+      "sha256After": "3ec0a08b759d45b9378bba99bee323cd7dea7ff4ec26d657995b5defa5f00b05"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01655.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 814,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 14,
+      "labelPreview": "vieron qué interesante, ¿verdad? queremos agradecer a @visualnocturna, @facundourquidifotografo por la realización del video.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01655.npz",
+      "sha256Before": "b328947ca656f0dcec15fcb17a8da02fb0ecba6c9935a4672a25d05cc0510b6d",
+      "bytes": 993,
+      "sha256After": "b328947ca656f0dcec15fcb17a8da02fb0ecba6c9935a4672a25d05cc0510b6d"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01661.npz",
+      "split": "train",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 1088,
+      "zeroRatio": 0.021920226423902893,
+      "validFrameRatio": 0.9972426470588235,
+      "labelWords": 72,
+      "labelPreview": "si no se ofrece a la personas sorda la posibilidad de aprender la lengua de señas que es visual y para la que la persona sorda está preparada para adquirir, lue",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01661.npz",
+      "sha256Before": "263f6bad880eb0982b1ee9451fe5902561fa7adba15639c5852a84a1b6d840e2",
+      "bytes": 420760,
+      "sha256After": "263f6bad880eb0982b1ee9451fe5902561fa7adba15639c5852a84a1b6d840e2"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01665.npz",
+      "split": "train",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 1679,
+      "zeroRatio": 0.03728126152188094,
+      "validFrameRatio": 0.9863013698630136,
+      "labelWords": 63,
+      "labelPreview": "lorena carracedo, supervisora escolar educación especial, expresó en un comunicado oficial su total desacuerdo con los conceptos expresados por cichero y asegur",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01665.npz",
+      "sha256Before": "78a4fc876088c4d929f305c1e2d19a155b53fb480d34b701ea602717d7748f88",
+      "bytes": 633230,
+      "sha256After": "78a4fc876088c4d929f305c1e2d19a155b53fb480d34b701ea602717d7748f88"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01737.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 329,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 27,
+      "labelPreview": "me gustaría que nos cuentes, el pasado jueves se debatió sobre el proyecto de ley federal de lsa en la mesa de trabajo de la región centro.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01737.npz",
+      "sha256Before": "a77e5fa656f2e7b8ea0d99c9ef3b42c2ad57aac8cf90290ace081c3cfab8434c",
+      "bytes": 754,
+      "sha256After": "a77e5fa656f2e7b8ea0d99c9ef3b42c2ad57aac8cf90290ace081c3cfab8434c"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01739.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 615,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 33,
+      "labelPreview": "uh, fue muy emocionante estar presente en este momento de la historia porque soy una mujer sorda y hace aproximadamente más de 20 años que trabajo en diferentes",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01739.npz",
+      "sha256Before": "892ac4cdd0d1e670b50feb167019dc5441fb87e9fd1a177fd35caa3013a7ee48",
+      "bytes": 939,
+      "sha256After": "892ac4cdd0d1e670b50feb167019dc5441fb87e9fd1a177fd35caa3013a7ee48"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01740.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 113,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 8,
+      "labelPreview": "en asociaciones, en la confederación, en fundasor, etc.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01740.npz",
+      "sha256Before": "a0f0c0eee9033c55adad1f7a09a6b8f029bc3b1bd93782d2f2ea2fd2ec4ff19c",
+      "bytes": 556,
+      "sha256After": "a0f0c0eee9033c55adad1f7a09a6b8f029bc3b1bd93782d2f2ea2fd2ec4ff19c"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01763.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 86,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 7,
+      "labelPreview": "siempre de manera conjunta, eso es importante.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01763.npz",
+      "sha256Before": "840a929e93edee7f3c84f613c609a46aa3b3c317e784e1e528333ecbfa713257",
+      "bytes": 543,
+      "sha256After": "840a929e93edee7f3c84f613c609a46aa3b3c317e784e1e528333ecbfa713257"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01775.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 117,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 10,
+      "labelPreview": "quisimos adentrarnos en la temática, conocer distintos sabores y demás.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01775.npz",
+      "sha256Before": "b4b00c453fa0e603d3db07f69dd2546a0e3ce1613fe002dede1e887fa59766aa",
+      "bytes": 587,
+      "sha256After": "b4b00c453fa0e603d3db07f69dd2546a0e3ce1613fe002dede1e887fa59766aa"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01790.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 88,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 7,
+      "labelPreview": "-¿saben cómo elegir una cerveza de calidad?",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01790.npz",
+      "sha256Before": "20f689e197af970b771a6eb4d1f97a3e15dcfefb07026b9a9535f1f88b5ce6ef",
+      "bytes": 544,
+      "sha256After": "20f689e197af970b771a6eb4d1f97a3e15dcfefb07026b9a9535f1f88b5ce6ef"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01791.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 203,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 11,
+      "labelPreview": "este de aquí es para servir la cerveza \"ipa\" o \"neipa\".",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01791.npz",
+      "sha256Before": "4dcde72f2e5a3ebadbae6fc614abdda281033d4177422729877074e8241e7c6a",
+      "bytes": 606,
+      "sha256After": "4dcde72f2e5a3ebadbae6fc614abdda281033d4177422729877074e8241e7c6a"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01793.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 139,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 8,
+      "labelPreview": "cada cerveza debe servirse en una determinada copa.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01793.npz",
+      "sha256Before": "968b1242e18c1c1b8b372d6668c307b8a847859729500ed25d16920d2516da87",
+      "bytes": 564,
+      "sha256After": "968b1242e18c1c1b8b372d6668c307b8a847859729500ed25d16920d2516da87"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01934.npz",
+      "split": "train",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 1162,
+      "zeroRatio": 0.02562631478294129,
+      "validFrameRatio": 0.9982788296041308,
+      "labelWords": 71,
+      "labelPreview": "el pasado miércoles 14 de julio, se disputó la edición 32 del famoso juego de las estrellas del básquet argentino y por primera vez en la historia contó con la ",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_01934.npz",
+      "sha256Before": "c5262c08ea6f61d2c8459cf1b49b4d3f203f6cb131c426b5994ea0f31fc9487e",
+      "bytes": 436548,
+      "sha256After": "c5262c08ea6f61d2c8459cf1b49b4d3f203f6cb131c426b5994ea0f31fc9487e"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02028.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 201,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 13,
+      "labelPreview": "el tema de la basura es muy grande y casi no hay información.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_02028.npz",
+      "sha256Before": "e5c59eb0a93ae8aff5dae11fa81b0bc6ea3ecbab7c5345d1da0742af33fb6205",
+      "bytes": 616,
+      "sha256After": "e5c59eb0a93ae8aff5dae11fa81b0bc6ea3ecbab7c5345d1da0742af33fb6205"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02029.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 232,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 10,
+      "labelPreview": "entonces, es muy importante que en casa separemos los residuos.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_02029.npz",
+      "sha256Before": "97db8ce9243700e57e7a69fb26f08f3fcda30e326dec3b3a4c90e259649c456b",
+      "bytes": 633,
+      "sha256After": "97db8ce9243700e57e7a69fb26f08f3fcda30e326dec3b3a4c90e259649c456b"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02032.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 114,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 10,
+      "labelPreview": "esto se creo en los años 80, en estados unidos.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_02032.npz",
+      "sha256Before": "2173a32de88602820e678df378281efadd781753b916aabf6e879e96625c2cd7",
+      "bytes": 547,
+      "sha256After": "2173a32de88602820e678df378281efadd781753b916aabf6e879e96625c2cd7"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02033.npz",
+      "split": "train",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 1043,
+      "zeroRatio": 0.14630415924759166,
+      "validFrameRatio": 0.9175455417066155,
+      "labelWords": 96,
+      "labelPreview": "jóvenes estudiantes se dieron cuenta que la basura crecía cada vez más, entonces crearon lo de las 3 “r”. la primera por “reducir”, la segunda por “reciclar”, p",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_02033.npz",
+      "sha256Before": "e6773adad8f3f8c2029168e6f1e38d6aaaa185eac19eb8ee4666e28d8fdd608b",
+      "bytes": 315578,
+      "sha256After": "e6773adad8f3f8c2029168e6f1e38d6aaaa185eac19eb8ee4666e28d8fdd608b"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02040.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 362,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 12,
+      "labelPreview": "son las tres “r” más conocidas, que son reducir, reciclar y reutilizar.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_02040.npz",
+      "sha256Before": "53250ea08a85e4e5116e0794df2135cb69c5df34662e99d30d9bef5c02dd79e3",
+      "bytes": 708,
+      "sha256After": "53250ea08a85e4e5116e0794df2135cb69c5df34662e99d30d9bef5c02dd79e3"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02043.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 103,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 9,
+      "labelPreview": "en el campo se hace en el suelo directamente.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_02043.npz",
+      "sha256Before": "97000ad3e45f83ca80f4c21731a85c8fcd71806a340ede7ae2149c81d5554847",
+      "bytes": 544,
+      "sha256After": "97000ad3e45f83ca80f4c21731a85c8fcd71806a340ede7ae2149c81d5554847"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02045.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 618,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 38,
+      "labelPreview": "en internet hay distintas formas de hacer compost, cada uno elige a gusto, pero el último contenedor es el que vamos a usar para que caiga toda la mezcla de agu",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_02045.npz",
+      "sha256Before": "3ebe6fea3ab5bff0c3fefdf6c0d756c49e929840e0155a31f479d28a58c00c42",
+      "bytes": 935,
+      "sha256After": "3ebe6fea3ab5bff0c3fefdf6c0d756c49e929840e0155a31f479d28a58c00c42"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02053.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 341,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 20,
+      "labelPreview": "si yo tengo mucha basura y no la voy a usar, es importante compartir con otras personas que lo necesiten.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_02053.npz",
+      "sha256Before": "2a25f91ea98d5a9f85242ab06cee13d7d65fb50415661ae053547d5cfda36927",
+      "bytes": 728,
+      "sha256After": "2a25f91ea98d5a9f85242ab06cee13d7d65fb50415661ae053547d5cfda36927"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02211.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 274,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 12,
+      "labelPreview": "vine al supermercado a comprar carne, la verdad que está carísima, miren...",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_02211.npz",
+      "sha256Before": "2cd09d095a19cabadb73ee32dcc5fb27fb3e084e19f49eab30fc993933fd77c8",
+      "bytes": 668,
+      "sha256After": "2cd09d095a19cabadb73ee32dcc5fb27fb3e084e19f49eab30fc993933fd77c8"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02307.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 176,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 5,
+      "labelPreview": "¡buenas tardes! ¿cómo estás, gustavo?",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_02307.npz",
+      "sha256Before": "445063ca35f8c18539f954851db25806b18ac7193106ef1a6926892f3e6609ec",
+      "bytes": 583,
+      "sha256After": "445063ca35f8c18539f954851db25806b18ac7193106ef1a6926892f3e6609ec"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02310.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 436,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 17,
+      "labelPreview": "estamos próximos a las 24º sordolimpiadas de verano, ¡primera vez en un país de américa del sur!",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_02310.npz",
+      "sha256Before": "472019bc9db140e54df0de46de19180d762f90d023d843ee8352b7b0b1788f6e",
+      "bytes": 770,
+      "sha256After": "472019bc9db140e54df0de46de19180d762f90d023d843ee8352b7b0b1788f6e"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02311.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 227,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 15,
+      "labelPreview": "en américa ya se habían llevado a cabo en washington dc en el año 1965.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_02311.npz",
+      "sha256Before": "b2fd1b2178b9a1f098ac79ac70236384f3b4af67d1cb04edddb9e60326570413",
+      "bytes": 646,
+      "sha256After": "b2fd1b2178b9a1f098ac79ac70236384f3b4af67d1cb04edddb9e60326570413"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02312.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 301,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 19,
+      "labelPreview": "ahora será sede brasil. ¿qué significa para la comunidad sorda que brasil sea elegido como sede para las sordolimpiadas?",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_02312.npz",
+      "sha256Before": "789ed8669a0b9014430e5174c4e908c9e968d85db5cdef181d60274536e70601",
+      "bytes": 714,
+      "sha256After": "789ed8669a0b9014430e5174c4e908c9e968d85db5cdef181d60274536e70601"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02335.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 494,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 21,
+      "labelPreview": "las sordolimpiadas serán en caxias do sul, y pensaba que es una ciudad pequeña, recibirán a mucha gente de varios países.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_02335.npz",
+      "sha256Before": "a2a50e9752fbab124e6b37f1a07d4b1c9926748ab1f505206069751e17c87c1b",
+      "bytes": 818,
+      "sha256After": "a2a50e9752fbab124e6b37f1a07d4b1c9926748ab1f505206069751e17c87c1b"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02336.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 147,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 9,
+      "labelPreview": "¿qué dificultades podrían tener en cuanto a la infraestructura?",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_02336.npz",
+      "sha256Before": "9814ceb2627c0a29cb6826afebbc7699432b346ae499b8d85b400214119712a5",
+      "bytes": 598,
+      "sha256After": "9814ceb2627c0a29cb6826afebbc7699432b346ae499b8d85b400214119712a5"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02371.npz",
+      "split": "train",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 1204,
+      "zeroRatio": 0.003875968992248062,
+      "validFrameRatio": 1.0,
+      "labelWords": 67,
+      "labelPreview": "el pasado jueves 3 de diciembre, en la semana del día internacional de las personas con discapacidad, la asociación tucumana de sordos y la asociación civil com",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_02371.npz",
+      "sha256Before": "5f17f0c8eac0ced22937210d3ce4984be0be522c107e586eb654d1a71fd6ed02",
+      "bytes": 482424,
+      "sha256After": "5f17f0c8eac0ced22937210d3ce4984be0be522c107e586eb654d1a71fd6ed02"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02430.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 102,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 12,
+      "labelPreview": "¿qué es esto de la ley federal de lengua de señas argentina?",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_02430.npz",
+      "sha256Before": "abf5e719db96600bbd57cae132a35ff0ac199ce5bb3363ff56b300dc860c31f4",
+      "bytes": 563,
+      "sha256After": "abf5e719db96600bbd57cae132a35ff0ac199ce5bb3363ff56b300dc860c31f4"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02432.npz",
+      "split": "train",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 1441,
+      "zeroRatio": 0.6565546412874658,
+      "validFrameRatio": 0.3886190145732131,
+      "labelWords": 111,
+      "labelPreview": "la lengua de señas es parte de nuestra cultura, es nuestra identidad, desde hace mucho tiempo la lengua de señas ha sido oprimida, no reconocida, en cambio ahor",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_02432.npz",
+      "sha256Before": "aff5e499ee59b95683ab50ac83e2457007d6486b95b4967dc680406ca3971a54",
+      "bytes": 160279,
+      "sha256After": "aff5e499ee59b95683ab50ac83e2457007d6486b95b4967dc680406ca3971a54"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02966.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 183,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 11,
+      "labelPreview": "este de aquí es para servir la cerveza \"ipa\" o \"neipa\".",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_02966.npz",
+      "sha256Before": "3f4037e8984ff06e699d2894a9065977c0b8b0551e49d4f8efb23739fe185993",
+      "bytes": 596,
+      "sha256After": "3f4037e8984ff06e699d2894a9065977c0b8b0551e49d4f8efb23739fe185993"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02969.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 61,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 5,
+      "labelPreview": "pero no es lo correcto.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_02969.npz",
+      "sha256Before": "18946e64420e5117ed05b7811c7626feb0d883bb7caf381d15a917055eeb7d35",
+      "bytes": 494,
+      "sha256After": "18946e64420e5117ed05b7811c7626feb0d883bb7caf381d15a917055eeb7d35"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03068.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 97,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 3,
+      "labelPreview": "¡hola! ¿cómo estás?",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03068.npz",
+      "sha256Before": "d3f68612de16aa7fcd17de4033e5851087f6f818fbfe5c4b170ea4cc09e1eb5a",
+      "bytes": 519,
+      "sha256After": "d3f68612de16aa7fcd17de4033e5851087f6f818fbfe5c4b170ea4cc09e1eb5a"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03233.npz",
+      "split": "train",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 877,
+      "zeroRatio": 0.0536370382436517,
+      "validFrameRatio": 0.9703534777651083,
+      "labelWords": 71,
+      "labelPreview": "el escenario número cuatro, que es el más duro de todos y establece una reducción del 73% de los estudiantes en las aulas, sólo asistirán a clases presenciales ",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03233.npz",
+      "sha256Before": "82c4e512d3688bfbf3ddbead814ab4e0d75f2736424a477bed9ba4e7ab62403e",
+      "bytes": 324444,
+      "sha256After": "82c4e512d3688bfbf3ddbead814ab4e0d75f2736424a477bed9ba4e7ab62403e"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03350.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 785,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 36,
+      "labelPreview": "no había señas, usábamos mucho el alfabeto dactilológico y había temas que no se podían señar, entonces le pedí por favor que me enseñara y trabajáramos juntos,",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03350.npz",
+      "sha256Before": "e33ab1c4ebce35443424848dd79e0e1b2a3111295d575da43da4731b5b3a6b08",
+      "bytes": 1023,
+      "sha256After": "e33ab1c4ebce35443424848dd79e0e1b2a3111295d575da43da4731b5b3a6b08"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03351.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 327,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 23,
+      "labelPreview": "esto comenzó a abrirse y en el 2015 tuvimos el contacto con el instituto wine, esta es su seña, es una palabra inglesa.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03351.npz",
+      "sha256Before": "74bd08a29892f35806de16dab6a667133c4076e9338d6bd51858ac0dabe0b992",
+      "bytes": 734,
+      "sha256After": "74bd08a29892f35806de16dab6a667133c4076e9338d6bd51858ac0dabe0b992"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03352.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 298,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 19,
+      "labelPreview": "no es solamente catar el vino, sino que encierran muchos temas y conocimientos maravillosos y culturales sobre el vino.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03352.npz",
+      "sha256Before": "93948bf42ed5a232ed3202c386ad6822d0065e3f7b52c60557f4c4d1a3a5fa4a",
+      "bytes": 710,
+      "sha256After": "93948bf42ed5a232ed3202c386ad6822d0065e3f7b52c60557f4c4d1a3a5fa4a"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03353.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 442,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 17,
+      "labelPreview": "ellos aceptaron esta idea, organizaron reuniones y capacitaciones para las personas sordas, pensando en cómo podíamos armarlo.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03353.npz",
+      "sha256Before": "0b21db2a082888ad214367d8a677d9e59954737ba4222670a98fa3fb9f0e3cf6",
+      "bytes": 790,
+      "sha256After": "0b21db2a082888ad214367d8a677d9e59954737ba4222670a98fa3fb9f0e3cf6"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03357.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 345,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 16,
+      "labelPreview": "el año pasado tuvimos tres catas, gracias a la pandemia nos permitió expandirnos, nos ayudó muchísimo.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03357.npz",
+      "sha256Before": "2f78ab9c02842aefddc25b071cdd696e3d2a058f838a252b91acd76ef9eb48f9",
+      "bytes": 728,
+      "sha256After": "2f78ab9c02842aefddc25b071cdd696e3d2a058f838a252b91acd76ef9eb48f9"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03440.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 87,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 6,
+      "labelPreview": "bien, tengo algunas preguntas para hacerte.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03440.npz",
+      "sha256Before": "afff64b20a5f1828db0c2dde1017c5649691343c315b656232511d1d26391fcc",
+      "bytes": 534,
+      "sha256After": "afff64b20a5f1828db0c2dde1017c5649691343c315b656232511d1d26391fcc"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03453.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 142,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 8,
+      "labelPreview": "como sabes la uner es una universidad pública.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03453.npz",
+      "sha256Before": "e35a76c1679d7bf865b70d5489399a5e5c23bc2f3f22df0d8b0383b5502cfbb5",
+      "bytes": 568,
+      "sha256After": "e35a76c1679d7bf865b70d5489399a5e5c23bc2f3f22df0d8b0383b5502cfbb5"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03458.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 128,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 15,
+      "labelPreview": "al estar dentro de la tecnicatura que tiene una duración de dos años y medio.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03458.npz",
+      "sha256Before": "878d7bac177937d27045a80466b0ba1ec98b7bbe40b2ed8aedcd9d5c8f7c829c",
+      "bytes": 593,
+      "sha256After": "878d7bac177937d27045a80466b0ba1ec98b7bbe40b2ed8aedcd9d5c8f7c829c"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03460.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 273,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 20,
+      "labelPreview": "quedó un estudiante que no estaba muy abierto a reflexionar y nosotros debimos acercarnos a él y aclarar esta situación.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03460.npz",
+      "sha256Before": "a9a7de8dad54161f036030555ede7e17e342a36dadaaa9e57b55dc73ba1cdd13",
+      "bytes": 713,
+      "sha256After": "a9a7de8dad54161f036030555ede7e17e342a36dadaaa9e57b55dc73ba1cdd13"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03461.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 140,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 11,
+      "labelPreview": "hacerle ver que era el único que seguía con esa postura.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03461.npz",
+      "sha256Before": "2a701330cf3e79157960158e8853e52e79d6fe6869bf69956c28cd9039532d31",
+      "bytes": 575,
+      "sha256After": "2a701330cf3e79157960158e8853e52e79d6fe6869bf69956c28cd9039532d31"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03463.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 123,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 14,
+      "labelPreview": "la uner de todas formas estuvo de acuerdo con estos requisitos que les planteamos.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03463.npz",
+      "sha256Before": "d869f2215839eb7badcea7960eb270f29693a2c0fac7c10a8918a1d5938ceae8",
+      "bytes": 594,
+      "sha256After": "d869f2215839eb7badcea7960eb270f29693a2c0fac7c10a8918a1d5938ceae8"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03464.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 226,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 13,
+      "labelPreview": "el título que otorga es el de técnico universitario en lengua de señas.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03464.npz",
+      "sha256Before": "561b72179f61308a2d3efc4935adb9c82c10f239a5f7090443a1f41896347a84",
+      "bytes": 643,
+      "sha256After": "561b72179f61308a2d3efc4935adb9c82c10f239a5f7090443a1f41896347a84"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03465.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 123,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 6,
+      "labelPreview": "te recibís de instructor de lsa.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03465.npz",
+      "sha256Before": "8372b095020e2ffcc8fa78f51a48c8ef4660d33d4b2a8188f106419b6053a5d3",
+      "bytes": 541,
+      "sha256After": "8372b095020e2ffcc8fa78f51a48c8ef4660d33d4b2a8188f106419b6053a5d3"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03469.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 62,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 6,
+      "labelPreview": "fue un gran logro para nosotros.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03469.npz",
+      "sha256Before": "e2fd708c369657d9fe4c2ba7a44f0f86c234122c47272fc94a6d6489fd266d63",
+      "bytes": 508,
+      "sha256After": "e2fd708c369657d9fe4c2ba7a44f0f86c234122c47272fc94a6d6489fd266d63"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03471.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 117,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 10,
+      "labelPreview": "nuestro objetivo no consistía en echar a las personas oyentes.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03471.npz",
+      "sha256Before": "835019766144cfef40d5060da2ca5240cf1be00d76705f95910cacb676fb9818",
+      "bytes": 579,
+      "sha256After": "835019766144cfef40d5060da2ca5240cf1be00d76705f95910cacb676fb9818"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03472.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 272,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 18,
+      "labelPreview": "está relacionado con garantizar una accesibilidad para las personas sordas y no depender constantemente de la persona oyente.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03472.npz",
+      "sha256Before": "6e386b9e243fa764a2754a432c3ca1fa0f855ebe81255f5f02262f9456f87b5f",
+      "bytes": 707,
+      "sha256After": "6e386b9e243fa764a2754a432c3ca1fa0f855ebe81255f5f02262f9456f87b5f"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03473.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 167,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 12,
+      "labelPreview": "todas las clases y el material era accesibles en lengua de señas.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03473.npz",
+      "sha256Before": "0b3596daeaf104368735b1fbd282d21f6b2d0fe883540ad002ecdf4925641b05",
+      "bytes": 599,
+      "sha256After": "0b3596daeaf104368735b1fbd282d21f6b2d0fe883540ad002ecdf4925641b05"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03474.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 95,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 6,
+      "labelPreview": "también se trabajaba con el español.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03474.npz",
+      "sha256Before": "a8c4ab3dbb03934df132f031faaa0554a0caa8c1ba8ffcd42e685c479d4383de",
+      "bytes": 536,
+      "sha256After": "a8c4ab3dbb03934df132f031faaa0554a0caa8c1ba8ffcd42e685c479d4383de"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03475.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 66,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 6,
+      "labelPreview": "era un trabajo en ambos idiomas.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03475.npz",
+      "sha256Before": "7bbec402a320f80a8670cfd1c5491d7ab08546da451f3555ec8bab3ff1db8e95",
+      "bytes": 512,
+      "sha256After": "7bbec402a320f80a8670cfd1c5491d7ab08546da451f3555ec8bab3ff1db8e95"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03476.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 243,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 17,
+      "labelPreview": "entonces, los estudiantes tenían la opción de elegir si preferían la lengua de señas o el español.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03476.npz",
+      "sha256Before": "eca84c9240c19e1dc64fe7eafb914c4f1409872a6e756b3a9b46897020841082",
+      "bytes": 672,
+      "sha256After": "eca84c9240c19e1dc64fe7eafb914c4f1409872a6e756b3a9b46897020841082"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03522.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 274,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 15,
+      "labelPreview": "noté que muchos sordos piensan que no pueden entrar a la universidad y están equivocados.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03522.npz",
+      "sha256Before": "c885294c4989892eb119302e0bb5d722762ecb14d77983585f0d871c064956b3",
+      "bytes": 681,
+      "sha256After": "c885294c4989892eb119302e0bb5d722762ecb14d77983585f0d871c064956b3"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03523.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 314,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 25,
+      "labelPreview": "¡pueden! ¡todos pueden! no importa si no saben leer o escribir, no importa si no saben lengua de señas. ¡es posible entrar a la universidad!",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03523.npz",
+      "sha256Before": "60ab12f116b345f5108a7632b9f6b0dc3727f03d567e4fde235482aa4154a8ed",
+      "bytes": 730,
+      "sha256After": "60ab12f116b345f5108a7632b9f6b0dc3727f03d567e4fde235482aa4154a8ed"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03524.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 93,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 3,
+      "labelPreview": "¡todo es posible!",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03524.npz",
+      "sha256Before": "4293eaa5a0e496ed8c1c5f2905e7c9f32747c39f1accc61dc29688135267ad3d",
+      "bytes": 507,
+      "sha256After": "4293eaa5a0e496ed8c1c5f2905e7c9f32747c39f1accc61dc29688135267ad3d"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03542.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 72,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 4,
+      "labelPreview": "abrazos a vos. chau.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03542.npz",
+      "sha256Before": "e7b5fe9698dc8353eecd24429578b254428070ef29152bacfc51bf169adfb2b5",
+      "bytes": 500,
+      "sha256After": "e7b5fe9698dc8353eecd24429578b254428070ef29152bacfc51bf169adfb2b5"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03671.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 336,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 19,
+      "labelPreview": "gracias a la dedicación de su madre aprendió a leer los labios y a hablar perfectamente inglés y alemán.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_03671.npz",
+      "sha256Before": "e822472e6d502cb7b99b58f10b20088fa381af8023bfb647a2fdd792df3b87d4",
+      "bytes": 721,
+      "sha256After": "e822472e6d502cb7b99b58f10b20088fa381af8023bfb647a2fdd792df3b87d4"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04479.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 133,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 12,
+      "labelPreview": "no, gracias a vos por invitarme. la verdad que estoy muy contenta.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_04479.npz",
+      "sha256Before": "21b715561c8c35de9bd6f4d825fba235bc7ddd6045025a22d93d58472dcb649a",
+      "bytes": 589,
+      "sha256After": "21b715561c8c35de9bd6f4d825fba235bc7ddd6045025a22d93d58472dcb649a"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04480.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 346,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 25,
+      "labelPreview": "bien, a mí me gustaría que me cuentes, en este ratito, sobre la campaña que lanzó la cas por el proyecto de ley de lsa.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_04480.npz",
+      "sha256Before": "c7c10257b7e79c36a0f7b7074e021013db343aefdcf678575f30dd1a8134e03b",
+      "bytes": 737,
+      "sha256After": "c7c10257b7e79c36a0f7b7074e021013db343aefdcf678575f30dd1a8134e03b"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04496.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 134,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 7,
+      "labelPreview": "y, porque anteriormente siempre tuvimos muchos obstáculos.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_04496.npz",
+      "sha256Before": "690c1c5d37f43fae5d2299e4f66fc09121ef27ec43d347b2802d87eb02625fcf",
+      "bytes": 583,
+      "sha256After": "690c1c5d37f43fae5d2299e4f66fc09121ef27ec43d347b2802d87eb02625fcf"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04497.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 246,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 20,
+      "labelPreview": "son demasiadas barreras, esto nos da mucha angustia, queremos que se solucione ya, y es a través de la ley.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_04497.npz",
+      "sha256Before": "0b47e191e8d6f05d8d5198cf8fe0d64ee8eef11f537faada58b35bacffaf7478",
+      "bytes": 682,
+      "sha256After": "0b47e191e8d6f05d8d5198cf8fe0d64ee8eef11f537faada58b35bacffaf7478"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04498.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 125,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 9,
+      "labelPreview": "esta primera convocatoria se da en el momento justo.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_04498.npz",
+      "sha256Before": "0c9ccbb2779ac89cc8911033c3d80d12b1fa8ad25d2039c41c68615abecc0d6f",
+      "bytes": 571,
+      "sha256After": "0c9ccbb2779ac89cc8911033c3d80d12b1fa8ad25d2039c41c68615abecc0d6f"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04499.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 137,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 13,
+      "labelPreview": "veo que me decís que estaban algunos en tema de educación, tema laboral.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_04499.npz",
+      "sha256Before": "11c9bf1fb64d0de0c1d6ecbea323eecf040d992baf5ca734785e5f1d1896deb0",
+      "bytes": 595,
+      "sha256After": "11c9bf1fb64d0de0c1d6ecbea323eecf040d992baf5ca734785e5f1d1896deb0"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04501.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 295,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 11,
+      "labelPreview": "y, aproximadamente entre 25 años hasta los 50, en esa franja.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_04501.npz",
+      "sha256Before": "e1cbfeff0776410e15c91319dd1c17994f2d315600be09bb5fcf59a524be3368",
+      "bytes": 664,
+      "sha256After": "e1cbfeff0776410e15c91319dd1c17994f2d315600be09bb5fcf59a524be3368"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04503.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 203,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 9,
+      "labelPreview": "todos de diferentes ámbitos, educativos, referentes, ámbito laboral, salud.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_04503.npz",
+      "sha256Before": "57db1b9a69ff4d0eb1531c2ed255a5c1197a381d8dc259c0ccca4aaf045b6f59",
+      "bytes": 622,
+      "sha256After": "57db1b9a69ff4d0eb1531c2ed255a5c1197a381d8dc259c0ccca4aaf045b6f59"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04506.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 348,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 20,
+      "labelPreview": "me decías edades de 25 a 50, en ese rango, entonces, tienen mirada diferentes. ¿qué expectativas tiene para el futuro?",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_04506.npz",
+      "sha256Before": "dd8fc8959aeccd59a16ab2e5fb27d65b07b5accff33178b69022629920682ba5",
+      "bytes": 749,
+      "sha256After": "dd8fc8959aeccd59a16ab2e5fb27d65b07b5accff33178b69022629920682ba5"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04511.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 104,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 8,
+      "labelPreview": "por otro lado los adultos buscan la autonomía.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_04511.npz",
+      "sha256Before": "14d09e5c799d81fa3be73caf08cdfcf1ab43cec519f3681f6738f427dbc91810",
+      "bytes": 543,
+      "sha256After": "14d09e5c799d81fa3be73caf08cdfcf1ab43cec519f3681f6738f427dbc91810"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04512.npz",
+      "split": "train",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 548,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 48,
+      "labelPreview": "después, en el ámbito laboral, por ejemplo, en una reunión de trabajo que se realiza de forma oral y después le llega un breve resumen a la persona sorda. este ",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_04512.npz",
+      "sha256Before": "a826041106a41fbcc6e806d5018e4a5e214c6dc30f2cab775abc38f2b85b6e67",
+      "bytes": 952,
+      "sha256After": "a826041106a41fbcc6e806d5018e4a5e214c6dc30f2cab775abc38f2b85b6e67"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04905.npz",
+      "split": "train",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 1021,
+      "zeroRatio": 0.01825940954246537,
+      "validFrameRatio": 0.990205680705191,
+      "labelWords": 64,
+      "labelPreview": "luego de ese primer encuentro, una mamá de un compañero se contactó con la mamá de magalí, florencia pessino, para avisarle que entre todos los padres iban a re",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_04905.npz",
+      "sha256Before": "2da66de008ca08b73cb4efef35027e84b8b0c5c10a05d4f77339c98279d75d0a",
+      "bytes": 399458,
+      "sha256After": "2da66de008ca08b73cb4efef35027e84b8b0c5c10a05d4f77339c98279d75d0a"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04920.npz",
+      "split": "train",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 1521,
+      "zeroRatio": 0.9962848167976374,
+      "validFrameRatio": 0.0039447731755424065,
+      "labelWords": 69,
+      "labelPreview": "las contribuciones de las personas sordas y las lenguas de señas al desarrollo científico son numerosas. entre los casos más importantes, \"cn sordos\" recuerda e",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_04920.npz",
+      "sha256Before": "40d80df47b52b3bdc42c03aba7223e231de67345656932794ffa28326a501fd2",
+      "bytes": 4016,
+      "sha256After": "40d80df47b52b3bdc42c03aba7223e231de67345656932794ffa28326a501fd2"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_05106.npz",
+      "split": "train",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 2695,
+      "zeroRatio": 0.03813646670789528,
+      "validFrameRatio": 0.9851576994434137,
+      "labelWords": 78,
+      "labelPreview": "los cambios provocados por el hombre en la naturaleza, así como los crímenes que perturban la biodiversidad, como la deforestación, el cambio de uso del suelo c",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/train/train_05106.npz",
+      "sha256Before": "bd5e45927d11f82ac9b490fbdf38ec3165dc872e05f3931512aff5d9ab0e81b1",
+      "bytes": 1045208,
+      "sha256After": "bd5e45927d11f82ac9b490fbdf38ec3165dc872e05f3931512aff5d9ab0e81b1"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00059.npz",
+      "split": "val",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 2423,
+      "zeroRatio": 0.08503167397100538,
+      "validFrameRatio": 0.963268675196038,
+      "labelWords": 153,
+      "labelPreview": "en ese momento, la idea no prosperó porque había otro grupo de mujeres que no estaba de acuerdo e insisten que la palabra a utilizar tenía que ser woman, que re",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00059.npz",
+      "sha256Before": "8b0608db69c2d0a052b2f79c7799a71ee7d791aa57348e67d18d028bd5b9bc81",
+      "bytes": 837067,
+      "sha256After": "8b0608db69c2d0a052b2f79c7799a71ee7d791aa57348e67d18d028bd5b9bc81"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00060.npz",
+      "split": "val",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 921,
+      "zeroRatio": 0.04603346948623822,
+      "validFrameRatio": 0.9685124864277959,
+      "labelWords": 66,
+      "labelPreview": "crecer cada vez más, que las mujeres sordas tuvieran su espacio, nosotras las mujeres sordas queríamos sentirnos libres  y crecer cada vez más en esta idea. no ",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00060.npz",
+      "sha256Before": "23f1dc02491b62f787080835fd7474581e4406aef9bc5dba3cef8fc1ac43a9ab",
+      "bytes": 344675,
+      "sha256After": "23f1dc02491b62f787080835fd7474581e4406aef9bc5dba3cef8fc1ac43a9ab"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00072.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 174,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 6,
+      "labelPreview": "yo soy gianela, pertenezco \"juegos especiales\".",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00072.npz",
+      "sha256Before": "1d5ddcd30d7fe053530bb96faf03f98d8657e6f345688ac5a40ebb6eec49f9aa",
+      "bytes": 590,
+      "sha256After": "1d5ddcd30d7fe053530bb96faf03f98d8657e6f345688ac5a40ebb6eec49f9aa"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00162.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 134,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 2,
+      "labelPreview": "papi, hola...",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00162.npz",
+      "sha256Before": "22f932012ed608a3280d0d1de6f591e3828f8c115836b18bcaf57ef21bce3039",
+      "bytes": 518,
+      "sha256After": "22f932012ed608a3280d0d1de6f591e3828f8c115836b18bcaf57ef21bce3039"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00177.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 442,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 19,
+      "labelPreview": "antes que nada, les cuento que el grupo \"sueños sin fronteras\", así se llama, comenzó en el año 2003.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00177.npz",
+      "sha256Before": "eda52e69ce72959c0ff41dceb718a1e24de51840419969d98866933fdae63cbc",
+      "bytes": 777,
+      "sha256After": "eda52e69ce72959c0ff41dceb718a1e24de51840419969d98866933fdae63cbc"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00178.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 387,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 20,
+      "labelPreview": "en relación a lo que me preguntás, el chamamé se aprobó como patrimonio cultural de la humanidad por la unesco.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00178.npz",
+      "sha256Before": "9bc342d3e0bad009bb8b4420fb73126ab96623b9aac8a3e7ca8e7d32691cda01",
+      "bytes": 763,
+      "sha256After": "9bc342d3e0bad009bb8b4420fb73126ab96623b9aac8a3e7ca8e7d32691cda01"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00180.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 600,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 26,
+      "labelPreview": "en el grupo somos todas personas sordas y hay una persona oyente, que acompaña a las parejas y va guiando esa actividad para hacer los intercambios.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00180.npz",
+      "sha256Before": "8e2b2191b8e868004defcaf2c5eed4d9276440b63add5ac4a51b8d897b6abc22",
+      "bytes": 888,
+      "sha256After": "8e2b2191b8e868004defcaf2c5eed4d9276440b63add5ac4a51b8d897b6abc22"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00183.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 166,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 8,
+      "labelPreview": "¿van a eventos, hacen fiestas, cómo es esto?",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00183.npz",
+      "sha256Before": "bfcdcf269637b5e0137ef7c1d8289daff5899854d1f2c13d87d47f34784d3b78",
+      "bytes": 579,
+      "sha256After": "bfcdcf269637b5e0137ef7c1d8289daff5899854d1f2c13d87d47f34784d3b78"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00187.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 211,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 17,
+      "labelPreview": "por ejemplo, cuando hay percusión, uno puede sentir la energía, hay movimiento, hay vibración, es muy lindo.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00187.npz",
+      "sha256Before": "29805916cd739ae5495880de2c46b16b8a224283b6d5dc0a0eef927d29991b17",
+      "bytes": 667,
+      "sha256After": "29805916cd739ae5495880de2c46b16b8a224283b6d5dc0a0eef927d29991b17"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00205.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 324,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 15,
+      "labelPreview": "podemos dividir al estrés en tres partes: primero pensemos que el estrés es una alarma.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00205.npz",
+      "sha256Before": "b92e8b4081c1a181cd696e487fa1ae2f55faffb052eb6e3abe9d980520d16b81",
+      "bytes": 689,
+      "sha256After": "b92e8b4081c1a181cd696e487fa1ae2f55faffb052eb6e3abe9d980520d16b81"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00206.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 336,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 24,
+      "labelPreview": "va a aparecer en relación a una situación, por alguna situación con alguien, o incluso algún pensamiento, porque la causa no es siempre externa.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00206.npz",
+      "sha256Before": "a9eb9d5b65ac58fa14715bd839d36bee44e45bf96da10e6cc104337cf226f7bc",
+      "bytes": 745,
+      "sha256After": "a9eb9d5b65ac58fa14715bd839d36bee44e45bf96da10e6cc104337cf226f7bc"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00208.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 330,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 18,
+      "labelPreview": "las células se gastan, realmente se gastan, se mueren, y de a poco la energía empieza a decaer.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00208.npz",
+      "sha256Before": "f4e0e8eb6df82ad70aa5203b1ee237a85a0cb14d29fd7e929473b70774316f92",
+      "bytes": 701,
+      "sha256After": "f4e0e8eb6df82ad70aa5203b1ee237a85a0cb14d29fd7e929473b70774316f92"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00228.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 150,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 2,
+      "labelPreview": "sí, sí.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00228.npz",
+      "sha256Before": "9da92a4d1e38fde113f32f08d08344bbfd4e77e60f7ae6a99b2ad49b659c9942",
+      "bytes": 515,
+      "sha256After": "9da92a4d1e38fde113f32f08d08344bbfd4e77e60f7ae6a99b2ad49b659c9942"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00247.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 161,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 13,
+      "labelPreview": "la verdad es que fue una muy linda experiencia y me gustó mucho.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00247.npz",
+      "sha256Before": "d7f165e6a0234ad109ec46f6d92882e68371c7e8415ba4d7093144a329c3e96f",
+      "bytes": 606,
+      "sha256After": "d7f165e6a0234ad109ec46f6d92882e68371c7e8415ba4d7093144a329c3e96f"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00268.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 222,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 11,
+      "labelPreview": "antes que nada, es importante saber cuál es el público objetivo.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00268.npz",
+      "sha256Before": "6479b3554bf0a9e678b9af7bb70864bcf553c762fc51394c4d5c0e85309ebdeb",
+      "bytes": 633,
+      "sha256After": "6479b3554bf0a9e678b9af7bb70864bcf553c762fc51394c4d5c0e85309ebdeb"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00275.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 137,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 4,
+      "labelPreview": "¡sí! a mi instagram.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00275.npz",
+      "sha256Before": "fd095461438862310d5cbf483fdb75b1a1d643c0fdd1ec11391c8e8e84c236c7",
+      "bytes": 535,
+      "sha256After": "fd095461438862310d5cbf483fdb75b1a1d643c0fdd1ec11391c8e8e84c236c7"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00371.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 488,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 17,
+      "labelPreview": "también había una lingüista para entender la elección de cada palabra, cuál es su origen y uso.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00371.npz",
+      "sha256Before": "7922609aefa03dd8cc479476d7d071a19965676ac17ca8057076ce8f3ca661bd",
+      "bytes": 797,
+      "sha256After": "7922609aefa03dd8cc479476d7d071a19965676ac17ca8057076ce8f3ca661bd"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00373.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 166,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 14,
+      "labelPreview": "comprender que pensaban en ese momento las personas de la época en el 1800.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00373.npz",
+      "sha256Before": "5755c88a60716b147ab319d2385448505aed4da2b4e8d26346f42d8c562a60d5",
+      "bytes": 612,
+      "sha256After": "5755c88a60716b147ab319d2385448505aed4da2b4e8d26346f42d8c562a60d5"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00376.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 179,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 10,
+      "labelPreview": "el equipo estaba conformado en su totalidad por personas sordas.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00376.npz",
+      "sha256Before": "3f3d05d2efbf436eed82f7ac9b672f65d8046f1b4c4734e315dddd697f38a50f",
+      "bytes": 607,
+      "sha256After": "3f3d05d2efbf436eed82f7ac9b672f65d8046f1b4c4734e315dddd697f38a50f"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00378.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 208,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 12,
+      "labelPreview": "por otro lado, yo puedo darte una opinión personal desde mi perspectiva.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00378.npz",
+      "sha256Before": "0d11952f0510ed98998fbe8d3f2918627971948b548b58afddcc8c76414f7204",
+      "bytes": 632,
+      "sha256After": "0d11952f0510ed98998fbe8d3f2918627971948b548b58afddcc8c76414f7204"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00380.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 337,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 19,
+      "labelPreview": "esta primera interpretación causó un gran impacto en la población en general, no hablo solamente de la comunidad sorda.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00380.npz",
+      "sha256Before": "ab4104ab5fdc98be70380b86644fe46850c499000b47ac02657036472b436952",
+      "bytes": 732,
+      "sha256After": "ab4104ab5fdc98be70380b86644fe46850c499000b47ac02657036472b436952"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00381.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 307,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 15,
+      "labelPreview": "había diferentes ideologías, no podemos pensar solo en una, era una gran cantidad de opiniones.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00381.npz",
+      "sha256Before": "c51f5298d365a09f060ec5523be06f40ff1224ecf866d4b2d9005622cd235515",
+      "bytes": 702,
+      "sha256After": "c51f5298d365a09f060ec5523be06f40ff1224ecf866d4b2d9005622cd235515"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00382.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 915,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 27,
+      "labelPreview": "hasta el 1900, con el presidente de la nación, julio argentino roca, quien por decreto decide que en todas las escuelas se debían cantar el himno nacional.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00382.npz",
+      "sha256Before": "e6e850a9a1392733f44b65d808e65d5ffd68db3711c6f66c855c3911f075ee09",
+      "bytes": 1053,
+      "sha256After": "e6e850a9a1392733f44b65d808e65d5ffd68db3711c6f66c855c3911f075ee09"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00383.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 145,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 13,
+      "labelPreview": "no estaban todos de acuerdo y con las personas sordas ocurre lo mismo.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00383.npz",
+      "sha256Before": "6b74e97c947d761425e0ed2efc67baa07005f0a31b473ace98932cbdea3f5787",
+      "bytes": 591,
+      "sha256After": "6b74e97c947d761425e0ed2efc67baa07005f0a31b473ace98932cbdea3f5787"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00446.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 47,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 3,
+      "labelPreview": "hay muchas formas.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00446.npz",
+      "sha256Before": "ef0944cce8752ec221c20da98760cee72cb0a1149f235e6f3e4bc9260b7a933e",
+      "bytes": 485,
+      "sha256After": "ef0944cce8752ec221c20da98760cee72cb0a1149f235e6f3e4bc9260b7a933e"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00447.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 53,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 5,
+      "labelPreview": "pero no es lo correcto.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00447.npz",
+      "sha256Before": "eee478ac30a6c91c6f60aac69b5126b89d9600b201a98f304532f4e95211af37",
+      "bytes": 490,
+      "sha256After": "eee478ac30a6c91c6f60aac69b5126b89d9600b201a98f304532f4e95211af37"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00470.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 344,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 24,
+      "labelPreview": "sobre todo padres de niños sordos; también maestros y todas aquellas personas que están involucradas en la comunidad sorda en cualquier parte del mundo.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00470.npz",
+      "sha256Before": "8b47a53a1b139685fa48f94fd074bf283628f1ede05ff739920eab685d3f7f1b",
+      "bytes": 774,
+      "sha256After": "8b47a53a1b139685fa48f94fd074bf283628f1ede05ff739920eab685d3f7f1b"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00480.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 85,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 4,
+      "labelPreview": "¡todo bien! ya está.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00480.npz",
+      "sha256Before": "3d8af6df4be995c82325ba3ac9b1faabe007d2acb0261556935129a1dd701a07",
+      "bytes": 510,
+      "sha256After": "3d8af6df4be995c82325ba3ac9b1faabe007d2acb0261556935129a1dd701a07"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00515.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 318,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 16,
+      "labelPreview": "además, el agua va a tener cloro, este es importante para que puedan vivir los microorganismos.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00515.npz",
+      "sha256Before": "54bf617605b3ce6eab1c9191ea930cca1b641c378cb8eddbcb0b5b0aef16cd7f",
+      "bytes": 701,
+      "sha256After": "54bf617605b3ce6eab1c9191ea930cca1b641c378cb8eddbcb0b5b0aef16cd7f"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00739.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 105,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 6,
+      "labelPreview": "estudiamos e investigamos los diversos sabores.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00739.npz",
+      "sha256Before": "224a9d773633eb32cab86d48d704e7320acb78da6b4177b04c27f67bda039d71",
+      "bytes": 547,
+      "sha256After": "224a9d773633eb32cab86d48d704e7320acb78da6b4177b04c27f67bda039d71"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00751.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 253,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 10,
+      "labelPreview": "viene en una botella especial. está copa se denomina teku.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00751.npz",
+      "sha256Before": "c07bf03941ce1b7e00a96c1cdc354b99be0d431341cdc852dc66f2a1c701a20c",
+      "bytes": 633,
+      "sha256After": "c07bf03941ce1b7e00a96c1cdc354b99be0d431341cdc852dc66f2a1c701a20c"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00849.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 900,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 59,
+      "labelPreview": "entonces, cuando tuve estos contactos vi la oportunidad y con gabriela, la asesora, esta es su seña personal, empezamos a estar en contacto, con más apertura en",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00849.npz",
+      "sha256Before": "d1176d28858c3f1fd6dcbba79710f5119018a859fbce027a0666122cc45fa5aa",
+      "bytes": 1185,
+      "sha256After": "d1176d28858c3f1fd6dcbba79710f5119018a859fbce027a0666122cc45fa5aa"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00850.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 181,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 14,
+      "labelPreview": "ella nos dio el contacto y empezamos a hacer una capacitación para personas sordas.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00850.npz",
+      "sha256Before": "75bf9937e48bd27312c74b9e1f3c785796bc893b4dab12b988b279132036aaed",
+      "bytes": 628,
+      "sha256After": "75bf9937e48bd27312c74b9e1f3c785796bc893b4dab12b988b279132036aaed"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00851.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 345,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 24,
+      "labelPreview": "el objetivo de este proyecto, gracias a la situación de pandemia se pudo avanzar, es armar el glosario del vino, ese es el objetivo.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00851.npz",
+      "sha256Before": "a4a554421e3583eb000c93cb0d7f63d8886bf1d4781fc6e80d4ab550cf48312b",
+      "bytes": 748,
+      "sha256After": "a4a554421e3583eb000c93cb0d7f63d8886bf1d4781fc6e80d4ab550cf48312b"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00854.npz",
+      "split": "val",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 1077,
+      "zeroRatio": 0.01915962918748434,
+      "validFrameRatio": 0.9953574744661096,
+      "labelWords": 65,
+      "labelPreview": "sí, te cuento, el equipo lo integran la asociación de sordos de mendoza, un grupo de intérpretes de lsa, un grupo de profesores sordos que enseñan lsa, esta es ",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00854.npz",
+      "sha256Before": "60e839ff76a5db6c807c2f5b852ef5db270e3c5e71beb04fee6f89a75a83c856",
+      "bytes": 407861,
+      "sha256After": "60e839ff76a5db6c807c2f5b852ef5db270e3c5e71beb04fee6f89a75a83c856"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00855.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 429,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 18,
+      "labelPreview": "también hay otra persona responsable, de todo lo que es cultura, arte, música, se ocupa de ese espacio.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00855.npz",
+      "sha256Before": "0693816334b3e57ee34e94a4e7eb206fccf27764622fc7a1eb56d2f394300861",
+      "bytes": 771,
+      "sha256After": "0693816334b3e57ee34e94a4e7eb206fccf27764622fc7a1eb56d2f394300861"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00880.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 116,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 14,
+      "labelPreview": "no fue fácil ingresar a la universidad y todo lo que conlleva el proyecto.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00880.npz",
+      "sha256Before": "f19fa1ffce8f1f91e8695fc82f8b7a3a470c031c15ec085f95dae9e0c04d95d9",
+      "bytes": 593,
+      "sha256After": "f19fa1ffce8f1f91e8695fc82f8b7a3a470c031c15ec085f95dae9e0c04d95d9"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00881.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 214,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 15,
+      "labelPreview": "siempre se trabaja con las dos lenguas, con la lsa y la lecto-escritura del español.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00881.npz",
+      "sha256Before": "60241df25fc5180c15652adf89cef7f57d522c042e4d7a3cf759e25360267d75",
+      "bytes": 640,
+      "sha256After": "60241df25fc5180c15652adf89cef7f57d522c042e4d7a3cf759e25360267d75"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00888.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 158,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 13,
+      "labelPreview": "la comunidad sorda hacia los oyentes y los oyentes hacia la comunidad sorda.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_00888.npz",
+      "sha256Before": "97129403dd61f17d480cf5a450c8d11457c49696c8e1c42e6fefce84ef711220",
+      "bytes": 579,
+      "sha256After": "97129403dd61f17d480cf5a450c8d11457c49696c8e1c42e6fefce84ef711220"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_01115.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 111,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 5,
+      "labelPreview": "el video es muy impresionante.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_01115.npz",
+      "sha256Before": "30b949376fd1f484bfcc868ac50e04be973293abfad3e78232e8d2ef9e3912ad",
+      "bytes": 537,
+      "sha256After": "30b949376fd1f484bfcc868ac50e04be973293abfad3e78232e8d2ef9e3912ad"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_01121.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 208,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 14,
+      "labelPreview": "ahora con la situación del covid-19 se hicieron más notorias estas barreras que vivimos.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_01121.npz",
+      "sha256Before": "e036391a7e4fa2c00a00504da0a1c4367fb272fb57e5b6333d28829d466d18ee",
+      "bytes": 652,
+      "sha256After": "e036391a7e4fa2c00a00504da0a1c4367fb272fb57e5b6333d28829d466d18ee"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_01122.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 137,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 13,
+      "labelPreview": "no sólo a nivel saludo, si no los trámites, el trabajo, la educación.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_01122.npz",
+      "sha256Before": "0919f0b96fde4d00973f35ce25ce4b36328eacee63e10eb4789a0c676aeaa337",
+      "bytes": 598,
+      "sha256After": "0919f0b96fde4d00973f35ce25ce4b36328eacee63e10eb4789a0c676aeaa337"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_01123.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 84,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 3,
+      "labelPreview": "bien, muy interesante.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_01123.npz",
+      "sha256Before": "92e6f30ad6bbf21cf0d09d0dc2e98f3d835e76b2f3871278b758bdfbd4ff7bab",
+      "bytes": 508,
+      "sha256After": "92e6f30ad6bbf21cf0d09d0dc2e98f3d835e76b2f3871278b758bdfbd4ff7bab"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_01125.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 146,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 7,
+      "labelPreview": "poder ir al médico y poder comunicarse.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_01125.npz",
+      "sha256Before": "3be6cbd1b89a8cab1ab0426e6a39d9ae01c97f77e83359647761cb3dc0534eb8",
+      "bytes": 559,
+      "sha256After": "3be6cbd1b89a8cab1ab0426e6a39d9ae01c97f77e83359647761cb3dc0534eb8"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_01126.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 174,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 12,
+      "labelPreview": "son todos ámbitos diferentes, pero que están todos relacionados con la ley.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_01126.npz",
+      "sha256Before": "e2f5a3d345935a354922f8dfb71956cd713861ebf8c8507407a589144cdb4b7f",
+      "bytes": 614,
+      "sha256After": "e2f5a3d345935a354922f8dfb71956cd713861ebf8c8507407a589144cdb4b7f"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_01127.npz",
+      "split": "val",
+      "reasons": [
+        "allZero"
+      ],
+      "frames": 311,
+      "zeroRatio": 1.0,
+      "validFrameRatio": 0.0,
+      "labelWords": 26,
+      "labelPreview": "también en las noticias, a veces no está el recuadro de la intérprete, debemos ir consultando y nos genera muchas dudas la información que nos llega.",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_01127.npz",
+      "sha256Before": "fdea9989fd8bc43acdcc9d37e1610f34cee07321471805cc07c2c9b8b18045f9",
+      "bytes": 758,
+      "sha256After": "fdea9989fd8bc43acdcc9d37e1610f34cee07321471805cc07c2c9b8b18045f9"
+    },
+    {
+      "source": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_01230.npz",
+      "split": "val",
+      "reasons": [
+        "longLabel"
+      ],
+      "frames": 1086,
+      "zeroRatio": 0.013190973135724517,
+      "validFrameRatio": 0.998158379373849,
+      "labelWords": 63,
+      "labelPreview": "cada vez que les contaba a las personas mi sueño, la respuesta era \"pero vos sos sorda\". hace mucho tiempo un grupo de científicos hizo pruebas para investigar ",
+      "destination": "/home/tiagoashe/entrenamiento-modelo/data/quarantine/phase1/processed/val/val_01230.npz",
+      "sha256Before": "84ff127a6011b31701b47a84af77002c6f0d6b7cab5932b67083356e77e916e3",
+      "bytes": 416535,
+      "sha256After": "84ff127a6011b31701b47a84af77002c6f0d6b7cab5932b67083356e77e916e3"
+    }
+  ]
+}

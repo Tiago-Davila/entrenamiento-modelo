@@ -1,0 +1,2561 @@
+{
+  "dataDirectory": "/home/tiagoashe/entrenamiento-modelo/data",
+  "expectedShape": [
+    42,
+    3
+  ],
+  "vocabulary": {
+    "file": "/home/tiagoashe/entrenamiento-modelo/data/vocab.json",
+    "exists": true,
+    "count": 5981,
+    "isList": true,
+    "specialTokens": [
+      "<PAD>",
+      "<BOS>",
+      "<EOS>",
+      "<UNK>"
+    ],
+    "validSpecialTokens": true
+  },
+  "splits": {
+    "train": {
+      "directory": "/home/tiagoashe/entrenamiento-modelo/data/processed/train",
+      "expectedCount": 5413,
+      "fileCount": 5242,
+      "numericIds": 5242,
+      "missingIds": [
+        "train_00241",
+        "train_00257",
+        "train_00259",
+        "train_00366",
+        "train_00413",
+        "train_00482",
+        "train_00599",
+        "train_00607",
+        "train_00608",
+        "train_00684",
+        "train_00685",
+        "train_00686",
+        "train_00687",
+        "train_00688",
+        "train_00701",
+        "train_00703",
+        "train_00706",
+        "train_00707",
+        "train_00715",
+        "train_00716",
+        "train_00718",
+        "train_00719",
+        "train_00728",
+        "train_00729",
+        "train_00730",
+        "train_00732",
+        "train_00733",
+        "train_00739",
+        "train_00746",
+        "train_00763",
+        "train_00764",
+        "train_00765",
+        "train_00766",
+        "train_00768",
+        "train_00769",
+        "train_00770",
+        "train_00780",
+        "train_00781",
+        "train_00782",
+        "train_00783",
+        "train_00784",
+        "train_00785",
+        "train_00787",
+        "train_00788",
+        "train_00789",
+        "train_00790",
+        "train_00791",
+        "train_00813",
+        "train_00814",
+        "train_00815",
+        "train_00869",
+        "train_00875",
+        "train_00889",
+        "train_00980",
+        "train_00982",
+        "train_00985",
+        "train_01024",
+        "train_01033",
+        "train_01035",
+        "train_01039",
+        "train_01040",
+        "train_01041",
+        "train_01046",
+        "train_01049",
+        "train_01050",
+        "train_01052",
+        "train_01075",
+        "train_01122",
+        "train_01123",
+        "train_01129",
+        "train_01131",
+        "train_01154",
+        "train_01229",
+        "train_01232",
+        "train_01242",
+        "train_01397",
+        "train_01399",
+        "train_01400",
+        "train_01402",
+        "train_01403",
+        "train_01405",
+        "train_01406",
+        "train_01408",
+        "train_01418",
+        "train_01423",
+        "train_01425",
+        "train_01426",
+        "train_01428",
+        "train_01429",
+        "train_01430",
+        "train_01432",
+        "train_01433",
+        "train_01655",
+        "train_01661",
+        "train_01665",
+        "train_01737",
+        "train_01739",
+        "train_01740",
+        "train_01763",
+        "train_01775",
+        "train_01780",
+        "train_01790",
+        "train_01791",
+        "train_01793",
+        "train_01934",
+        "train_02028",
+        "train_02029",
+        "train_02032",
+        "train_02033",
+        "train_02040",
+        "train_02043",
+        "train_02045",
+        "train_02053",
+        "train_02211",
+        "train_02213",
+        "train_02307",
+        "train_02310",
+        "train_02311",
+        "train_02312",
+        "train_02335",
+        "train_02336",
+        "train_02371",
+        "train_02430",
+        "train_02432",
+        "train_02965",
+        "train_02966",
+        "train_02967",
+        "train_02969",
+        "train_02979",
+        "train_03068",
+        "train_03233",
+        "train_03350",
+        "train_03351",
+        "train_03352",
+        "train_03353",
+        "train_03357",
+        "train_03440",
+        "train_03453",
+        "train_03458",
+        "train_03460",
+        "train_03461",
+        "train_03463",
+        "train_03464",
+        "train_03465",
+        "train_03469",
+        "train_03471",
+        "train_03472",
+        "train_03473",
+        "train_03474",
+        "train_03475",
+        "train_03476",
+        "train_03522",
+        "train_03523",
+        "train_03524",
+        "train_03542",
+        "train_03671",
+        "train_04479",
+        "train_04480",
+        "train_04496",
+        "train_04497",
+        "train_04498",
+        "train_04499",
+        "train_04501",
+        "train_04503",
+        "train_04506",
+        "train_04511",
+        "train_04512",
+        "train_04606",
+        "train_04905",
+        "train_04920",
+        "train_05106"
+      ],
+      "invalidCount": 0,
+      "invalidFiles": [],
+      "duplicateLabels": 143,
+      "frames": {
+        "min": 30.0,
+        "p01": 51.0,
+        "p05": 75.0,
+        "p50": 223.0,
+        "p95": 704.0,
+        "p99": 1022.0,
+        "max": 1894.0
+      },
+      "zeroRatio": {
+        "min": 0.0,
+        "p01": 0.0007923684540854707,
+        "p05": 0.00254411593697308,
+        "p50": 0.03476019611761265,
+        "p95": 0.5657942840944142,
+        "p99": 0.9475841378489684,
+        "max": 0.9984567901234568
+      },
+      "validFrameRatio": {
+        "min": 0.0015923566878980893,
+        "p01": 0.05967119744662119,
+        "p05": 0.47071473750790643,
+        "p50": 0.9915254237288136,
+        "p95": 1.0,
+        "p99": 1.0,
+        "max": 1.0
+      },
+      "leftValidFrameRatio": {
+        "min": 0.0015923566878980893,
+        "p01": 0.05967119744662119,
+        "p05": 0.47071473750790643,
+        "p50": 0.9915254237288136,
+        "p95": 1.0,
+        "p99": 1.0,
+        "max": 1.0
+      },
+      "rightValidFrameRatio": {
+        "min": 0.0015923566878980893,
+        "p01": 0.05967119744662119,
+        "p05": 0.47071473750790643,
+        "p50": 0.9915254237288136,
+        "p95": 1.0,
+        "p99": 1.0,
+        "max": 1.0
+      },
+      "labelWords": {
+        "min": 1.0,
+        "p01": 1.0,
+        "p05": 3.0,
+        "p50": 13.0,
+        "p95": 37.0,
+        "p99": 47.590000000000146,
+        "max": 62.0
+      },
+      "zeroRatioAtLeast90Percent": 86,
+      "zeroRatioAtLeast99Percent": 15,
+      "zeroRatioExactly100Percent": 0,
+      "validFrameRatioBelow10Percent": 77,
+      "validFrameRatioExactlyZero": 0,
+      "labelsOver62Words": 0,
+      "qualityCandidates": {
+        "allZero": [],
+        "lowCoverage": [
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00609.npz",
+            "frames": 93,
+            "zeroRatio": 0.96415770609319,
+            "validFrameRatio": 0.043010752688172046,
+            "labelWords": 1,
+            "labelPreview": "¡abu!"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00610.npz",
+            "frames": 75,
+            "zeroRatio": 0.9156613756613756,
+            "validFrameRatio": 0.09333333333333334,
+            "labelWords": 4,
+            "labelPreview": "¡hola, mi amor! ¡hola!"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00700.npz",
+            "frames": 211,
+            "zeroRatio": 0.9644549763033176,
+            "validFrameRatio": 0.04265402843601896,
+            "labelWords": 9,
+            "labelPreview": "sí, nosotros veníamos de caminos distintos y nos unimos."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00720.npz",
+            "frames": 163,
+            "zeroRatio": 0.943762781186094,
+            "validFrameRatio": 0.06748466257668712,
+            "labelWords": 11,
+            "labelPreview": "¿qué piensan que podrían decirle a la comunidad que los ve?"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00727.npz",
+            "frames": 523,
+            "zeroRatio": 0.9904397705544933,
+            "validFrameRatio": 0.011472275334608031,
+            "labelWords": 21,
+            "labelPreview": "esto tiene historia, hay una lucha, el sentimiento que cada comunidad tiene, cómo es la comunicación, hay tantas cosas que resaltar."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00741.npz",
+            "frames": 370,
+            "zeroRatio": 0.9617117117117117,
+            "validFrameRatio": 0.04594594594594595,
+            "labelWords": 17,
+            "labelPreview": "te quiero hacer algunas preguntas, ya que sos un psicólogo profesional, y nos interesa tu palabra. bien."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00742.npz",
+            "frames": 886,
+            "zeroRatio": 0.9362660790426027,
+            "validFrameRatio": 0.07336343115124154,
+            "labelWords": 22,
+            "labelPreview": "la organización mundial de la salud (oms) advierte que para estas fechas los episodios depresivos y de tristeza aumentan un 40% más."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00753.npz",
+            "frames": 241,
+            "zeroRatio": 0.9045972469208984,
+            "validFrameRatio": 0.0995850622406639,
+            "labelWords": 11,
+            "labelPreview": "muy bien, gracias. ¿cómo podemos aplacar el estrés, modificar esta situación?"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00767.npz",
+            "frames": 738,
+            "zeroRatio": 0.9708779627478814,
+            "validFrameRatio": 0.032520325203252036,
+            "labelWords": 55,
+            "labelPreview": "\"esto va en contra de mis pensamientos, siento que estoy amenazado\", entonces, es una respuesta automática basada en nuestra experiencia, sumado a todos los sen"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00812.npz",
+            "frames": 193,
+            "zeroRatio": 0.9119170984455959,
+            "validFrameRatio": 0.08808290155440414,
+            "labelWords": 8,
+            "labelPreview": "muchas gracias a vos. tengo un último mensaje."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00868.npz",
+            "frames": 498,
+            "zeroRatio": 0.9752820807037674,
+            "validFrameRatio": 0.02610441767068273,
+            "labelWords": 15,
+            "labelPreview": "me voy a presentar, mi nombre es micaela britos, este es mi nombre en señas."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00871.npz",
+            "frames": 142,
+            "zeroRatio": 0.9589201877934272,
+            "validFrameRatio": 0.04225352112676056,
+            "labelWords": 12,
+            "labelPreview": "en mi ojo derecho una disminución parcial y en el izquierdo total."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00880.npz",
+            "frames": 154,
+            "zeroRatio": 0.9784580498866213,
+            "validFrameRatio": 0.025974025974025976,
+            "labelWords": 10,
+            "labelPreview": "es difícil acceder a ciertos ámbitos para la comunidad sorda."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00981.npz",
+            "frames": 221,
+            "zeroRatio": 0.9962292609351433,
+            "validFrameRatio": 0.004524886877828055,
+            "labelWords": 14,
+            "labelPreview": "esta marcha multitudinaria reclama el incumplimiento de diversas políticas, las cuales están siendo ignoradas."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00984.npz",
+            "frames": 233,
+            "zeroRatio": 0.9771442196334901,
+            "validFrameRatio": 0.02575107296137339,
+            "labelWords": 25,
+            "labelPreview": "podemos ver las consecuencias en esto, con los incendios en la patagonia, y el año pasado en córdoba, santiago del estero y el norte argentino."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00986.npz",
+            "frames": 161,
+            "zeroRatio": 0.994824016563147,
+            "validFrameRatio": 0.006211180124223602,
+            "labelWords": 12,
+            "labelPreview": "estos son algunos de los motivos por los cuales nos manifestamos hoy."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01034.npz",
+            "frames": 184,
+            "zeroRatio": 0.9302536231884058,
+            "validFrameRatio": 0.08152173913043478,
+            "labelWords": 9,
+            "labelPreview": "por eso siempre digo que es como un embarazo."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01036.npz",
+            "frames": 735,
+            "zeroRatio": 0.9829931972789115,
+            "validFrameRatio": 0.02040816326530612,
+            "labelWords": 37,
+            "labelPreview": "sí, lo fundamental que se necesita para empezar es el nombre, no se puede empezar sin nombre, hay que registrarlo como marca, esta no se puede cambiar, es defin"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01037.npz",
+            "frames": 189,
+            "zeroRatio": 0.9339464180734022,
+            "validFrameRatio": 0.07936507936507936,
+            "labelWords": 10,
+            "labelPreview": "una vez que se tiene el emprendimiento, ¿cómo se difunde?"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01048.npz",
+            "frames": 289,
+            "zeroRatio": 0.9884659746251442,
+            "validFrameRatio": 0.01384083044982699,
+            "labelWords": 10,
+            "labelPreview": "también es importante dar mensajes claros, tener confianza y seguridad."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01053.npz",
+            "frames": 745,
+            "zeroRatio": 0.9664855651432832,
+            "validFrameRatio": 0.040268456375838924,
+            "labelWords": 20,
+            "labelPreview": "hay tres estrategias breves que sí o sí tiene que conocer un emprendedor: primero, elegir el público objetivo, el nicho."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01054.npz",
+            "frames": 577,
+            "zeroRatio": 0.9740034662045061,
+            "validFrameRatio": 0.03119584055459272,
+            "labelWords": 18,
+            "labelPreview": "además, realizar un análisis foda, f de fortaleza, o de oportunidad, d de debilidad y a de amenazas."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01056.npz",
+            "frames": 502,
+            "zeroRatio": 0.9651552520078417,
+            "validFrameRatio": 0.04183266932270916,
+            "labelWords": 38,
+            "labelPreview": "antes ir a un comercio no era accesible por el uso del barbijo, y se sentían mal y dejaban de ir. gracias a la cuarentena, esto fue más fácil por videollamada o"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01059.npz",
+            "frames": 516,
+            "zeroRatio": 0.9909714531807555,
+            "validFrameRatio": 0.009689922480620155,
+            "labelWords": 23,
+            "labelPreview": "no es solo pensar en emprender y listo, hay herramientas de difusión, estrategias de marketing, el análisis foda, se necesita de todo esto."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01061.npz",
+            "frames": 125,
+            "zeroRatio": 0.9533333333333334,
+            "validFrameRatio": 0.056,
+            "labelWords": 3,
+            "labelPreview": "¡qué lindas fotos!"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01064.npz",
+            "frames": 280,
+            "zeroRatio": 0.9655045351473923,
+            "validFrameRatio": 0.039285714285714285,
+            "labelWords": 16,
+            "labelPreview": "¡claro! es lindo que las personas sordas decidan ser emprendedores, independientes y ser sus propios jefes."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01081.npz",
+            "frames": 120,
+            "zeroRatio": 0.9222883597883598,
+            "validFrameRatio": 0.09166666666666666,
+            "labelWords": 10,
+            "labelPreview": "yo sería la primera persona sorda en aplicársela. sigo esperando."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01124.npz",
+            "frames": 755,
+            "zeroRatio": 0.9869757174392936,
+            "validFrameRatio": 0.013245033112582781,
+            "labelWords": 36,
+            "labelPreview": "sí, la agrupación de sordos btt, b es de bicicletas, la t de todo y t de terreno, no es un club, sino un grupo particular de sordos que andan en bicicleta, hace"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01127.npz",
+            "frames": 106,
+            "zeroRatio": 0.9842767295597484,
+            "validFrameRatio": 0.018867924528301886,
+            "labelWords": 3,
+            "labelPreview": "¡qué buena idea!"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01130.npz",
+            "frames": 304,
+            "zeroRatio": 0.9402673350041771,
+            "validFrameRatio": 0.06578947368421052,
+            "labelWords": 21,
+            "labelPreview": "ella la manejaba, y yo fui mirando todo, sintiendo el aire, la vibración, pudimos andar y disfrutarlo, ¡no lo podía creer!"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01151.npz",
+            "frames": 342,
+            "zeroRatio": 0.9585769980506823,
+            "validFrameRatio": 0.049707602339181284,
+            "labelWords": 18,
+            "labelPreview": "bueno, hoy nos decías que están recibiendo muchas donaciones, así que capaz puedan comprar más de una bicicleta."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01153.npz",
+            "frames": 412,
+            "zeroRatio": 0.9203459701032517,
+            "validFrameRatio": 0.08980582524271845,
+            "labelWords": 23,
+            "labelPreview": "la bicicleta es muy cara, por ahora pensamos comprar una bicicleta, un casco de seguridad, dos espejos laterales, ropa adecuada y varias cosas."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01249.npz",
+            "frames": 154,
+            "zeroRatio": 0.9512987012987013,
+            "validFrameRatio": 0.05844155844155844,
+            "labelWords": 8,
+            "labelPreview": "¡hola! yo soy la secretaria de asorsam, victoria."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01401.npz",
+            "frames": 501,
+            "zeroRatio": 0.9747172322022621,
+            "validFrameRatio": 0.02594810379241517,
+            "labelWords": 30,
+            "labelPreview": "adquirir todo el conocimiento de manera completa y todo el grupo de investigadores debíamos, de alguna manera, hacer un viaje en el tiempo, sentir que estábamos"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01410.npz",
+            "frames": 316,
+            "zeroRatio": 0.9947257383966245,
+            "validFrameRatio": 0.006329113924050633,
+            "labelWords": 31,
+            "labelPreview": "los oyentes se relacionan con lo sonoro de la música, es parte de su cultura y las personas sordas lo hacemos con lo visual de las imágenes, las cuales le agreg"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01417.npz",
+            "frames": 99,
+            "zeroRatio": 0.9141414141414141,
+            "validFrameRatio": 0.09090909090909091,
+            "labelWords": 8,
+            "labelPreview": "todo fue hecho por integrantes de la comunidad."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01427.npz",
+            "frames": 438,
+            "zeroRatio": 0.9866818873668188,
+            "validFrameRatio": 0.01598173515981735,
+            "labelWords": 17,
+            "labelPreview": "en 1813, cuando se crea el himno, la primera mujer en cantarlo es mariquita sánchez de thompson."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01431.npz",
+            "frames": 197,
+            "zeroRatio": 0.9323181049069373,
+            "validFrameRatio": 0.08121827411167512,
+            "labelWords": 12,
+            "labelPreview": "surge la nueva versión y hay resistencia o aceptación, son opiniones diferentes."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01736.npz",
+            "frames": 161,
+            "zeroRatio": 0.984472049689441,
+            "validFrameRatio": 0.018633540372670808,
+            "labelWords": 8,
+            "labelPreview": "tenemos de invitada a mariana de buenos aires."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01738.npz",
+            "frames": 86,
+            "zeroRatio": 0.9709302325581395,
+            "validFrameRatio": 0.03488372093023256,
+            "labelWords": 5,
+            "labelPreview": "quisimos convocarte para algunas preguntas."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01789.npz",
+            "frames": 47,
+            "zeroRatio": 0.9645390070921985,
+            "validFrameRatio": 0.0425531914893617,
+            "labelWords": 3,
+            "labelPreview": "ojala que sí."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01899.npz",
+            "frames": 286,
+            "zeroRatio": 0.9796037296037297,
+            "validFrameRatio": 0.02097902097902098,
+            "labelWords": 27,
+            "labelPreview": "bien, no me dolió, me sentí bien, estuvimos preguntando junto con mi hermano que me acompañó, él es oyente, hicimos todas las preguntas y fueron muy claros."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02031.npz",
+            "frames": 124,
+            "zeroRatio": 0.9932795698924731,
+            "validFrameRatio": 0.008064516129032258,
+            "labelWords": 7,
+            "labelPreview": "sí. las tres “r” son muy conocidas."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02042.npz",
+            "frames": 729,
+            "zeroRatio": 0.9695930498399634,
+            "validFrameRatio": 0.03566529492455418,
+            "labelWords": 52,
+            "labelPreview": "el compost se genera a partir de lo que cada uno consume en su casa, multiplicado por millones de casas, millones de toneladas de basura, que puede ser de cosas"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02052.npz",
+            "frames": 393,
+            "zeroRatio": 0.9893977947413062,
+            "validFrameRatio": 0.01272264631043257,
+            "labelWords": 24,
+            "labelPreview": "si lo necesito en mi casa, lo puedo poner en cualquier árbol, porque necesita de un buen suelo para tomar la energía y sobrevivir."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02054.npz",
+            "frames": 540,
+            "zeroRatio": 0.9984567901234568,
+            "validFrameRatio": 0.001851851851851852,
+            "labelWords": 19,
+            "labelPreview": "imaginate ahora en la ciudad, antes era todo tierra, así que había mucho lugar para las lombrices. eso cambió."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02256.npz",
+            "frames": 567,
+            "zeroRatio": 0.9785420340975897,
+            "validFrameRatio": 0.02292768959435626,
+            "labelWords": 20,
+            "labelPreview": "¡hola! esta es mi seña personal. me llamo santiago hanza, nací en argentina pero vivo en dinamarca, un país lejano..."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02334.npz",
+            "frames": 130,
+            "zeroRatio": 0.9743589743589743,
+            "validFrameRatio": 0.03076923076923077,
+            "labelWords": 3,
+            "labelPreview": "clarísima la información."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02428.npz",
+            "frames": 530,
+            "zeroRatio": 0.9984276729559748,
+            "validFrameRatio": 0.0018867924528301887,
+            "labelWords": 45,
+            "labelPreview": "mi nombre es gabriela, ésta es mi seña personal y soy la presidenta del círculo de sordos de rosario, nos encontramos ahora en el parque de españa, nos hemos co"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02441.npz",
+            "frames": 373,
+            "zeroRatio": 0.9924039320822162,
+            "validFrameRatio": 0.00804289544235925,
+            "labelWords": 28,
+            "labelPreview": "también nosotros decimos, ya no, por favor, no nos opriman más, queremos sentirnos libres en el uso de la lengua de señas que es muy valiosa para nosotros."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02442.npz",
+            "frames": 228,
+            "zeroRatio": 0.9963450292397661,
+            "validFrameRatio": 0.0043859649122807015,
+            "labelWords": 7,
+            "labelPreview": "¡ley federal de lengua de señas argentina!"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02443.npz",
+            "frames": 628,
+            "zeroRatio": 0.9984202810635932,
+            "validFrameRatio": 0.0015923566878980893,
+            "labelWords": 38,
+            "labelPreview": "la cas finalizó las 6 mesas de trabajo para la campaña #leyfederalsa esto es gran logro de un largo camino y al ver que nos acompañamos entre todos/as hace el c"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03332.npz",
+            "frames": 882,
+            "zeroRatio": 0.990551776266062,
+            "validFrameRatio": 0.01020408163265306,
+            "labelWords": 46,
+            "labelPreview": "a partir de este 4 de abril dará comienzo el torneo región buenos aires de sordo de fútbol 11 y desde el 8 de abril se sumarán las categorías futsal, (masculino"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03349.npz",
+            "frames": 314,
+            "zeroRatio": 0.9973460721868365,
+            "validFrameRatio": 0.0031847133757961785,
+            "labelWords": 9,
+            "labelPreview": "este proyecto se creó en el 2014, de casualidad."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03354.npz",
+            "frames": 643,
+            "zeroRatio": 0.9779802019304352,
+            "validFrameRatio": 0.026438569206842923,
+            "labelWords": 39,
+            "labelPreview": "ese es el objetivo, la aplicación está hecha en cuatro idiomas, en inglés, en francés, en portugués y una más que no me acuerdo bien, pero son cuatro idiomas pa"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03355.npz",
+            "frames": 694,
+            "zeroRatio": 0.9711815561959655,
+            "validFrameRatio": 0.0345821325648415,
+            "labelWords": 43,
+            "labelPreview": "también tenemos otro objetivo que es la organización de catas virtuales, que la gente puede asistir de manera remota, puede observar y se les explica con todo l"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03358.npz",
+            "frames": 573,
+            "zeroRatio": 0.9299011052937755,
+            "validFrameRatio": 0.08376963350785341,
+            "labelWords": 19,
+            "labelPreview": "además, la idea es difundir con el #difundirporelvino aprender lengua de señas, nos grabamos, lo subimos con el #."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03362.npz",
+            "frames": 681,
+            "zeroRatio": 0.9363680861478219,
+            "validFrameRatio": 0.07195301027900147,
+            "labelWords": 45,
+            "labelPreview": "es un desafío muy importante para el equipo, donde hay personas sordas y también hay intérpretes, hay 2 intérpretes, que también están siempre, trabajamos siemp"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03435.npz",
+            "frames": 472,
+            "zeroRatio": 0.9470507129405434,
+            "validFrameRatio": 0.0614406779661017,
+            "labelWords": 26,
+            "labelPreview": "son muy importantes las piedras ya que cuando les da el sol, durante la mañana y la tarde, las piedras absorben su calor y lo mantienen."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03443.npz",
+            "frames": 259,
+            "zeroRatio": 0.9189802046944904,
+            "validFrameRatio": 0.09266409266409266,
+            "labelWords": 15,
+            "labelPreview": "surge de la seña de “tecnicatura” y esta segunda, es el logo de la uner."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03445.npz",
+            "frames": 586,
+            "zeroRatio": 0.928138035646568,
+            "validFrameRatio": 0.07849829351535836,
+            "labelWords": 35,
+            "labelPreview": "en el 2013 ya había algunas ideas previas, no trabajé yo solo, vos conocés, hay un gran equipo personas sordas militando por la accesibilidad en diversos ámbito"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03459.npz",
+            "frames": 681,
+            "zeroRatio": 0.9440365475607766,
+            "validFrameRatio": 0.06167400881057269,
+            "labelWords": 50,
+            "labelPreview": "el año pasado, en el 2020, se extendió dos meses más debido al covid-19 y la cuarentena, pero bueno, las personas oyentes comenzaron a darse cuenta, a reflexion"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03506.npz",
+            "frames": 204,
+            "zeroRatio": 0.9738951136009959,
+            "validFrameRatio": 0.029411764705882353,
+            "labelWords": 4,
+            "labelPreview": "hay formas de solucionarlo."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03650.npz",
+            "frames": 363,
+            "zeroRatio": 0.950872359963269,
+            "validFrameRatio": 0.05234159779614325,
+            "labelWords": 21,
+            "labelPreview": "sí, hace un año que se está planificando un torneo en santa fe, pero se tuvo que posponer por la pandemia."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03658.npz",
+            "frames": 260,
+            "zeroRatio": 0.9423992673992674,
+            "validFrameRatio": 0.057692307692307696,
+            "labelWords": 16,
+            "labelPreview": "el lugar depende, puede ser en los clubes de la asociación o en otros clubes también."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03662.npz",
+            "frames": 99,
+            "zeroRatio": 0.930976430976431,
+            "validFrameRatio": 0.0707070707070707,
+            "labelWords": 6,
+            "labelPreview": "bueno, es muy interesante esta entrevista."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03699.npz",
+            "frames": 465,
+            "zeroRatio": 0.996415770609319,
+            "validFrameRatio": 0.004301075268817204,
+            "labelWords": 35,
+            "labelPreview": "al aire libre sí, los dejamos, desde el 18 de abril que llegamos a esta medida, pero en los lugares cerrados, como puede ser un medio de transporte, en el médic"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03860.npz",
+            "frames": 260,
+            "zeroRatio": 0.9353174603174603,
+            "validFrameRatio": 0.07692307692307693,
+            "labelWords": 21,
+            "labelPreview": "está claro que el reconocimiento de la lengua de señas abre un abanico de oportunidades para el desarrollo de la comunidad."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04096.npz",
+            "frames": 391,
+            "zeroRatio": 0.9054723338610806,
+            "validFrameRatio": 0.09718670076726342,
+            "labelWords": 20,
+            "labelPreview": "hola, \"cn sordos\", yo soy lucía y estoy en la cancha de san lorenzo, me vine a vacunar, por fin."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04108.npz",
+            "frames": 70,
+            "zeroRatio": 0.9523809523809523,
+            "validFrameRatio": 0.05714285714285714,
+            "labelWords": 7,
+            "labelPreview": "bueno, falta poquito. ¿la tuya? ¿cómo es?"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04428.npz",
+            "frames": 137,
+            "zeroRatio": 0.9575947167188044,
+            "validFrameRatio": 0.051094890510948905,
+            "labelWords": 15,
+            "labelPreview": "el test de antígeno se realiza por medio de un hisopado de garganta o nariz."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04500.npz",
+            "frames": 212,
+            "zeroRatio": 0.9921758011380652,
+            "validFrameRatio": 0.009433962264150943,
+            "labelWords": 10,
+            "labelPreview": "entonces, ¿en qué rango de edad estaban? ¿solamente personas sordas?"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04504.npz",
+            "frames": 226,
+            "zeroRatio": 0.9778761061946902,
+            "validFrameRatio": 0.02654867256637168,
+            "labelWords": 16,
+            "labelPreview": "las ganas están y esto hay que seguir promoviéndolo para que continúe y no se pierda."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04513.npz",
+            "frames": 181,
+            "zeroRatio": 0.9549241427694466,
+            "validFrameRatio": 0.049723756906077346,
+            "labelWords": 16,
+            "labelPreview": "claro, es como que todos tienen el mismo objetivo que es mejorar la calidad de vida."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04516.npz",
+            "frames": 208,
+            "zeroRatio": 0.9479548229548229,
+            "validFrameRatio": 0.0625,
+            "labelWords": 14,
+            "labelPreview": "ya se hizo la patagonia, faltan las demás regiones que van a sumarse también."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04946.npz",
+            "frames": 73,
+            "zeroRatio": 0.9202000434877147,
+            "validFrameRatio": 0.0958904109589041,
+            "labelWords": 1,
+            "labelPreview": "¡hola!"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_05296.npz",
+            "frames": 199,
+            "zeroRatio": 0.9415330621360772,
+            "validFrameRatio": 0.07035175879396985,
+            "labelWords": 7,
+            "labelPreview": "primero poner las ecobotellas a la trituradora."
+          }
+        ],
+        "highZero": [
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00609.npz",
+            "frames": 93,
+            "zeroRatio": 0.96415770609319,
+            "validFrameRatio": 0.043010752688172046,
+            "labelWords": 1,
+            "labelPreview": "¡abu!"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00610.npz",
+            "frames": 75,
+            "zeroRatio": 0.9156613756613756,
+            "validFrameRatio": 0.09333333333333334,
+            "labelWords": 4,
+            "labelPreview": "¡hola, mi amor! ¡hola!"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00700.npz",
+            "frames": 211,
+            "zeroRatio": 0.9644549763033176,
+            "validFrameRatio": 0.04265402843601896,
+            "labelWords": 9,
+            "labelPreview": "sí, nosotros veníamos de caminos distintos y nos unimos."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00720.npz",
+            "frames": 163,
+            "zeroRatio": 0.943762781186094,
+            "validFrameRatio": 0.06748466257668712,
+            "labelWords": 11,
+            "labelPreview": "¿qué piensan que podrían decirle a la comunidad que los ve?"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00727.npz",
+            "frames": 523,
+            "zeroRatio": 0.9904397705544933,
+            "validFrameRatio": 0.011472275334608031,
+            "labelWords": 21,
+            "labelPreview": "esto tiene historia, hay una lucha, el sentimiento que cada comunidad tiene, cómo es la comunicación, hay tantas cosas que resaltar."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00741.npz",
+            "frames": 370,
+            "zeroRatio": 0.9617117117117117,
+            "validFrameRatio": 0.04594594594594595,
+            "labelWords": 17,
+            "labelPreview": "te quiero hacer algunas preguntas, ya que sos un psicólogo profesional, y nos interesa tu palabra. bien."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00742.npz",
+            "frames": 886,
+            "zeroRatio": 0.9362660790426027,
+            "validFrameRatio": 0.07336343115124154,
+            "labelWords": 22,
+            "labelPreview": "la organización mundial de la salud (oms) advierte que para estas fechas los episodios depresivos y de tristeza aumentan un 40% más."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00753.npz",
+            "frames": 241,
+            "zeroRatio": 0.9045972469208984,
+            "validFrameRatio": 0.0995850622406639,
+            "labelWords": 11,
+            "labelPreview": "muy bien, gracias. ¿cómo podemos aplacar el estrés, modificar esta situación?"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00767.npz",
+            "frames": 738,
+            "zeroRatio": 0.9708779627478814,
+            "validFrameRatio": 0.032520325203252036,
+            "labelWords": 55,
+            "labelPreview": "\"esto va en contra de mis pensamientos, siento que estoy amenazado\", entonces, es una respuesta automática basada en nuestra experiencia, sumado a todos los sen"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00812.npz",
+            "frames": 193,
+            "zeroRatio": 0.9119170984455959,
+            "validFrameRatio": 0.08808290155440414,
+            "labelWords": 8,
+            "labelPreview": "muchas gracias a vos. tengo un último mensaje."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00868.npz",
+            "frames": 498,
+            "zeroRatio": 0.9752820807037674,
+            "validFrameRatio": 0.02610441767068273,
+            "labelWords": 15,
+            "labelPreview": "me voy a presentar, mi nombre es micaela britos, este es mi nombre en señas."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00871.npz",
+            "frames": 142,
+            "zeroRatio": 0.9589201877934272,
+            "validFrameRatio": 0.04225352112676056,
+            "labelWords": 12,
+            "labelPreview": "en mi ojo derecho una disminución parcial y en el izquierdo total."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00880.npz",
+            "frames": 154,
+            "zeroRatio": 0.9784580498866213,
+            "validFrameRatio": 0.025974025974025976,
+            "labelWords": 10,
+            "labelPreview": "es difícil acceder a ciertos ámbitos para la comunidad sorda."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00981.npz",
+            "frames": 221,
+            "zeroRatio": 0.9962292609351433,
+            "validFrameRatio": 0.004524886877828055,
+            "labelWords": 14,
+            "labelPreview": "esta marcha multitudinaria reclama el incumplimiento de diversas políticas, las cuales están siendo ignoradas."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00984.npz",
+            "frames": 233,
+            "zeroRatio": 0.9771442196334901,
+            "validFrameRatio": 0.02575107296137339,
+            "labelWords": 25,
+            "labelPreview": "podemos ver las consecuencias en esto, con los incendios en la patagonia, y el año pasado en córdoba, santiago del estero y el norte argentino."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_00986.npz",
+            "frames": 161,
+            "zeroRatio": 0.994824016563147,
+            "validFrameRatio": 0.006211180124223602,
+            "labelWords": 12,
+            "labelPreview": "estos son algunos de los motivos por los cuales nos manifestamos hoy."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01034.npz",
+            "frames": 184,
+            "zeroRatio": 0.9302536231884058,
+            "validFrameRatio": 0.08152173913043478,
+            "labelWords": 9,
+            "labelPreview": "por eso siempre digo que es como un embarazo."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01036.npz",
+            "frames": 735,
+            "zeroRatio": 0.9829931972789115,
+            "validFrameRatio": 0.02040816326530612,
+            "labelWords": 37,
+            "labelPreview": "sí, lo fundamental que se necesita para empezar es el nombre, no se puede empezar sin nombre, hay que registrarlo como marca, esta no se puede cambiar, es defin"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01037.npz",
+            "frames": 189,
+            "zeroRatio": 0.9339464180734022,
+            "validFrameRatio": 0.07936507936507936,
+            "labelWords": 10,
+            "labelPreview": "una vez que se tiene el emprendimiento, ¿cómo se difunde?"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01048.npz",
+            "frames": 289,
+            "zeroRatio": 0.9884659746251442,
+            "validFrameRatio": 0.01384083044982699,
+            "labelWords": 10,
+            "labelPreview": "también es importante dar mensajes claros, tener confianza y seguridad."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01053.npz",
+            "frames": 745,
+            "zeroRatio": 0.9664855651432832,
+            "validFrameRatio": 0.040268456375838924,
+            "labelWords": 20,
+            "labelPreview": "hay tres estrategias breves que sí o sí tiene que conocer un emprendedor: primero, elegir el público objetivo, el nicho."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01054.npz",
+            "frames": 577,
+            "zeroRatio": 0.9740034662045061,
+            "validFrameRatio": 0.03119584055459272,
+            "labelWords": 18,
+            "labelPreview": "además, realizar un análisis foda, f de fortaleza, o de oportunidad, d de debilidad y a de amenazas."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01056.npz",
+            "frames": 502,
+            "zeroRatio": 0.9651552520078417,
+            "validFrameRatio": 0.04183266932270916,
+            "labelWords": 38,
+            "labelPreview": "antes ir a un comercio no era accesible por el uso del barbijo, y se sentían mal y dejaban de ir. gracias a la cuarentena, esto fue más fácil por videollamada o"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01059.npz",
+            "frames": 516,
+            "zeroRatio": 0.9909714531807555,
+            "validFrameRatio": 0.009689922480620155,
+            "labelWords": 23,
+            "labelPreview": "no es solo pensar en emprender y listo, hay herramientas de difusión, estrategias de marketing, el análisis foda, se necesita de todo esto."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01061.npz",
+            "frames": 125,
+            "zeroRatio": 0.9533333333333334,
+            "validFrameRatio": 0.056,
+            "labelWords": 3,
+            "labelPreview": "¡qué lindas fotos!"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01064.npz",
+            "frames": 280,
+            "zeroRatio": 0.9655045351473923,
+            "validFrameRatio": 0.039285714285714285,
+            "labelWords": 16,
+            "labelPreview": "¡claro! es lindo que las personas sordas decidan ser emprendedores, independientes y ser sus propios jefes."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01076.npz",
+            "frames": 110,
+            "zeroRatio": 0.9077922077922078,
+            "validFrameRatio": 0.10909090909090909,
+            "labelWords": 2,
+            "labelPreview": "ya llegamos."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01081.npz",
+            "frames": 120,
+            "zeroRatio": 0.9222883597883598,
+            "validFrameRatio": 0.09166666666666666,
+            "labelWords": 10,
+            "labelPreview": "yo sería la primera persona sorda en aplicársela. sigo esperando."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01124.npz",
+            "frames": 755,
+            "zeroRatio": 0.9869757174392936,
+            "validFrameRatio": 0.013245033112582781,
+            "labelWords": 36,
+            "labelPreview": "sí, la agrupación de sordos btt, b es de bicicletas, la t de todo y t de terreno, no es un club, sino un grupo particular de sordos que andan en bicicleta, hace"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01127.npz",
+            "frames": 106,
+            "zeroRatio": 0.9842767295597484,
+            "validFrameRatio": 0.018867924528301886,
+            "labelWords": 3,
+            "labelPreview": "¡qué buena idea!"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01130.npz",
+            "frames": 304,
+            "zeroRatio": 0.9402673350041771,
+            "validFrameRatio": 0.06578947368421052,
+            "labelWords": 21,
+            "labelPreview": "ella la manejaba, y yo fui mirando todo, sintiendo el aire, la vibración, pudimos andar y disfrutarlo, ¡no lo podía creer!"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01150.npz",
+            "frames": 207,
+            "zeroRatio": 0.9154972778161184,
+            "validFrameRatio": 0.10144927536231885,
+            "labelWords": 5,
+            "labelPreview": "¡perfecto! ¿podemos mostrarlo? ¡sí si!"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01151.npz",
+            "frames": 342,
+            "zeroRatio": 0.9585769980506823,
+            "validFrameRatio": 0.049707602339181284,
+            "labelWords": 18,
+            "labelPreview": "bueno, hoy nos decías que están recibiendo muchas donaciones, así que capaz puedan comprar más de una bicicleta."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01153.npz",
+            "frames": 412,
+            "zeroRatio": 0.9203459701032517,
+            "validFrameRatio": 0.08980582524271845,
+            "labelWords": 23,
+            "labelPreview": "la bicicleta es muy cara, por ahora pensamos comprar una bicicleta, un casco de seguridad, dos espejos laterales, ropa adecuada y varias cosas."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01234.npz",
+            "frames": 130,
+            "zeroRatio": 0.9039072039072039,
+            "validFrameRatio": 0.11538461538461539,
+            "labelWords": 9,
+            "labelPreview": "mauricio llegó a la escuela, y nos hicimos amigos."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01249.npz",
+            "frames": 154,
+            "zeroRatio": 0.9512987012987013,
+            "validFrameRatio": 0.05844155844155844,
+            "labelWords": 8,
+            "labelPreview": "¡hola! yo soy la secretaria de asorsam, victoria."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01401.npz",
+            "frames": 501,
+            "zeroRatio": 0.9747172322022621,
+            "validFrameRatio": 0.02594810379241517,
+            "labelWords": 30,
+            "labelPreview": "adquirir todo el conocimiento de manera completa y todo el grupo de investigadores debíamos, de alguna manera, hacer un viaje en el tiempo, sentir que estábamos"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01410.npz",
+            "frames": 316,
+            "zeroRatio": 0.9947257383966245,
+            "validFrameRatio": 0.006329113924050633,
+            "labelWords": 31,
+            "labelPreview": "los oyentes se relacionan con lo sonoro de la música, es parte de su cultura y las personas sordas lo hacemos con lo visual de las imágenes, las cuales le agreg"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01417.npz",
+            "frames": 99,
+            "zeroRatio": 0.9141414141414141,
+            "validFrameRatio": 0.09090909090909091,
+            "labelWords": 8,
+            "labelPreview": "todo fue hecho por integrantes de la comunidad."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01427.npz",
+            "frames": 438,
+            "zeroRatio": 0.9866818873668188,
+            "validFrameRatio": 0.01598173515981735,
+            "labelWords": 17,
+            "labelPreview": "en 1813, cuando se crea el himno, la primera mujer en cantarlo es mariquita sánchez de thompson."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01431.npz",
+            "frames": 197,
+            "zeroRatio": 0.9323181049069373,
+            "validFrameRatio": 0.08121827411167512,
+            "labelWords": 12,
+            "labelPreview": "surge la nueva versión y hay resistencia o aceptación, son opiniones diferentes."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01434.npz",
+            "frames": 171,
+            "zeroRatio": 0.9074074074074074,
+            "validFrameRatio": 0.1111111111111111,
+            "labelWords": 6,
+            "labelPreview": "hay que darle tiempo al tiempo."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01569.npz",
+            "frames": 246,
+            "zeroRatio": 0.9126338882436443,
+            "validFrameRatio": 0.1016260162601626,
+            "labelWords": 9,
+            "labelPreview": "un hermoso proyecto y el trabajo que están realizando."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01736.npz",
+            "frames": 161,
+            "zeroRatio": 0.984472049689441,
+            "validFrameRatio": 0.018633540372670808,
+            "labelWords": 8,
+            "labelPreview": "tenemos de invitada a mariana de buenos aires."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01738.npz",
+            "frames": 86,
+            "zeroRatio": 0.9709302325581395,
+            "validFrameRatio": 0.03488372093023256,
+            "labelWords": 5,
+            "labelPreview": "quisimos convocarte para algunas preguntas."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01789.npz",
+            "frames": 47,
+            "zeroRatio": 0.9645390070921985,
+            "validFrameRatio": 0.0425531914893617,
+            "labelWords": 3,
+            "labelPreview": "ojala que sí."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_01899.npz",
+            "frames": 286,
+            "zeroRatio": 0.9796037296037297,
+            "validFrameRatio": 0.02097902097902098,
+            "labelWords": 27,
+            "labelPreview": "bien, no me dolió, me sentí bien, estuvimos preguntando junto con mi hermano que me acompañó, él es oyente, hicimos todas las preguntas y fueron muy claros."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02031.npz",
+            "frames": 124,
+            "zeroRatio": 0.9932795698924731,
+            "validFrameRatio": 0.008064516129032258,
+            "labelWords": 7,
+            "labelPreview": "sí. las tres “r” son muy conocidas."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02041.npz",
+            "frames": 110,
+            "zeroRatio": 0.9090909090909091,
+            "validFrameRatio": 0.10909090909090909,
+            "labelWords": 10,
+            "labelPreview": "y hay que seguir luchando para que esto se difunda."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02042.npz",
+            "frames": 729,
+            "zeroRatio": 0.9695930498399634,
+            "validFrameRatio": 0.03566529492455418,
+            "labelWords": 52,
+            "labelPreview": "el compost se genera a partir de lo que cada uno consume en su casa, multiplicado por millones de casas, millones de toneladas de basura, que puede ser de cosas"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02052.npz",
+            "frames": 393,
+            "zeroRatio": 0.9893977947413062,
+            "validFrameRatio": 0.01272264631043257,
+            "labelWords": 24,
+            "labelPreview": "si lo necesito en mi casa, lo puedo poner en cualquier árbol, porque necesita de un buen suelo para tomar la energía y sobrevivir."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02054.npz",
+            "frames": 540,
+            "zeroRatio": 0.9984567901234568,
+            "validFrameRatio": 0.001851851851851852,
+            "labelWords": 19,
+            "labelPreview": "imaginate ahora en la ciudad, antes era todo tierra, así que había mucho lugar para las lombrices. eso cambió."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02256.npz",
+            "frames": 567,
+            "zeroRatio": 0.9785420340975897,
+            "validFrameRatio": 0.02292768959435626,
+            "labelWords": 20,
+            "labelPreview": "¡hola! esta es mi seña personal. me llamo santiago hanza, nací en argentina pero vivo en dinamarca, un país lejano..."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02334.npz",
+            "frames": 130,
+            "zeroRatio": 0.9743589743589743,
+            "validFrameRatio": 0.03076923076923077,
+            "labelWords": 3,
+            "labelPreview": "clarísima la información."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02428.npz",
+            "frames": 530,
+            "zeroRatio": 0.9984276729559748,
+            "validFrameRatio": 0.0018867924528301887,
+            "labelWords": 45,
+            "labelPreview": "mi nombre es gabriela, ésta es mi seña personal y soy la presidenta del círculo de sordos de rosario, nos encontramos ahora en el parque de españa, nos hemos co"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02441.npz",
+            "frames": 373,
+            "zeroRatio": 0.9924039320822162,
+            "validFrameRatio": 0.00804289544235925,
+            "labelWords": 28,
+            "labelPreview": "también nosotros decimos, ya no, por favor, no nos opriman más, queremos sentirnos libres en el uso de la lengua de señas que es muy valiosa para nosotros."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02442.npz",
+            "frames": 228,
+            "zeroRatio": 0.9963450292397661,
+            "validFrameRatio": 0.0043859649122807015,
+            "labelWords": 7,
+            "labelPreview": "¡ley federal de lengua de señas argentina!"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02443.npz",
+            "frames": 628,
+            "zeroRatio": 0.9984202810635932,
+            "validFrameRatio": 0.0015923566878980893,
+            "labelWords": 38,
+            "labelPreview": "la cas finalizó las 6 mesas de trabajo para la campaña #leyfederalsa esto es gran logro de un largo camino y al ver que nos acompañamos entre todos/as hace el c"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_02844.npz",
+            "frames": 193,
+            "zeroRatio": 0.9052142445924829,
+            "validFrameRatio": 0.11398963730569948,
+            "labelWords": 12,
+            "labelPreview": "nuestra hermosa bandera celeste y blanca. tenemos que cuidarla y respetarla siempre."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03332.npz",
+            "frames": 882,
+            "zeroRatio": 0.990551776266062,
+            "validFrameRatio": 0.01020408163265306,
+            "labelWords": 46,
+            "labelPreview": "a partir de este 4 de abril dará comienzo el torneo región buenos aires de sordo de fútbol 11 y desde el 8 de abril se sumarán las categorías futsal, (masculino"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03349.npz",
+            "frames": 314,
+            "zeroRatio": 0.9973460721868365,
+            "validFrameRatio": 0.0031847133757961785,
+            "labelWords": 9,
+            "labelPreview": "este proyecto se creó en el 2014, de casualidad."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03354.npz",
+            "frames": 643,
+            "zeroRatio": 0.9779802019304352,
+            "validFrameRatio": 0.026438569206842923,
+            "labelWords": 39,
+            "labelPreview": "ese es el objetivo, la aplicación está hecha en cuatro idiomas, en inglés, en francés, en portugués y una más que no me acuerdo bien, pero son cuatro idiomas pa"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03355.npz",
+            "frames": 694,
+            "zeroRatio": 0.9711815561959655,
+            "validFrameRatio": 0.0345821325648415,
+            "labelWords": 43,
+            "labelPreview": "también tenemos otro objetivo que es la organización de catas virtuales, que la gente puede asistir de manera remota, puede observar y se les explica con todo l"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03358.npz",
+            "frames": 573,
+            "zeroRatio": 0.9299011052937755,
+            "validFrameRatio": 0.08376963350785341,
+            "labelWords": 19,
+            "labelPreview": "además, la idea es difundir con el #difundirporelvino aprender lengua de señas, nos grabamos, lo subimos con el #."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03362.npz",
+            "frames": 681,
+            "zeroRatio": 0.9363680861478219,
+            "validFrameRatio": 0.07195301027900147,
+            "labelWords": 45,
+            "labelPreview": "es un desafío muy importante para el equipo, donde hay personas sordas y también hay intérpretes, hay 2 intérpretes, que también están siempre, trabajamos siemp"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03435.npz",
+            "frames": 472,
+            "zeroRatio": 0.9470507129405434,
+            "validFrameRatio": 0.0614406779661017,
+            "labelWords": 26,
+            "labelPreview": "son muy importantes las piedras ya que cuando les da el sol, durante la mañana y la tarde, las piedras absorben su calor y lo mantienen."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03443.npz",
+            "frames": 259,
+            "zeroRatio": 0.9189802046944904,
+            "validFrameRatio": 0.09266409266409266,
+            "labelWords": 15,
+            "labelPreview": "surge de la seña de “tecnicatura” y esta segunda, es el logo de la uner."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03445.npz",
+            "frames": 586,
+            "zeroRatio": 0.928138035646568,
+            "validFrameRatio": 0.07849829351535836,
+            "labelWords": 35,
+            "labelPreview": "en el 2013 ya había algunas ideas previas, no trabajé yo solo, vos conocés, hay un gran equipo personas sordas militando por la accesibilidad en diversos ámbito"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03459.npz",
+            "frames": 681,
+            "zeroRatio": 0.9440365475607766,
+            "validFrameRatio": 0.06167400881057269,
+            "labelWords": 50,
+            "labelPreview": "el año pasado, en el 2020, se extendió dos meses más debido al covid-19 y la cuarentena, pero bueno, las personas oyentes comenzaron a darse cuenta, a reflexion"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03462.npz",
+            "frames": 127,
+            "zeroRatio": 0.902949631296088,
+            "validFrameRatio": 0.10236220472440945,
+            "labelWords": 13,
+            "labelPreview": "así logramos que el alumnado en su totalidad esté conformado por personas sordas."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03468.npz",
+            "frames": 254,
+            "zeroRatio": 0.9108548931383577,
+            "validFrameRatio": 0.1062992125984252,
+            "labelWords": 14,
+            "labelPreview": "dentro de la universidad eran todas personas sordas durante los dos años y medio."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03506.npz",
+            "frames": 204,
+            "zeroRatio": 0.9738951136009959,
+            "validFrameRatio": 0.029411764705882353,
+            "labelWords": 4,
+            "labelPreview": "hay formas de solucionarlo."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03650.npz",
+            "frames": 363,
+            "zeroRatio": 0.950872359963269,
+            "validFrameRatio": 0.05234159779614325,
+            "labelWords": 21,
+            "labelPreview": "sí, hace un año que se está planificando un torneo en santa fe, pero se tuvo que posponer por la pandemia."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03658.npz",
+            "frames": 260,
+            "zeroRatio": 0.9423992673992674,
+            "validFrameRatio": 0.057692307692307696,
+            "labelWords": 16,
+            "labelPreview": "el lugar depende, puede ser en los clubes de la asociación o en otros clubes también."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03662.npz",
+            "frames": 99,
+            "zeroRatio": 0.930976430976431,
+            "validFrameRatio": 0.0707070707070707,
+            "labelWords": 6,
+            "labelPreview": "bueno, es muy interesante esta entrevista."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03699.npz",
+            "frames": 465,
+            "zeroRatio": 0.996415770609319,
+            "validFrameRatio": 0.004301075268817204,
+            "labelWords": 35,
+            "labelPreview": "al aire libre sí, los dejamos, desde el 18 de abril que llegamos a esta medida, pero en los lugares cerrados, como puede ser un medio de transporte, en el médic"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_03860.npz",
+            "frames": 260,
+            "zeroRatio": 0.9353174603174603,
+            "validFrameRatio": 0.07692307692307693,
+            "labelWords": 21,
+            "labelPreview": "está claro que el reconocimiento de la lengua de señas abre un abanico de oportunidades para el desarrollo de la comunidad."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04096.npz",
+            "frames": 391,
+            "zeroRatio": 0.9054723338610806,
+            "validFrameRatio": 0.09718670076726342,
+            "labelWords": 20,
+            "labelPreview": "hola, \"cn sordos\", yo soy lucía y estoy en la cancha de san lorenzo, me vine a vacunar, por fin."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04108.npz",
+            "frames": 70,
+            "zeroRatio": 0.9523809523809523,
+            "validFrameRatio": 0.05714285714285714,
+            "labelWords": 7,
+            "labelPreview": "bueno, falta poquito. ¿la tuya? ¿cómo es?"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04428.npz",
+            "frames": 137,
+            "zeroRatio": 0.9575947167188044,
+            "validFrameRatio": 0.051094890510948905,
+            "labelWords": 15,
+            "labelPreview": "el test de antígeno se realiza por medio de un hisopado de garganta o nariz."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04500.npz",
+            "frames": 212,
+            "zeroRatio": 0.9921758011380652,
+            "validFrameRatio": 0.009433962264150943,
+            "labelWords": 10,
+            "labelPreview": "entonces, ¿en qué rango de edad estaban? ¿solamente personas sordas?"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04504.npz",
+            "frames": 226,
+            "zeroRatio": 0.9778761061946902,
+            "validFrameRatio": 0.02654867256637168,
+            "labelWords": 16,
+            "labelPreview": "las ganas están y esto hay que seguir promoviéndolo para que continúe y no se pierda."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04513.npz",
+            "frames": 181,
+            "zeroRatio": 0.9549241427694466,
+            "validFrameRatio": 0.049723756906077346,
+            "labelWords": 16,
+            "labelPreview": "claro, es como que todos tienen el mismo objetivo que es mejorar la calidad de vida."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04516.npz",
+            "frames": 208,
+            "zeroRatio": 0.9479548229548229,
+            "validFrameRatio": 0.0625,
+            "labelWords": 14,
+            "labelPreview": "ya se hizo la patagonia, faltan las demás regiones que van a sumarse también."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_04946.npz",
+            "frames": 73,
+            "zeroRatio": 0.9202000434877147,
+            "validFrameRatio": 0.0958904109589041,
+            "labelWords": 1,
+            "labelPreview": "¡hola!"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/train/train_05296.npz",
+            "frames": 199,
+            "zeroRatio": 0.9415330621360772,
+            "validFrameRatio": 0.07035175879396985,
+            "labelWords": 7,
+            "labelPreview": "primero poner las ecobotellas a la trituradora."
+          }
+        ],
+        "longLabel": []
+      }
+    },
+    "val": {
+      "directory": "/home/tiagoashe/entrenamiento-modelo/data/processed/val",
+      "expectedCount": 1354,
+      "fileCount": 1305,
+      "numericIds": 1305,
+      "missingIds": [
+        "val_00059",
+        "val_00060",
+        "val_00072",
+        "val_00162",
+        "val_00177",
+        "val_00178",
+        "val_00180",
+        "val_00183",
+        "val_00187",
+        "val_00205",
+        "val_00206",
+        "val_00208",
+        "val_00228",
+        "val_00247",
+        "val_00268",
+        "val_00275",
+        "val_00329",
+        "val_00371",
+        "val_00373",
+        "val_00376",
+        "val_00378",
+        "val_00380",
+        "val_00381",
+        "val_00382",
+        "val_00383",
+        "val_00446",
+        "val_00447",
+        "val_00470",
+        "val_00480",
+        "val_00515",
+        "val_00739",
+        "val_00751",
+        "val_00815",
+        "val_00849",
+        "val_00850",
+        "val_00851",
+        "val_00854",
+        "val_00855",
+        "val_00880",
+        "val_00881",
+        "val_00888",
+        "val_01115",
+        "val_01121",
+        "val_01122",
+        "val_01123",
+        "val_01125",
+        "val_01126",
+        "val_01127",
+        "val_01230"
+      ],
+      "invalidCount": 0,
+      "invalidFiles": [],
+      "duplicateLabels": 13,
+      "frames": {
+        "min": 34.0,
+        "p01": 56.0,
+        "p05": 73.2,
+        "p50": 220.0,
+        "p95": 720.1999999999996,
+        "p99": 1023.0,
+        "max": 1369.0
+      },
+      "zeroRatio": {
+        "min": 2.5893990004919858e-05,
+        "p01": 0.0009819554781553426,
+        "p05": 0.002612202612202612,
+        "p50": 0.03742647651277093,
+        "p95": 0.5156819816049023,
+        "p99": 0.9734524239391723,
+        "max": 0.9987974987974988
+      },
+      "validFrameRatio": {
+        "min": 0.001443001443001443,
+        "p01": 0.03018559976890302,
+        "p05": 0.539435736677116,
+        "p50": 0.9911504424778761,
+        "p95": 1.0,
+        "p99": 1.0,
+        "max": 1.0
+      },
+      "leftValidFrameRatio": {
+        "min": 0.001443001443001443,
+        "p01": 0.03018559976890302,
+        "p05": 0.539435736677116,
+        "p50": 0.9911504424778761,
+        "p95": 1.0,
+        "p99": 1.0,
+        "max": 1.0
+      },
+      "rightValidFrameRatio": {
+        "min": 0.001443001443001443,
+        "p01": 0.03018559976890302,
+        "p05": 0.539435736677116,
+        "p50": 0.9911504424778761,
+        "p95": 1.0,
+        "p99": 1.0,
+        "max": 1.0
+      },
+      "labelWords": {
+        "min": 1.0,
+        "p01": 1.0,
+        "p05": 3.0,
+        "p50": 13.0,
+        "p95": 37.0,
+        "p99": 52.0,
+        "max": 60.0
+      },
+      "zeroRatioAtLeast90Percent": 28,
+      "zeroRatioAtLeast99Percent": 5,
+      "zeroRatioExactly100Percent": 0,
+      "validFrameRatioBelow10Percent": 26,
+      "validFrameRatioExactlyZero": 0,
+      "labelsOver62Words": 0,
+      "qualityCandidates": {
+        "allZero": [],
+        "lowCoverage": [
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00000.npz",
+            "frames": 340,
+            "zeroRatio": 0.9926704014939309,
+            "validFrameRatio": 0.008823529411764706,
+            "labelWords": 20,
+            "labelPreview": "para dejar en el camino tanto inglés, para que el país sea un puño apretado gritando por argentina. argentina 2..."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00090.npz",
+            "frames": 331,
+            "zeroRatio": 0.9290030211480362,
+            "validFrameRatio": 0.07250755287009064,
+            "labelWords": 16,
+            "labelPreview": "chau ¿vieron el video? el planeta está sufriendo cambios drásticos, terremotos, nevadas muy fuertes, incendios forestales."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00158.npz",
+            "frames": 143,
+            "zeroRatio": 0.9883449883449883,
+            "validFrameRatio": 0.013986013986013986,
+            "labelWords": 13,
+            "labelPreview": "sí, maravilloso. nos vamos a pinamar, a disfrutar del sol , la playa."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00207.npz",
+            "frames": 354,
+            "zeroRatio": 0.9463949421576541,
+            "validFrameRatio": 0.059322033898305086,
+            "labelWords": 21,
+            "labelPreview": "realmente lo que tengo que hacer es defenderme de todo esto que me ataca entonces me estresa y me pone nervioso."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00210.npz",
+            "frames": 461,
+            "zeroRatio": 0.951279137830114,
+            "validFrameRatio": 0.049891540130151846,
+            "labelWords": 21,
+            "labelPreview": "si sos una persona que va en contra de todo, tenés que mirarte, mirar cómo es tu vida en este momento."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00272.npz",
+            "frames": 207,
+            "zeroRatio": 0.9838969404186796,
+            "validFrameRatio": 0.01932367149758454,
+            "labelWords": 8,
+            "labelPreview": "las ventas directas a personas sordas aumentaron muchísimo."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00273.npz",
+            "frames": 122,
+            "zeroRatio": 0.9658469945355191,
+            "validFrameRatio": 0.040983606557377046,
+            "labelWords": 10,
+            "labelPreview": "buenísimo, ¿aprovechamos y mostramos fotos y video de los cursos?"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00276.npz",
+            "frames": 908,
+            "zeroRatio": 0.9737693168309909,
+            "validFrameRatio": 0.02973568281938326,
+            "labelWords": 44,
+            "labelPreview": "también quiero contarte que para febrero estoy pensando un proyecto de escuela para emprendedores sordos, para abordar temas que todos necesitan, como contabili"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00295.npz",
+            "frames": 102,
+            "zeroRatio": 0.9918300653594772,
+            "validFrameRatio": 0.00980392156862745,
+            "labelWords": 10,
+            "labelPreview": "gracias por tu tiempo y por sumarte a esta entrevista."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00300.npz",
+            "frames": 275,
+            "zeroRatio": 0.990909090909091,
+            "validFrameRatio": 0.01090909090909091,
+            "labelWords": 19,
+            "labelPreview": "es una cuenta privada, yo lo recibo, y btt también tiene cbu asociado, donde se puede depositar el dinero."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00301.npz",
+            "frames": 131,
+            "zeroRatio": 0.9770992366412213,
+            "validFrameRatio": 0.022900763358778626,
+            "labelWords": 7,
+            "labelPreview": "por ahora eso, después vemos cómo seguimos."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00332.npz",
+            "frames": 739,
+            "zeroRatio": 0.9229009601134094,
+            "validFrameRatio": 0.08660351826792964,
+            "labelWords": 43,
+            "labelPreview": "en la comisión directiva de asorsam estamos muy contentos y orgullosos porque se logró que se aprobara la ordenanza en el consejo municipal de san martín, que r"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00372.npz",
+            "frames": 352,
+            "zeroRatio": 0.9479392135642135,
+            "validFrameRatio": 0.05397727272727273,
+            "labelWords": 22,
+            "labelPreview": "entonces, nosotros, las personas sordas, teníamos que relacionarnos con el español, toda la información con la que contábamos era desde el español."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00375.npz",
+            "frames": 331,
+            "zeroRatio": 0.9446362633673812,
+            "validFrameRatio": 0.06646525679758308,
+            "labelWords": 12,
+            "labelPreview": "no solamente con los profesores sino también idear las imágenes del fondo."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00379.npz",
+            "frames": 514,
+            "zeroRatio": 0.9513618677042801,
+            "validFrameRatio": 0.058365758754863814,
+            "labelWords": 20,
+            "labelPreview": "te cuento, la letra es del autor vicente lópez y planes, la música es de un hombre catalán, de españa."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00401.npz",
+            "frames": 73,
+            "zeroRatio": 0.9885844748858448,
+            "validFrameRatio": 0.0136986301369863,
+            "labelWords": 3,
+            "labelPreview": "felicitaciones. muchas gracias."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00514.npz",
+            "frames": 123,
+            "zeroRatio": 0.986449864498645,
+            "validFrameRatio": 0.016260162601626018,
+            "labelWords": 6,
+            "labelPreview": "puede ser una caja de madera."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00518.npz",
+            "frames": 176,
+            "zeroRatio": 0.9527867965367965,
+            "validFrameRatio": 0.056818181818181816,
+            "labelWords": 9,
+            "labelPreview": "te cuento una cosa más respecto de las lombrices."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00519.npz",
+            "frames": 693,
+            "zeroRatio": 0.9987974987974988,
+            "validFrameRatio": 0.001443001443001443,
+            "labelWords": 26,
+            "labelPreview": "es muy importante ponerle lombrices, y en tres meses vamos a ver que van a ser más porque se reproducen, van a haber 150 o más."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00591.npz",
+            "frames": 407,
+            "zeroRatio": 0.939023439023439,
+            "validFrameRatio": 0.06388206388206388,
+            "labelWords": 19,
+            "labelPreview": "es muy importante lo que decís sobre el apoyo del municipio de caxias a la participación de los deportistas."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00753.npz",
+            "frames": 223,
+            "zeroRatio": 0.9962630792227205,
+            "validFrameRatio": 0.004484304932735426,
+            "labelWords": 15,
+            "labelPreview": "lo importante es la clase de cerveza. por ejemplo, la que ven aquí es \"neipa\"."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00848.npz",
+            "frames": 930,
+            "zeroRatio": 0.9804659498207885,
+            "validFrameRatio": 0.02258064516129032,
+            "labelWords": 34,
+            "labelPreview": "yo estaba interpretando una actividad musical, junto con varios músicos, lo organizaba una persona de la bodega monte viejo, esta es la seña de la bodega, de tu"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00852.npz",
+            "frames": 208,
+            "zeroRatio": 0.980006105006105,
+            "validFrameRatio": 0.02403846153846154,
+            "labelWords": 12,
+            "labelPreview": "hacer una aplicación para el celular, que todos pudieran descargarla para verlo."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00853.npz",
+            "frames": 208,
+            "zeroRatio": 0.980006105006105,
+            "validFrameRatio": 0.02403846153846154,
+            "labelWords": 13,
+            "labelPreview": "es gratuita, para que la gente pudiera ver las señas mediante esa aplicación."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00876.npz",
+            "frames": 328,
+            "zeroRatio": 0.9243854045683314,
+            "validFrameRatio": 0.07926829268292683,
+            "labelWords": 20,
+            "labelPreview": "fue un proceso de lucha llegar a estar en la facultad de trabajo social de la uner e incorporarnos allí."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00931.npz",
+            "frames": 80,
+            "zeroRatio": 0.9125992063492063,
+            "validFrameRatio": 0.0875,
+            "labelWords": 8,
+            "labelPreview": "¿cómo hacen los chicos sordos que quieran jugar?"
+          }
+        ],
+        "highZero": [
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00000.npz",
+            "frames": 340,
+            "zeroRatio": 0.9926704014939309,
+            "validFrameRatio": 0.008823529411764706,
+            "labelWords": 20,
+            "labelPreview": "para dejar en el camino tanto inglés, para que el país sea un puño apretado gritando por argentina. argentina 2..."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00090.npz",
+            "frames": 331,
+            "zeroRatio": 0.9290030211480362,
+            "validFrameRatio": 0.07250755287009064,
+            "labelWords": 16,
+            "labelPreview": "chau ¿vieron el video? el planeta está sufriendo cambios drásticos, terremotos, nevadas muy fuertes, incendios forestales."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00158.npz",
+            "frames": 143,
+            "zeroRatio": 0.9883449883449883,
+            "validFrameRatio": 0.013986013986013986,
+            "labelWords": 13,
+            "labelPreview": "sí, maravilloso. nos vamos a pinamar, a disfrutar del sol , la playa."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00207.npz",
+            "frames": 354,
+            "zeroRatio": 0.9463949421576541,
+            "validFrameRatio": 0.059322033898305086,
+            "labelWords": 21,
+            "labelPreview": "realmente lo que tengo que hacer es defenderme de todo esto que me ataca entonces me estresa y me pone nervioso."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00210.npz",
+            "frames": 461,
+            "zeroRatio": 0.951279137830114,
+            "validFrameRatio": 0.049891540130151846,
+            "labelWords": 21,
+            "labelPreview": "si sos una persona que va en contra de todo, tenés que mirarte, mirar cómo es tu vida en este momento."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00272.npz",
+            "frames": 207,
+            "zeroRatio": 0.9838969404186796,
+            "validFrameRatio": 0.01932367149758454,
+            "labelWords": 8,
+            "labelPreview": "las ventas directas a personas sordas aumentaron muchísimo."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00273.npz",
+            "frames": 122,
+            "zeroRatio": 0.9658469945355191,
+            "validFrameRatio": 0.040983606557377046,
+            "labelWords": 10,
+            "labelPreview": "buenísimo, ¿aprovechamos y mostramos fotos y video de los cursos?"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00276.npz",
+            "frames": 908,
+            "zeroRatio": 0.9737693168309909,
+            "validFrameRatio": 0.02973568281938326,
+            "labelWords": 44,
+            "labelPreview": "también quiero contarte que para febrero estoy pensando un proyecto de escuela para emprendedores sordos, para abordar temas que todos necesitan, como contabili"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00295.npz",
+            "frames": 102,
+            "zeroRatio": 0.9918300653594772,
+            "validFrameRatio": 0.00980392156862745,
+            "labelWords": 10,
+            "labelPreview": "gracias por tu tiempo y por sumarte a esta entrevista."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00300.npz",
+            "frames": 275,
+            "zeroRatio": 0.990909090909091,
+            "validFrameRatio": 0.01090909090909091,
+            "labelWords": 19,
+            "labelPreview": "es una cuenta privada, yo lo recibo, y btt también tiene cbu asociado, donde se puede depositar el dinero."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00301.npz",
+            "frames": 131,
+            "zeroRatio": 0.9770992366412213,
+            "validFrameRatio": 0.022900763358778626,
+            "labelWords": 7,
+            "labelPreview": "por ahora eso, después vemos cómo seguimos."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00332.npz",
+            "frames": 739,
+            "zeroRatio": 0.9229009601134094,
+            "validFrameRatio": 0.08660351826792964,
+            "labelWords": 43,
+            "labelPreview": "en la comisión directiva de asorsam estamos muy contentos y orgullosos porque se logró que se aprobara la ordenanza en el consejo municipal de san martín, que r"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00372.npz",
+            "frames": 352,
+            "zeroRatio": 0.9479392135642135,
+            "validFrameRatio": 0.05397727272727273,
+            "labelWords": 22,
+            "labelPreview": "entonces, nosotros, las personas sordas, teníamos que relacionarnos con el español, toda la información con la que contábamos era desde el español."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00375.npz",
+            "frames": 331,
+            "zeroRatio": 0.9446362633673812,
+            "validFrameRatio": 0.06646525679758308,
+            "labelWords": 12,
+            "labelPreview": "no solamente con los profesores sino también idear las imágenes del fondo."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00379.npz",
+            "frames": 514,
+            "zeroRatio": 0.9513618677042801,
+            "validFrameRatio": 0.058365758754863814,
+            "labelWords": 20,
+            "labelPreview": "te cuento, la letra es del autor vicente lópez y planes, la música es de un hombre catalán, de españa."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00401.npz",
+            "frames": 73,
+            "zeroRatio": 0.9885844748858448,
+            "validFrameRatio": 0.0136986301369863,
+            "labelWords": 3,
+            "labelPreview": "felicitaciones. muchas gracias."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00479.npz",
+            "frames": 58,
+            "zeroRatio": 0.9081828133552271,
+            "validFrameRatio": 0.10344827586206896,
+            "labelWords": 3,
+            "labelPreview": "¿dónde estamos yendo?"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00514.npz",
+            "frames": 123,
+            "zeroRatio": 0.986449864498645,
+            "validFrameRatio": 0.016260162601626018,
+            "labelWords": 6,
+            "labelPreview": "puede ser una caja de madera."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00518.npz",
+            "frames": 176,
+            "zeroRatio": 0.9527867965367965,
+            "validFrameRatio": 0.056818181818181816,
+            "labelWords": 9,
+            "labelPreview": "te cuento una cosa más respecto de las lombrices."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00519.npz",
+            "frames": 693,
+            "zeroRatio": 0.9987974987974988,
+            "validFrameRatio": 0.001443001443001443,
+            "labelWords": 26,
+            "labelPreview": "es muy importante ponerle lombrices, y en tres meses vamos a ver que van a ser más porque se reproducen, van a haber 150 o más."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00591.npz",
+            "frames": 407,
+            "zeroRatio": 0.939023439023439,
+            "validFrameRatio": 0.06388206388206388,
+            "labelWords": 19,
+            "labelPreview": "es muy importante lo que decís sobre el apoyo del municipio de caxias a la participación de los deportistas."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00753.npz",
+            "frames": 223,
+            "zeroRatio": 0.9962630792227205,
+            "validFrameRatio": 0.004484304932735426,
+            "labelWords": 15,
+            "labelPreview": "lo importante es la clase de cerveza. por ejemplo, la que ven aquí es \"neipa\"."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00848.npz",
+            "frames": 930,
+            "zeroRatio": 0.9804659498207885,
+            "validFrameRatio": 0.02258064516129032,
+            "labelWords": 34,
+            "labelPreview": "yo estaba interpretando una actividad musical, junto con varios músicos, lo organizaba una persona de la bodega monte viejo, esta es la seña de la bodega, de tu"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00852.npz",
+            "frames": 208,
+            "zeroRatio": 0.980006105006105,
+            "validFrameRatio": 0.02403846153846154,
+            "labelWords": 12,
+            "labelPreview": "hacer una aplicación para el celular, que todos pudieran descargarla para verlo."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00853.npz",
+            "frames": 208,
+            "zeroRatio": 0.980006105006105,
+            "validFrameRatio": 0.02403846153846154,
+            "labelWords": 13,
+            "labelPreview": "es gratuita, para que la gente pudiera ver las señas mediante esa aplicación."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00876.npz",
+            "frames": 328,
+            "zeroRatio": 0.9243854045683314,
+            "validFrameRatio": 0.07926829268292683,
+            "labelWords": 20,
+            "labelPreview": "fue un proceso de lucha llegar a estar en la facultad de trabajo social de la uner e incorporarnos allí."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_00931.npz",
+            "frames": 80,
+            "zeroRatio": 0.9125992063492063,
+            "validFrameRatio": 0.0875,
+            "labelWords": 8,
+            "labelPreview": "¿cómo hacen los chicos sordos que quieran jugar?"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/val/val_01324.npz",
+            "frames": 110,
+            "zeroRatio": 0.9030303030303031,
+            "validFrameRatio": 0.10909090909090909,
+            "labelWords": 6,
+            "labelPreview": "hola, \"cn sordos ecología\", ¿cómo están?"
+          }
+        ],
+        "longLabel": []
+      }
+    },
+    "test": {
+      "directory": "/home/tiagoashe/entrenamiento-modelo/data/processed/test",
+      "expectedCount": 1692,
+      "fileCount": 1637,
+      "numericIds": 1637,
+      "missingIds": [
+        "test_00074",
+        "test_00081",
+        "test_00088",
+        "test_00176",
+        "test_00234",
+        "test_00235",
+        "test_00240",
+        "test_00244",
+        "test_00253",
+        "test_00254",
+        "test_00255",
+        "test_00259",
+        "test_00260",
+        "test_00261",
+        "test_00281",
+        "test_00315",
+        "test_00316",
+        "test_00324",
+        "test_00332",
+        "test_00336",
+        "test_00340",
+        "test_00359",
+        "test_00386",
+        "test_00413",
+        "test_00428",
+        "test_00432",
+        "test_00435",
+        "test_00436",
+        "test_00437",
+        "test_00537",
+        "test_00548",
+        "test_00556",
+        "test_00610",
+        "test_00727",
+        "test_00728",
+        "test_00750",
+        "test_00837",
+        "test_00881",
+        "test_01020",
+        "test_01043",
+        "test_01044",
+        "test_01045",
+        "test_01046",
+        "test_01047",
+        "test_01067",
+        "test_01068",
+        "test_01087",
+        "test_01375",
+        "test_01380",
+        "test_01382",
+        "test_01383",
+        "test_01384",
+        "test_01388",
+        "test_01390",
+        "test_01544"
+      ],
+      "invalidCount": 0,
+      "invalidFiles": [],
+      "duplicateLabels": 16,
+      "frames": {
+        "min": 34.0,
+        "p01": 51.36,
+        "p05": 71.80000000000001,
+        "p50": 220.0,
+        "p95": 728.5999999999995,
+        "p99": 1037.1999999999994,
+        "max": 1695.0
+      },
+      "zeroRatio": {
+        "min": 0.0,
+        "p01": 0.0006685665518607699,
+        "p05": 0.0025041639738759896,
+        "p50": 0.037054912054912056,
+        "p95": 0.5413903846830674,
+        "p99": 0.9150996616276077,
+        "max": 0.9990375360923965
+      },
+      "validFrameRatio": {
+        "min": 0.0009624639076034649,
+        "p01": 0.09856880490341424,
+        "p05": 0.5112554112554113,
+        "p50": 0.9908466819221968,
+        "p95": 1.0,
+        "p99": 1.0,
+        "max": 1.0
+      },
+      "leftValidFrameRatio": {
+        "min": 0.0009624639076034649,
+        "p01": 0.09856880490341424,
+        "p05": 0.5112554112554113,
+        "p50": 0.9908466819221968,
+        "p95": 1.0,
+        "p99": 1.0,
+        "max": 1.0
+      },
+      "rightValidFrameRatio": {
+        "min": 0.0009624639076034649,
+        "p01": 0.09856880490341424,
+        "p05": 0.5112554112554113,
+        "p50": 0.9908466819221968,
+        "p95": 1.0,
+        "p99": 1.0,
+        "max": 1.0
+      },
+      "labelWords": {
+        "min": 1.0,
+        "p01": 1.0,
+        "p05": 3.0,
+        "p50": 13.0,
+        "p95": 38.0,
+        "p99": 50.0,
+        "max": 62.0
+      },
+      "zeroRatioAtLeast90Percent": 19,
+      "zeroRatioAtLeast99Percent": 4,
+      "zeroRatioExactly100Percent": 0,
+      "validFrameRatioBelow10Percent": 17,
+      "validFrameRatioExactlyZero": 0,
+      "labelsOver62Words": 0,
+      "qualityCandidates": {
+        "allZero": [],
+        "lowCoverage": [
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00179.npz",
+            "frames": 74,
+            "zeroRatio": 0.9887387387387387,
+            "validFrameRatio": 0.013513513513513514,
+            "labelWords": 8,
+            "labelPreview": "pueden ir en micro, en avión, en auto."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00242.npz",
+            "frames": 533,
+            "zeroRatio": 0.9968730456535334,
+            "validFrameRatio": 0.00375234521575985,
+            "labelWords": 32,
+            "labelPreview": "por ejemplo, si hay dos personas sordas, esa tercera persona oyente va controlando la vibración, los pasos, va observando el escenario para ver si es de madera "
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00304.npz",
+            "frames": 157,
+            "zeroRatio": 0.9628955616216762,
+            "validFrameRatio": 0.044585987261146494,
+            "labelWords": 7,
+            "labelPreview": "bueno, me presento, mi nombre es gonzalo."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00337.npz",
+            "frames": 498,
+            "zeroRatio": 0.939105628864665,
+            "validFrameRatio": 0.06827309236947791,
+            "labelWords": 23,
+            "labelPreview": "por ejemplo, si vendes cosas como botellas para el agua, el público objetivo será aquel que acampa, que esté relacionado con la naturaleza."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00342.npz",
+            "frames": 222,
+            "zeroRatio": 0.9317174317174317,
+            "validFrameRatio": 0.08108108108108109,
+            "labelWords": 18,
+            "labelPreview": "todo esto es muy interesante. aquellos que quieran emprender, ¿pueden realizar cursos con vos en lengua de señas?"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00360.npz",
+            "frames": 323,
+            "zeroRatio": 0.9499975428767998,
+            "validFrameRatio": 0.058823529411764705,
+            "labelWords": 18,
+            "labelPreview": "averiguamos para comprar la bicicleta doble de la marca tandem, que es una marca específica de bicicletas dobles."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00361.npz",
+            "frames": 328,
+            "zeroRatio": 0.9796747967479674,
+            "validFrameRatio": 0.024390243902439025,
+            "labelWords": 15,
+            "labelPreview": "por último, ¿cuál sería tu mensaje para las personas sordociegas que estén viendo el programa?"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00522.npz",
+            "frames": 1039,
+            "zeroRatio": 0.9990375360923965,
+            "validFrameRatio": 0.0009624639076034649,
+            "labelWords": 30,
+            "labelPreview": "el hot sale 2021 estuvo marcado por rubros muy vinculados a la pandemia del coronavirus y el oxímetro de pulso fue la vedette, estuvo entre las 10 cosas más ven"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00536.npz",
+            "frames": 240,
+            "zeroRatio": 0.9965277777777778,
+            "validFrameRatio": 0.004166666666666667,
+            "labelWords": 22,
+            "labelPreview": "estuviste en el debate que se realizó sobre el proyecto de ley en la región centro ¿qué opinas luego de haber participado?"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00557.npz",
+            "frames": 221,
+            "zeroRatio": 0.9562953386482799,
+            "validFrameRatio": 0.049773755656108594,
+            "labelWords": 13,
+            "labelPreview": "este vaso no se ve seguido. de hecho el más conocido es este."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00752.npz",
+            "frames": 448,
+            "zeroRatio": 0.9443204365079365,
+            "validFrameRatio": 0.06696428571428571,
+            "labelWords": 39,
+            "labelPreview": "es muy valioso, lo más importante es el tema de las barreras, es lo que nosotros pedimos, en las escuelas y universidades no hay intérpretes, escuelas y hospita"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00785.npz",
+            "frames": 143,
+            "zeroRatio": 0.9477744477744477,
+            "validFrameRatio": 0.06293706293706294,
+            "labelWords": 8,
+            "labelPreview": "gracias. bueno, por favor, escribí cómo te llamás."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00901.npz",
+            "frames": 462,
+            "zeroRatio": 0.9621212121212122,
+            "validFrameRatio": 0.045454545454545456,
+            "labelWords": 26,
+            "labelPreview": "son muy importantes las piedras ya que cuando les da el sol, durante la mañana y la tarde, las piedras absorben su calor y lo mantienen."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_01049.npz",
+            "frames": 1051,
+            "zeroRatio": 0.9173198616585867,
+            "validFrameRatio": 0.09514747859181731,
+            "labelWords": 41,
+            "labelPreview": "gracias a la capacitación del instituto wine, los profesores nos van enseñando distintos temas, por ejemplo la biografía del vino, las cepas, hacemos catas, hac"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_01386.npz",
+            "frames": 85,
+            "zeroRatio": 0.9411764705882353,
+            "validFrameRatio": 0.07058823529411765,
+            "labelWords": 9,
+            "labelPreview": "me parece que no hay dudas, está muy claro."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_01389.npz",
+            "frames": 115,
+            "zeroRatio": 0.9927536231884058,
+            "validFrameRatio": 0.008695652173913044,
+            "labelWords": 7,
+            "labelPreview": "por eso compartir estas diferente miradas, guau."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_01679.npz",
+            "frames": 182,
+            "zeroRatio": 0.9634135705564277,
+            "validFrameRatio": 0.038461538461538464,
+            "labelWords": 8,
+            "labelPreview": "bien. esto es como un primer gran paso."
+          }
+        ],
+        "highZero": [
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00179.npz",
+            "frames": 74,
+            "zeroRatio": 0.9887387387387387,
+            "validFrameRatio": 0.013513513513513514,
+            "labelWords": 8,
+            "labelPreview": "pueden ir en micro, en avión, en auto."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00242.npz",
+            "frames": 533,
+            "zeroRatio": 0.9968730456535334,
+            "validFrameRatio": 0.00375234521575985,
+            "labelWords": 32,
+            "labelPreview": "por ejemplo, si hay dos personas sordas, esa tercera persona oyente va controlando la vibración, los pasos, va observando el escenario para ver si es de madera "
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00304.npz",
+            "frames": 157,
+            "zeroRatio": 0.9628955616216762,
+            "validFrameRatio": 0.044585987261146494,
+            "labelWords": 7,
+            "labelPreview": "bueno, me presento, mi nombre es gonzalo."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00337.npz",
+            "frames": 498,
+            "zeroRatio": 0.939105628864665,
+            "validFrameRatio": 0.06827309236947791,
+            "labelWords": 23,
+            "labelPreview": "por ejemplo, si vendes cosas como botellas para el agua, el público objetivo será aquel que acampa, que esté relacionado con la naturaleza."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00342.npz",
+            "frames": 222,
+            "zeroRatio": 0.9317174317174317,
+            "validFrameRatio": 0.08108108108108109,
+            "labelWords": 18,
+            "labelPreview": "todo esto es muy interesante. aquellos que quieran emprender, ¿pueden realizar cursos con vos en lengua de señas?"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00343.npz",
+            "frames": 159,
+            "zeroRatio": 0.9056603773584906,
+            "validFrameRatio": 0.11320754716981132,
+            "labelWords": 12,
+            "labelPreview": "¡qué linda! ¡gracias por sumarte! ojalá se suscriban muchos para que continues."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00360.npz",
+            "frames": 323,
+            "zeroRatio": 0.9499975428767998,
+            "validFrameRatio": 0.058823529411764705,
+            "labelWords": 18,
+            "labelPreview": "averiguamos para comprar la bicicleta doble de la marca tandem, que es una marca específica de bicicletas dobles."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00361.npz",
+            "frames": 328,
+            "zeroRatio": 0.9796747967479674,
+            "validFrameRatio": 0.024390243902439025,
+            "labelWords": 15,
+            "labelPreview": "por último, ¿cuál sería tu mensaje para las personas sordociegas que estén viendo el programa?"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00522.npz",
+            "frames": 1039,
+            "zeroRatio": 0.9990375360923965,
+            "validFrameRatio": 0.0009624639076034649,
+            "labelWords": 30,
+            "labelPreview": "el hot sale 2021 estuvo marcado por rubros muy vinculados a la pandemia del coronavirus y el oxímetro de pulso fue la vedette, estuvo entre las 10 cosas más ven"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00536.npz",
+            "frames": 240,
+            "zeroRatio": 0.9965277777777778,
+            "validFrameRatio": 0.004166666666666667,
+            "labelWords": 22,
+            "labelPreview": "estuviste en el debate que se realizó sobre el proyecto de ley en la región centro ¿qué opinas luego de haber participado?"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00557.npz",
+            "frames": 221,
+            "zeroRatio": 0.9562953386482799,
+            "validFrameRatio": 0.049773755656108594,
+            "labelWords": 13,
+            "labelPreview": "este vaso no se ve seguido. de hecho el más conocido es este."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00647.npz",
+            "frames": 344,
+            "zeroRatio": 0.9111526393503138,
+            "validFrameRatio": 0.10465116279069768,
+            "labelWords": 22,
+            "labelPreview": "por ejemplo, acá hay restos de comida, podemos agarrar cualquier recipiente, en mi casa tenemos un balde de plástico, hay distintos modelos."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00752.npz",
+            "frames": 448,
+            "zeroRatio": 0.9443204365079365,
+            "validFrameRatio": 0.06696428571428571,
+            "labelWords": 39,
+            "labelPreview": "es muy valioso, lo más importante es el tema de las barreras, es lo que nosotros pedimos, en las escuelas y universidades no hay intérpretes, escuelas y hospita"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00785.npz",
+            "frames": 143,
+            "zeroRatio": 0.9477744477744477,
+            "validFrameRatio": 0.06293706293706294,
+            "labelWords": 8,
+            "labelPreview": "gracias. bueno, por favor, escribí cómo te llamás."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_00901.npz",
+            "frames": 462,
+            "zeroRatio": 0.9621212121212122,
+            "validFrameRatio": 0.045454545454545456,
+            "labelWords": 26,
+            "labelPreview": "son muy importantes las piedras ya que cuando les da el sol, durante la mañana y la tarde, las piedras absorben su calor y lo mantienen."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_01049.npz",
+            "frames": 1051,
+            "zeroRatio": 0.9173198616585867,
+            "validFrameRatio": 0.09514747859181731,
+            "labelWords": 41,
+            "labelPreview": "gracias a la capacitación del instituto wine, los profesores nos van enseñando distintos temas, por ejemplo la biografía del vino, las cepas, hacemos catas, hac"
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_01386.npz",
+            "frames": 85,
+            "zeroRatio": 0.9411764705882353,
+            "validFrameRatio": 0.07058823529411765,
+            "labelWords": 9,
+            "labelPreview": "me parece que no hay dudas, está muy claro."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_01389.npz",
+            "frames": 115,
+            "zeroRatio": 0.9927536231884058,
+            "validFrameRatio": 0.008695652173913044,
+            "labelWords": 7,
+            "labelPreview": "por eso compartir estas diferente miradas, guau."
+          },
+          {
+            "file": "/home/tiagoashe/entrenamiento-modelo/data/processed/test/test_01679.npz",
+            "frames": 182,
+            "zeroRatio": 0.9634135705564277,
+            "validFrameRatio": 0.038461538461538464,
+            "labelWords": 8,
+            "labelPreview": "bien. esto es como un primer gran paso."
+          }
+        ],
+        "longLabel": []
+      }
+    }
+  },
+  "totalFiles": 8184,
+  "totalInvalid": 0,
+  "totalMissing": 275
+}

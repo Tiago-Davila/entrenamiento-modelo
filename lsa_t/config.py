@@ -3,15 +3,24 @@ config.py — Configuracion centralizada del proyecto LSA
 Modificar aqui antes de correr cualquier script.
 """
 from pathlib import Path
+import os
+
+from sequence_contract import INPUT_DIM, MAX_FRAMES
 
 # ── Directorios ───────────────────────────────────────────────────────────────
-BASE_DIR        = Path(__file__).parent
-DATA_DIR        = BASE_DIR / "data"
-CHECKPOINTS_DIR = BASE_DIR / "checkpoints"
-EXPORTS_DIR     = BASE_DIR / "exports"
+BASE_DIR = Path(__file__).resolve().parent
+
+# LSA-T es autocontenido en ``lsa_t/``. ``LSA_PROJECT_DIR`` permite usar una
+# copia alternativa de sus datos sin mezclarla con Eva/LSA64.
+PROJECT_DIR = Path(
+    os.environ.get("LSA_PROJECT_DIR", str(BASE_DIR)),
+).expanduser().resolve()
+DATA_DIR        = PROJECT_DIR / "data"
+CHECKPOINTS_DIR = PROJECT_DIR / "checkpoints"
+EXPORTS_DIR     = PROJECT_DIR / "exports"
 
 for d in [DATA_DIR, CHECKPOINTS_DIR, EXPORTS_DIR]:
-    d.mkdir(exist_ok=True)
+    d.mkdir(parents=True, exist_ok=True)
 
 # ── Vocabulario ───────────────────────────────────────────────────────────────
 VOCAB_PATH  = DATA_DIR / "vocab.json"
@@ -23,8 +32,6 @@ SPECIAL_TOKENS = ["<PAD>", "<BOS>", "<EOS>", "<UNK>"]
 MIN_FREQ    = 2     # filtrar palabras con frecuencia < MIN_FREQ (singletons)
 
 # ── Preprocesamiento de keypoints ─────────────────────────────────────────────
-MAX_FRAMES  = 75    # frames por clip (75 @ 30fps = 2.5 seg)
-INPUT_DIM   = 126   # 21 landmarks mano izq * 3 coords + 21 mano der * 3 coords
 # Indices de landmarks de manos en MediaPipe Holistic (543 total)
 # Pose: 0-32 (33), Face: 33-500 (468), Left hand: 501-521 (21), Right: 522-542 (21)
 MP_LEFT_HAND_START  = 501
