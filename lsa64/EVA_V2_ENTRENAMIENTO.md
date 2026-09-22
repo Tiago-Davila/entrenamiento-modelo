@@ -11,9 +11,9 @@ el catálogo, el manifiesto y el fixture como una unidad.
 ## Preparar el dataset
 
 ```powershell
-Set-Location -LiteralPath 'C:\ruta\entrenamiento-modelo'
+Set-Location -LiteralPath 'C:\ruta\entrenamiento-modelo\lsa64'
 & .\venv\Scripts\Activate.ps1
-python .\preprocess_tasks.py --videos 'C:\ruta\lsa64' --out .\data_eva_v2 --model .\holistic_landmarker.task
+python .\preprocess_tasks.py --videos .\data\raw\all --out .\data\processed --model .\assets\holistic_landmarker.task
 ```
 
 El resultado esperado es `X.npy` con forma `(muestras, 40, 168)`.
@@ -22,7 +22,7 @@ El resultado esperado es `X.npy` con forma `(muestras, 40, 168)`.
 
 ```powershell
 python .\test_eva_contract.py
-python .\train_keras_tflite.py --data .\data_eva_v2 --out .\exports_eva_v2 --epochs 120 --augment-factor 2
+python .\train_keras_tflite.py --data .\data\processed --out .\exports --epochs 120 --augment-factor 2
 ```
 
 `--augment-factor 2` deja las muestras originales y agrega dos copias

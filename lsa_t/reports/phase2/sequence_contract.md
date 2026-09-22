@@ -53,9 +53,9 @@ El tensor final es `[75, 126]`, aplanado por filas para LiteRT.
 
 ## Implementaciones
 
-- Python: [sequence_contract.py](/home/tiagoashe/entrenamiento-modelo/lsa/sequence_contract.py)
+- Python: [sequence_contract.py](/home/tiagoashe/entrenamiento-modelo/lsa_t/sequence_contract.py)
 - Kotlin: [SequenceKeypointContract.kt](/home/tiagoashe/helpi/helpi/app/src/main/java/com/helpi/conversation/keypoints/SequenceKeypointContract.kt)
-- Fixture: [sequence_contract_fixture.json](/home/tiagoashe/entrenamiento-modelo/reports/phase2/sequence_contract_fixture.json)
+- Fixture: [sequence_contract_fixture.json](/home/tiagoashe/entrenamiento-modelo/lsa_t/reports/phase2/sequence_contract_fixture.json)
 
 El fixture cubre una secuencia corta con mano ausente, una secuencia exacta de
 75 cuadros y una secuencia de 79 cuadros que detecta el error de redondeo de

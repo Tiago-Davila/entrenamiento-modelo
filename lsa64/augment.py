@@ -22,7 +22,7 @@ Uso típico:
 
     aug = Augmenter(AugmentConfig())
     rng = np.random.default_rng(1234)
-    x_aug = aug(x, rng)          # x: (T, 201) float32
+    x_aug = aug(x, rng)          # x: (T, 168) float32
 
 Nota sobre aritmética entera: el contrato de submuestreo con división entera
 rige el camino de INFERENCIA, donde hace falta reproducibilidad bit a bit
@@ -95,14 +95,14 @@ MIRROR_PERMUTATION = _build_mirror_permutation()
 # ---------------------------------------------------------------------------
 
 def to_points(x: np.ndarray) -> np.ndarray:
-    """(T, 201) -> (T, 67, 3)."""
+    """(T, 168) -> (T, 56, 3)."""
     if x.ndim != 2 or x.shape[1] != N_COORDS:
         raise ValueError(f"Se esperaba (T, {N_COORDS}), se recibió {x.shape}")
     return x.reshape(x.shape[0], N_POINTS, 3)
 
 
 def to_flat(p: np.ndarray) -> np.ndarray:
-    """(T, 67, 3) -> (T, 201)."""
+    """(T, 56, 3) -> (T, 168)."""
     return p.reshape(p.shape[0], N_COORDS)
 
 

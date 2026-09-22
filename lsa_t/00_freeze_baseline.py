@@ -81,10 +81,10 @@ def build_baseline() -> dict[str, Any]:
         CHECKPOINTS_DIR / "phase_b_best.pt",
         CHECKPOINTS_DIR / "phase_b_last.pt",
         CHECKPOINTS_DIR / "phase_b_history.json",
-        BASE_DIR / "checkpoints" / "phase_b_best.pt",
-        BASE_DIR / "checkpoints" / "phase_c_best.pt",
-        BASE_DIR / "exports" / "encoder_int8.tflite",
-        BASE_DIR / "exports" / "decoder_int8.tflite",
+        PROJECT_DIR / "checkpoints_legacy" / "phase_b_best.pt",
+        PROJECT_DIR / "checkpoints_legacy" / "phase_c_best.pt",
+        PROJECT_DIR / "exports_legacy" / "encoder_int8.tflite",
+        PROJECT_DIR / "exports_legacy" / "decoder_int8.tflite",
     ]
     return {
         "artifactVersion": ARTIFACT_VERSION,
@@ -104,16 +104,16 @@ def build_baseline() -> dict[str, Any]:
             "role": "checkpoint candidato oficial para la próxima exportación",
             "reason": (
                 "está junto al dataset raíz, coincide con la configuración vigente "
-                "y es más reciente que las copias bajo lsa/checkpoints"
+                "y es el checkpoint actual dentro de lsa_t/checkpoints"
             ),
         },
         "notSelectedAlternatives": [
             {
-                "path": str(BASE_DIR / "checkpoints" / "phase_b_best.pt"),
-                "reason": "copia anterior bajo lsa/checkpoints; se conserva para comparación",
+                "path": str(PROJECT_DIR / "checkpoints_legacy" / "phase_b_best.pt"),
+                "reason": "copia histórica; se conserva para comparación",
             },
             {
-                "path": str(BASE_DIR / "checkpoints" / "phase_c_best.pt"),
+                "path": str(PROJECT_DIR / "checkpoints_legacy" / "phase_c_best.pt"),
                 "reason": "checkpoint de otra fase; no corresponde al candidato phase_b",
             },
         ],
@@ -175,7 +175,7 @@ def markdown(baseline: dict[str, Any]) -> str:
         "- No se modificaron datos, checkpoints ni exportaciones.",
         "- No se seleccionó todavía ningún modelo para Android.",
         "- La exportación futura debe partir del candidato oficial y generar una nueva versión de artefacto.",
-        "- La carpeta `lsa/exports` actual queda fuera de la línea base candidata hasta que pase la validación LiteRT.",
+        "- La carpeta `exports_legacy` queda fuera de la línea base candidata hasta que pase la validación LiteRT.",
         "",
         "## Próximo paso",
         "",

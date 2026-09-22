@@ -22,7 +22,7 @@ Uso tipico:
     pip install huggingface_hub pose-format numpy
     python brecha_dominio.py --inspect
     python brecha_dominio.py --download --limit 300
-    python brecha_dominio.py --compare --lsa64 ./data_tasks
+    python brecha_dominio.py --compare --lsa64 ./data/processed
 """
 
 from __future__ import annotations
@@ -32,17 +32,17 @@ import json
 from pathlib import Path
 
 import numpy as np
+from eva_contract import COORDS, POSE_OFFSET, POSE_SOURCE_INDICES, center_sequence
 
 REPO = "pedroodb/glosl-lsat"
 
-# --- Contrato de 201 coordenadas (mismo que preprocess_tasks.py) ---
-N_COORDS = 201
-POSE_N = 25                 # landmarks de pose 0..24 (sin piernas)
+# --- Contrato Eva v2 de 168 coordenadas (mismo que preprocess_tasks.py) ---
+N_COORDS = COORDS
 OFF_MANO_IZQ = 0
 OFF_MANO_DER = 63
-OFF_POSE = 126
-IDX_HOMBRO_IZQ = OFF_POSE + 11 * 3
-IDX_HOMBRO_DER = OFF_POSE + 12 * 3
+OFF_POSE = POSE_OFFSET
+IDX_HOMBRO_IZQ = OFF_POSE
+IDX_HOMBRO_DER = OFF_POSE + 3
 
 # Nombres de componente que usa MediaPipe Holistic en el contenedor .pose.
 # Se resuelven de forma tolerante porque la nomenclatura varía entre versiones.
@@ -86,8 +86,8 @@ def datos_numpy(pose) -> np.ndarray:
     return arr
 
 
-def a_contrato_201(pose) -> np.ndarray | None:
-    """Convierte un .pose de 543 puntos al vector de 201 del contrato.
+def a_contrato_eva_v2(pose) -> np.ndarray | None:
+    """Convierte un .pose de 543 puntos al vector Eva v2 de 168 coordenadas.
 
     IMPORTANTE: la normalización glosl-norm-v1 se aplica al CARGAR, no está
     guardada. Acá NO se invoca pose.normalize(): se toman los valores crudos y
@@ -111,14 +111,15 @@ def a_contrato_201(pose) -> np.ndarray | None:
 
     volcar("mano_izq", OFF_MANO_IZQ, 21)
     volcar("mano_der", OFF_MANO_DER, 21)
-    volcar("pose", OFF_POSE, POSE_N)
+    pose_off, pose_n = comps["pose"]
+    for local_index, source_index in enumerate(POSE_SOURCE_INDICES):
+        if source_index >= pose_n:
+            break
+        point = np.nan_to_num(arr[:, pose_off + source_index, :3], nan=0.0)
+        start = OFF_POSE + local_index * 3
+        out[:, start:start + 3] = point
 
-    # centrado en punto medio de hombros (x e y; z sin tocar)
-    cx = (out[:, IDX_HOMBRO_IZQ] + out[:, IDX_HOMBRO_DER]) / 2.0
-    cy = (out[:, IDX_HOMBRO_IZQ + 1] + out[:, IDX_HOMBRO_DER + 1]) / 2.0
-    out[:, 0::3] -= cx[:, None]
-    out[:, 1::3] -= cy[:, None]
-    return out
+    return center_sequence(out)
 
 
 # --------------------------------------------------------------------------
@@ -128,7 +129,7 @@ def a_contrato_201(pose) -> np.ndarray | None:
 BLOQUES = {
     "mano_izq": (0, 63),
     "mano_der": (63, 126),
-    "pose": (126, 201),
+    "pose": (126, 168),
 }
 
 
@@ -136,7 +137,7 @@ def estadisticas(secuencias: list[np.ndarray] | np.ndarray, nombre: str) -> dict
     if isinstance(secuencias, np.ndarray) and secuencias.ndim == 3:
         secuencias = list(secuencias)
 
-    todo = np.concatenate([s for s in secuencias], axis=0)   # (sum_T, 201)
+    todo = np.concatenate([s for s in secuencias], axis=0)   # (sum_T, 168)
     d = {
         "nombre": nombre,
         "secuencias": len(secuencias),
@@ -224,7 +225,7 @@ def main() -> int:
     ap.add_argument("--limit", type=int, default=200,
                     help="cuántos .pose usar (default 200)")
     ap.add_argument("--poses-dir", default="./lsat_poses")
-    ap.add_argument("--lsa64", default="./data_tasks",
+    ap.add_argument("--lsa64", default="./data/processed",
                     help="carpeta con X.npy del dataset LSA64 procesado")
     ap.add_argument("--out", default="brecha_dominio.json")
     args = ap.parse_args()
@@ -344,7 +345,7 @@ def main() -> int:
                   f"x[{np.nanmin(b[...,0]):+.3f},{np.nanmax(b[...,0]):+.3f}] "
                   f"z[{np.nanmin(b[...,2]):+.3f},{np.nanmax(b[...,2]):+.3f}]")
 
-        v = a_contrato_201(p)
+        v = a_contrato_eva_v2(p)
         if v is None:
             print("  *** No se pudieron ubicar manos y pose. Revisar nombres. ***")
             return 1
@@ -389,7 +390,7 @@ def main() -> int:
     secs, fallos = [], 0
     for i, f in enumerate(archivos, 1):
         try:
-            v = a_contrato_201(abrir_pose(f))
+            v = a_contrato_eva_v2(abrir_pose(f))
             if v is not None and len(v) > 1:
                 secs.append(v)
             else:

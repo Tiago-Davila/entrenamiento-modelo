@@ -5,8 +5,8 @@ No elimina ni modifica muestras. Produce un JSON con las mediciones completas
 y un resumen Markdown para revisar las exclusiones en una fase posterior.
 
 Uso:
-    python lsa/05_audit_data.py
-    python lsa/05_audit_data.py --report-dir reports/phase1
+    python 05_audit_data.py
+    python 05_audit_data.py --report-dir reports/phase1
 """
 
 from __future__ import annotations

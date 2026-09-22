@@ -1,8 +1,8 @@
 # Entrenamiento de LSA-T en Windows
 
 Esta guía ejecuta todo desde PowerShell en Windows. No usa SSH ni WSL.
-Trabaja sobre el repositorio `entrenamiento-modelo` y deja los datos,
-checkpoints y exports en la raíz del repositorio.
+Trabaja dentro de `entrenamiento-modelo\\lsa_t` y deja los datos,
+checkpoints y exports dentro de esa carpeta, separados de Eva/LSA64.
 
 El entrenamiento detecta automáticamente, en este orden, Intel XPU, NVIDIA
 CUDA o CPU. Para un entrenamiento completo se recomienda una GPU NVIDIA con
@@ -16,17 +16,17 @@ la computadora es distinta.
 Reemplazar la ruta por la carpeta real donde se clonó el proyecto:
 
 ```powershell
-Set-Location -LiteralPath 'C:\ruta\entrenamiento-modelo'
+Set-Location -LiteralPath 'C:\ruta\entrenamiento-modelo\lsa_t'
 $env:LSA_PROJECT_DIR = (Get-Location).Path
 ```
 
 Comprobar que los scripts existen:
 
 ```powershell
-Test-Path .\lsa\01_prepare_data.py
-Test-Path .\lsa\02_train.py
-Test-Path .\lsa\03_evaluate.py
-Test-Path .\lsa\04_export.py
+Test-Path 01_prepare_data.py
+Test-Path 02_train.py
+Test-Path 03_evaluate.py
+Test-Path 04_export.py
 ```
 
 ## 2. Crear y activar el entorno Python
@@ -85,7 +85,7 @@ seguirá con CUDA o CPU; no se debe confundir eso con un entrenamiento acelerado
 ## 4. Instalar las dependencias del proyecto
 
 ```powershell
-python -m pip install -r .\lsa\requirements.txt
+python -m pip install -r requirements.txt
 ```
 
 Verificar las importaciones principales:
@@ -100,7 +100,7 @@ instalar el resto sin esa dependencia:
 
 ```powershell
 $tmpReq = Join-Path $env:TEMP 'lsa-requirements-windows.txt'
-Get-Content .\lsa\requirements.txt | Where-Object { $_ -notmatch '^\s*pyzes(\s|$)' } | Set-Content -Encoding utf8 $tmpReq
+Get-Content requirements.txt | Where-Object { $_ -notmatch '^\s*pyzes(\s|$)' } | Set-Content -Encoding utf8 $tmpReq
 python -m pip install -r $tmpReq
 Remove-Item -LiteralPath $tmpReq -Force
 ```
@@ -108,7 +108,7 @@ Remove-Item -LiteralPath $tmpReq -Force
 ## 5. Confirmar la ubicación de datos y checkpoints
 
 El código usa la raíz indicada por `LSA_PROJECT_DIR`. Si no se define, usa la
-carpeta padre de `lsa` automáticamente.
+carpeta actual de `lsa_t` automáticamente.
 
 ```powershell
 Write-Host "Proyecto: $env:LSA_PROJECT_DIR"
@@ -139,7 +139,7 @@ Usar esta sección únicamente si no existen `data\processed\train`, `val` y
 Descarga las anotaciones y poses desde Hugging Face y genera el vocabulario:
 
 ```powershell
-python .\lsa\01_prepare_data.py
+python 01_prepare_data.py
 ```
 
 ### LSA-T más LSA-X opcional
@@ -148,27 +148,27 @@ LSA-X agrega una descarga grande y se usa para el preentrenamiento opcional de
 la fase A:
 
 ```powershell
-python .\lsa\01_prepare_data.py --lsax
+python 01_prepare_data.py --lsax
 ```
 
 Después de preparar datos nuevos, auditar antes de entrenar:
 
 ```powershell
-python .\lsa\05_audit_data.py --report-dir reports\phase1
+python 05_audit_data.py --report-dir reports\phase1
 Get-Content .\reports\phase1\data_audit.md
 ```
 
 La limpieza es recuperable. Primero mostrar el plan sin mover archivos:
 
 ```powershell
-python .\lsa\06_clean_data.py
+python 06_clean_data.py
 Get-Content .\reports\phase1\cleaning_report.md
 ```
 
 Solo después de revisar el plan, aplicar la cuarentena:
 
 ```powershell
-python .\lsa\06_clean_data.py --apply
+python 06_clean_data.py --apply
 ```
 
 El script mueve muestras a `data\quarantine\phase1`; no las elimina. No
@@ -181,8 +181,8 @@ Estos comandos no entrenan. Guardan hashes y generan la referencia compartida
 entre Python y Android:
 
 ```powershell
-python .\lsa\00_freeze_baseline.py
-python .\lsa\07_write_sequence_fixture.py
+python 00_freeze_baseline.py
+python 07_write_sequence_fixture.py
 Get-Content .\reports\phase0\baseline.md
 Get-Content .\reports\phase2\sequence_contract.md
 ```
@@ -196,7 +196,7 @@ El smoke test ejecuta solo cinco pasos por época y sirve para confirmar que el
 modelo, el vocabulario, los datos y el dispositivo funcionan.
 
 ```powershell
-python .\lsa\02_train.py --phase b --smoke --fresh
+python 02_train.py --phase b --smoke --fresh
 ```
 
 Debe mostrar `device=cuda` si se instaló una GPU NVIDIA correctamente. Si
@@ -212,7 +212,7 @@ checkpoint viejo que haya sido producido con otro preprocesamiento.
 New-Item -ItemType Directory -Force .\logs | Out-Null
 $stamp = Get-Date -Format 'yyyyMMdd_HHmmss'
 $log = ".\logs\phase_b_$stamp.log"
-python .\lsa\02_train.py --phase b --fresh 2>&1 | Tee-Object -FilePath $log
+python 02_train.py --phase b --fresh 2>&1 | Tee-Object -FilePath $log
 ```
 
 El entrenamiento guarda:
@@ -235,7 +235,7 @@ Si ya existe `phase_b_last.pt` de la misma configuración, reanudar sin
 `--fresh`:
 
 ```powershell
-python .\lsa\02_train.py --phase b
+python 02_train.py --phase b
 ```
 
 No usar `--fresh` para reanudar; ese parámetro empieza una corrida nueva.
@@ -245,13 +245,13 @@ No usar `--fresh` para reanudar; ese parámetro empieza una corrida nueva.
 Solo ejecutar si se preparó `data\processed\pretrain` con `--lsax`:
 
 ```powershell
-python .\lsa\02_train.py --phase a --epochs 25 --fresh
+python 02_train.py --phase a --epochs 25 --fresh
 ```
 
 Después, la fase B puede iniciar desde `phase_a_best.pt`:
 
 ```powershell
-python .\lsa\02_train.py --phase b --fresh
+python 02_train.py --phase b --fresh
 ```
 
 ## 11. Fase C opcional — fine-tuning con augmentación
@@ -263,7 +263,7 @@ conserva la carga de `phase_b_best.pt` prevista por el script:
 ```powershell
 $stamp = Get-Date -Format 'yyyyMMdd_HHmmss'
 $log = ".\logs\phase_c_$stamp.log"
-python .\lsa\02_train.py --phase c --epochs 20 --fresh 2>&1 | Tee-Object -FilePath $log
+python 02_train.py --phase c --epochs 20 --fresh 2>&1 | Tee-Object -FilePath $log
 ```
 
 El resultado esperado es:
@@ -279,13 +279,13 @@ checkpoints\phase_c_history.json
 Evaluar una sola versión candidata sobre `test`:
 
 ```powershell
-python .\lsa\03_evaluate.py --ckpt phase_b_best.pt --examples 20
+python 03_evaluate.py --ckpt phase_b_best.pt --examples 20
 ```
 
 Si se promovió la fase C como candidata:
 
 ```powershell
-python .\lsa\03_evaluate.py --ckpt phase_c_best.pt --examples 20
+python 03_evaluate.py --ckpt phase_c_best.pt --examples 20
 ```
 
 El script muestra BLEU-4, WER, ROUGE-L y ejemplos cualitativos. Revisar el
@@ -303,13 +303,13 @@ suficiente, el checkpoint queda como prototipo y no debe pasar a Android.
 Elegir el checkpoint que haya pasado la evaluación:
 
 ```powershell
-python .\lsa\04_export.py --ckpt phase_b_best.pt
+python 04_export.py --ckpt phase_b_best.pt
 ```
 
 O, si la fase C es la candidata:
 
 ```powershell
-python .\lsa\04_export.py --ckpt phase_c_best.pt
+python 04_export.py --ckpt phase_c_best.pt
 ```
 
 La exportación completa produce en `exports`:
@@ -350,7 +350,7 @@ Si solo se necesita diagnosticar ONNX y todavía no se puede convertir a
 LiteRT/TFLite:
 
 ```powershell
-python .\lsa\04_export.py --ckpt phase_b_best.pt --skip-tflite
+python 04_export.py --ckpt phase_b_best.pt --skip-tflite
 ```
 
 Ese comando no genera un paquete Android completo. Para integrar en la app se
@@ -362,24 +362,24 @@ checkpoint.
 Para una computadora Windows nueva, el orden resumido es:
 
 ```powershell
-Set-Location -LiteralPath 'C:\ruta\entrenamiento-modelo'
+Set-Location -LiteralPath 'C:\ruta\entrenamiento-modelo\lsa_t'
 $env:LSA_PROJECT_DIR = (Get-Location).Path
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 py -3.12 -m venv .venv
 & .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip setuptools wheel
 python -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
-python -m pip install -r .\lsa\requirements.txt
+python -m pip install -r requirements.txt
 python -c "import torch; print(torch.__version__); print('CUDA:', torch.cuda.is_available())"
-python .\lsa\05_audit_data.py
-python .\lsa\07_write_sequence_fixture.py
-python .\lsa\02_train.py --phase b --smoke --fresh
-python .\lsa\02_train.py --phase b --fresh
-python .\lsa\03_evaluate.py --ckpt phase_b_best.pt --examples 20
-python .\lsa\04_export.py --ckpt phase_b_best.pt
+python 05_audit_data.py
+python 07_write_sequence_fixture.py
+python 02_train.py --phase b --smoke --fresh
+python 02_train.py --phase b --fresh
+python 03_evaluate.py --ckpt phase_b_best.pt --examples 20
+python 04_export.py --ckpt phase_b_best.pt
 ```
 
-Si el dataset no existe, ejecutar `python .\lsa\01_prepare_data.py` antes de
+Si el dataset no existe, ejecutar `python 01_prepare_data.py` antes de
 la auditoría. Si se usa CPU, detenerse después del smoke test salvo que se
 acepte un tiempo de entrenamiento mucho mayor.
 
@@ -419,7 +419,7 @@ para apuntar a una ruta Linux.
 Para iniciar una versión nueva desde cero:
 
 ```powershell
-python .\lsa\02_train.py --phase b --fresh
+python 02_train.py --phase b --fresh
 ```
 
 Para continuar una corrida interrumpida de la misma versión, quitar `--fresh`.

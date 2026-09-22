@@ -7,8 +7,8 @@ archivo. Por seguridad, primero ejecutar sin argumentos para revisar el plan y
 usar ``--apply`` para moverlo.
 
 Uso:
-    python lsa/06_clean_data.py
-    python lsa/06_clean_data.py --apply
+    python 06_clean_data.py
+    python 06_clean_data.py --apply
 """
 
 from __future__ import annotations

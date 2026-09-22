@@ -21,26 +21,25 @@ Uso:
 
 from __future__ import annotations
 
+import json
 import sys
 import unicodedata
 from collections import Counter
+from pathlib import Path
 
 REPO = "pedroodb/glosl-lsat"
 ARCHIVO = "annotations.csv"
 
-# Las 64 señas de LSA64, en orden de indice de clase.
-SENAS_LSA64 = [
-    "Opaco", "Rojo", "Verde", "Amarillo", "Brillante", "Celeste", "Colores",
-    "Rosa", "Mujer", "Enemigo", "Hijo", "Hombre", "Lejos", "Dibujar", "Nacer",
-    "Aprender", "Llamar", "Skimmer", "Ubicacion", "Atrapar", "Gracias",
-    "Aceptar", "Sordo", "Cuchillo", "Otro", "Ninguno", "Nombre", "Paciencia",
-    "Perfume", "Deporte", "Cafe", "Uruguay", "Argentina", "Pais", "A_pesar_de",
-    "Preguntar", "Cumpleanos", "Desayuno", "Foto", "Hambre", "Mapa",
-    "Moneda", "Musica", "Barco", "Despues", "Duro", "Comida", "Aceite",
-    "Fideos", "Pescado", "Acuerdo", "Duda", "Argolla", "Comprar", "Copa",
-    "Bailar", "Novia", "Cerveza", "Guardar", "Candado", "Aguja", "Sur",
-    "Aspirina", "Cruz",
-]
+CATALOGO_LSA64 = Path(__file__).resolve().parents[2] / "lsa64" / "catalogo_lsa64.json"
+
+
+def cargar_senas_lsa64() -> list[str]:
+    """Lee el catálogo oficial sin duplicar nombres en el proyecto LSA-T."""
+    contenido = json.loads(CATALOGO_LSA64.read_text(encoding="utf-8"))
+    senas = contenido.get("glosas")
+    if not isinstance(senas, list) or len(senas) != 64:
+        raise ValueError(f"Catálogo LSA64 inválido: {CATALOGO_LSA64}")
+    return senas
 
 
 def sin_tildes(s: str) -> str:
@@ -49,6 +48,11 @@ def sin_tildes(s: str) -> str:
 
 
 def main() -> int:
+    try:
+        senas_lsa64 = cargar_senas_lsa64()
+    except (OSError, ValueError, json.JSONDecodeError) as error:
+        print(f"No se pudo leer el catálogo LSA64: {error}")
+        return 2
     try:
         from huggingface_hub import hf_hub_download
     except ImportError:
@@ -132,7 +136,7 @@ def main() -> int:
         blob = " " + " ".join(textos) + " "
 
         hallados: list[tuple[str, int]] = []
-        for sena in SENAS_LSA64:
+        for sena in senas_lsa64:
             palabra = sin_tildes(sena.replace("_", " "))
             n = blob.count(f" {palabra} ")
             if n:

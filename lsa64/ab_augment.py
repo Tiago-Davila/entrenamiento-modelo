@@ -20,8 +20,9 @@ reales falta ~16% del tiempo, y nunca aprendió a tolerarlo. p_drop simula esa
 pérdida de detección durante el entrenamiento.
 
 Uso:
-    python ab_augment.py --data ./data_tasks --seeds 3
-    python ab_augment.py --data ./data_tasks --seeds 3 --p-drop 0.15 0.25
+    cd lsa64
+    python ab_augment.py --data ./data/processed --seeds 3
+    python ab_augment.py --data ./data/processed --seeds 3 --p-drop 0.15 0.25
 """
 
 from __future__ import annotations

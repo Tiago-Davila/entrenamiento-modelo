@@ -31,6 +31,10 @@ LSA/
 └── exports/              # Modelos ONNX y TFLite para Android (generado)
 ```
 
+`data_seed/`, `checkpoints_legacy/` y `exports_legacy/` conservan una muestra
+y artefactos históricos. Sirven para auditoría; los scripts activos usan solo
+`data/`, `checkpoints/` y `exports/`.
+
 ---
 
 ## Instalacion

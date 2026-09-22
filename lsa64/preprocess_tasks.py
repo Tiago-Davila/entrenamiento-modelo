@@ -34,8 +34,9 @@ Modelo requerido: holistic_landmarker.task
 
 Uso:
     pip install "mediapipe>=1.0" opencv-python numpy tqdm
-    python preprocess_tasks.py --videos ./lsa64 --out ./data_tasks \
-           --model ./holistic_landmarker.task
+    cd lsa64
+    python preprocess_tasks.py --videos ./data/raw/all --out ./data/processed \
+           --model ./assets/holistic_landmarker.task
 """
 
 from __future__ import annotations

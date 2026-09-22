@@ -10,11 +10,10 @@ from sequence_contract import INPUT_DIM, MAX_FRAMES
 # ── Directorios ───────────────────────────────────────────────────────────────
 BASE_DIR = Path(__file__).resolve().parent
 
-# El codigo vive en ``lsa/``, pero los datos y checkpoints oficiales viven en
-# la raiz del repositorio. ``LSA_PROJECT_DIR`` permite apuntar a otra copia sin
-# volver a duplicar cientos de megabytes de datos.
+# LSA-T es autocontenido en ``lsa_t/``. ``LSA_PROJECT_DIR`` permite usar una
+# copia alternativa de sus datos sin mezclarla con Eva/LSA64.
 PROJECT_DIR = Path(
-    os.environ.get("LSA_PROJECT_DIR", str(BASE_DIR.parent)),
+    os.environ.get("LSA_PROJECT_DIR", str(BASE_DIR)),
 ).expanduser().resolve()
 DATA_DIR        = PROJECT_DIR / "data"
 CHECKPOINTS_DIR = PROJECT_DIR / "checkpoints"

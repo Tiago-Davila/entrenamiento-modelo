@@ -347,7 +347,7 @@ def main() -> int:
     }, ensure_ascii=False, indent=2), encoding="utf-8")
 
     print(f"\nListo. Archivos en {out_dir.resolve()}")
-    print("  modelo_lsa.tflite, catalogo_senas.json y lsa-manifest.json -> assets/lsa/")
+    print("  modelo_lsa.tflite, catalogo_senas.json y lsa-manifest.json -> paquete Eva v2")
     print("  fixture_android.json   -> app/src/androidTest/assets/")
     return 0
 
