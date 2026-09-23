@@ -1,0 +1,109 @@
+GUIA DE PREPARACION Y ENTRENAMIENTO — EVA LSA64 v2
+===================================================
+
+Este archivo contiene los comandos del pipeline de Eva/LSA64. Las
+dependencias instalables están en REQUERIMIENTOS_LSA64.txt.
+
+1. ENTORNO EN WINDOWS POWERSHELL
+--------------------------------
+
+    Set-Location -LiteralPath 'D:\2026-Politecnico\helpi\entrenamiento-modelo'
+    py -3.12 -m venv venv
+    Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+    .\venv\Scripts\Activate.ps1
+    python -m pip install --upgrade pip setuptools wheel
+    python -m pip install -r .\REQUERIMIENTOS_LSA64.txt
+
+Si ya existe y está activo el entorno `(venv)`, ejecutar solamente:
+
+    python -m pip install -r .\REQUERIMIENTOS_LSA64.txt
+
+No usar Python 3.14 o superior. TensorFlow no dispone de una wheel
+compatible para esa versión.
+
+2. ARCHIVO DE MEDIAPIPE
+-----------------------
+
+Descargar `holistic_landmarker.task` desde los modelos oficiales de
+MediaPipe y colocarlo en:
+
+    lsa64\assets\holistic_landmarker.task
+
+El archivo es binario y no se sube al repositorio. La misma versión deberá
+usarse luego en Android.
+
+Comprobar que existe:
+
+    Test-Path .\lsa64\assets\holistic_landmarker.task
+
+Debe devolver `True`.
+
+3. COMPROBAR LA INSTALACION
+---------------------------
+
+    python -c "import mediapipe as mp; from mediapipe.tasks.python import vision; import tensorflow as tf; print('MediaPipe:', mp.__version__); print('TensorFlow:', tf.__version__); print('HolisticLandmarker:', hasattr(vision, 'HolisticLandmarker'))"
+
+4. UBICARSE EN EL PIPELINE LSA64
+--------------------------------
+
+    Set-Location .\lsa64
+
+La estructura esperada es:
+
+    data\raw\all\                  videos LSA64 (.mp4)
+    assets\holistic_landmarker.task
+    catalogo_lsa64.json
+    preprocess_tasks.py
+    test_eva_contract.py
+    train_keras_tflite.py
+
+5. REEXTRAER LOS KEYPOINTS
+--------------------------
+
+Es obligatorio para Eva v2 porque el contrato cambió de 40x201 a 40x168.
+Los keypoints anteriores no se pueden reutilizar.
+
+    python .\preprocess_tasks.py --videos .\data\raw\all --out .\data\processed --model .\assets\holistic_landmarker.task
+
+Verificar la forma generada:
+
+    python -c "import numpy as np; x=np.load('.\\data\\processed\\X.npy'); print(x.shape); assert x.ndim == 3 and x.shape[1:] == (40,168)"
+
+El resultado debe tener esta forma:
+
+    (cantidad_de_muestras, 40, 168)
+
+6. VALIDAR EL CONTRATO
+----------------------
+
+    python .\test_eva_contract.py
+
+Debe finalizar correctamente con `OK`.
+
+7. ENTRENAR EVA
+---------------
+
+Entrenamiento recomendado con aumentación (dos copias aumentadas por cada
+muestra del split de entrenamiento):
+
+    python .\train_keras_tflite.py --data .\data\processed --out .\exports --epochs 120 --augment-factor 2
+
+Línea base sin aumentación:
+
+    python .\train_keras_tflite.py --data .\data\processed --out .\exports --epochs 120 --augment-factor 0
+
+8. ARTEFACTOS ESPERADOS
+-----------------------
+
+La carpeta `lsa64\exports` debe contener los archivos producidos por la
+misma ejecución:
+
+    modelo_lsa.tflite
+    catalogo_senas.json
+    lsa-manifest.json
+    fixture_android.json
+    metricas.json
+
+El modelo, el catálogo, el manifiesto y el fixture se deben copiar juntos.
+No instalar estos artefactos en la aplicación actual hasta actualizar allí
+el contrato de 201 a 168 coordenadas.
