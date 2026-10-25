@@ -69,6 +69,8 @@ logs/
 /node_modules/
 /=*
 /lsa-test.log
+/lsa64/runs/
+/lsa64/ab_augment.json
 
 # ---------------------------------------------------------------------------
 # Editores y sistema operativo
@@ -77,3 +79,6 @@ logs/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Configuración local (copiar de .env.example)
+/.env

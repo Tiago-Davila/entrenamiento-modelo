@@ -101,7 +101,7 @@ El tensor final de entrada al encoder es `[1, 75, 126]` float32
 
 ```kotlin
 val interpreter = Interpreter(loadModelFile("encoder_int8.tflite"))
-// input:  keypoints [1, 75, 126] float32
+// input:  keypoints [1, 126, 75] float32 (transponer la ventana [1, 75, 126])
 // output: embeddings [1, 75, 256] float32  (usar este)
 //         ctc_logits (no es necesario para inferencia con decoder)
 interpreter.run(inputKeypoints, outputEmbeddings)
@@ -122,14 +122,16 @@ val generated = mutableListOf(BOS_ID)
 val decoderInterpreter = Interpreter(loadModelFile("decoder_int8.tflite"))
 
 for (step in 0 until MAX_DEC_LEN) {
-    // tgt_tokens: [1, generated.size] int64
+    // tgt_tokens: [1, 64] int64. Completar con PAD_ID después del prefijo.
     // memory:     [1, 75, 256] float32 (embeddings del encoder, fijo en todo el loop)
-    // logits:     [1, generated.size, vocab_size]
+    // logits:     [1, 64, vocab_size]
+    val tokenBuffer = LongArray(MAX_DEC_LEN) { PAD_ID }
+    generated.forEachIndexed { index, token -> tokenBuffer[index] = token.toLong() }
     decoderInterpreter.run(
-        mapOf("tgt_tokens" to generated.toLongArray(), "memory" to encoderEmbeddings),
+        mapOf("tgt_tokens" to tokenBuffer, "memory" to encoderEmbeddings),
         outputLogits
     )
-    val nextId = argmax(outputLogits[0].last())  // ultimo timestep
+    val nextId = argmax(outputLogits[0][generated.lastIndex])
     generated.add(nextId)
     if (nextId == EOS_ID) break
 }

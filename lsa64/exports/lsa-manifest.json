@@ -1,10 +1,11 @@
 {
-  "modelVersion": "eva-lsa64-v2",
+  "modelVersion": "eva-lsa64-v3",
   "catalogVersion": "2.0",
-  "modelSha256": "35de4ddd220f46d4871b1e5bd1d886cf2f10bc30fce66bd68e9960dbde432275",
+  "modelSha256": "e231d3962e2eb8d081e9a95d61d6600a6b489db06db03f971530bc7da8f0d488",
   "catalogSha256": "377a02e97bd57b0133962dbe961c853ca3a205d0f985eceb31b358ea323df412",
   "numClasses": 64,
   "outputsProbabilities": false,
   "frames": 40,
-  "coords": 168
+  "coords": 168,
+  "contractVersion": 3
 }

@@ -19,14 +19,20 @@ viejo, hay que regenerar:
    el entero da 15, porque 13*45/39 = 14.999999999999998 en float).
    La version entera es reproducible bit a bit entre Python, Kotlin y JS.
 
-CONTRATO EVA v2 — 168 COORDENADAS:
+CONTRATO EVA v3 — 168 COORDENADAS (definición completa en eva_contract.py):
     [  0: 63)  mano izquierda  21 landmarks x (x,y,z)
     [ 63:126)  mano derecha    21 landmarks x (x,y,z)
     [126:168)  pose 11..24     14 landmarks x (x,y,z)
                  (sin cara: pose 0..10; sin piernas: pose 25..32)
-    centrado: se resta el punto medio de los hombros (pose 11 y 12) a x e y.
-    z NO se centra.
+    pixeles (x*W, y*H, z*W), centro en el punto medio de los hombros y
+    division por la mediana del ancho de hombros. z NO se centra.
     no detectado -> ceros.
+    Se guarda sizes.npy con W,H de cada video. --contract 2 reproduce v2.
+
+Sirve tambien para videos propios grabados con el celular (vertical u
+horizontal): la normalizacion v3 no depende de la orientacion ni la distancia.
+Los nombres deben seguir el formato de LSA64: SSS_PPP_RRR.mp4
+(seña_sujeto_repeticion).
 
 Modelo requerido: holistic_landmarker.task
     Descargalo de la documentacion oficial de MediaPipe (seccion Holistic
@@ -51,6 +57,7 @@ import cv2
 import numpy as np
 from tqdm import tqdm
 from eva_contract import (
+    CONTRACT_VERSION,
     COORDS,
     FRAMES,
     LEFT_HAND_OFFSET,
@@ -58,14 +65,16 @@ from eva_contract import (
     POSE_SOURCE_INDICES,
     RIGHT_HAND_OFFSET,
     center_sequence,
+    normalize_sequence_v3,
     sample_indices,
+    sample_indices_v2,
 )
 
 # --- Contrato ---
 FRAMES_FIJOS = FRAMES
 N_COORDS = COORDS
 
-_CFG = None                    # (model_path, min_conf) por proceso worker
+_CFG = None                    # (model_path, min_conf, contrato) por proceso worker
 
 
 # --------------------------------------------------------------------------
@@ -80,6 +89,8 @@ def indices_muestreo(total: int, n: int = FRAMES_FIJOS) -> list[int]:
     """
     if n != FRAMES_FIJOS:
         raise ValueError("Eva v2 siempre usa 40 cuadros")
+    if _CFG is not None and _CFG[2] == 2:
+        return sample_indices_v2(total)
     return sample_indices(total)
 
 
@@ -121,7 +132,7 @@ def vector_de_resultado(res) -> np.ndarray:
 # Workers
 # --------------------------------------------------------------------------
 
-def _init_worker(model_path: str, min_conf: float):
+def _init_worker(model_path: str, min_conf: float, contrato: int = CONTRACT_VERSION):
     """Guarda la configuracion. NO crea el landmarker.
 
     El landmarker se crea por video en _procesar(). Ver el comentario ahi:
@@ -151,7 +162,7 @@ def _init_worker(model_path: str, min_conf: float):
         os.dup2(devnull, 2)
         os.close(devnull)          # fd 2 ya es una copia; este sobra
 
-    _CFG = (model_path, min_conf)
+    _CFG = (model_path, min_conf, contrato)
 
 
 def _crear_landmarker():
@@ -159,7 +170,7 @@ def _crear_landmarker():
     from mediapipe.tasks.python import BaseOptions
     from mediapipe.tasks.python import vision
 
-    model_path, min_conf = _CFG
+    model_path, min_conf, _ = _CFG
     return vision.HolisticLandmarker.create_from_options(
         vision.HolisticLandmarkerOptions(
             base_options=BaseOptions(model_asset_path=model_path),
@@ -195,6 +206,7 @@ def _procesar(path_str: str):
 
     cap = cv2.VideoCapture(str(path))
     fps = cap.get(cv2.CAP_PROP_FPS) or 30.0
+    ancho = alto = 0
     frames: list[np.ndarray] = []
     n = 0
     try:
@@ -202,6 +214,9 @@ def _procesar(path_str: str):
             ok, frame = cap.read()
             if not ok:
                 break
+            # W/H del cuadro que realmente ve MediaPipe (ya rotado por
+            # OpenCV si el video trae rotación en metadatos).
+            alto, ancho = frame.shape[:2]
             rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             imagen = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb)
             # VIDEO mode exige timestamps en ms estrictamente crecientes
@@ -220,11 +235,17 @@ def _procesar(path_str: str):
 
     crudo = np.array(frames, dtype=np.float32)
     idx = indices_muestreo(len(crudo))
-    seq = centrar(crudo[idx])
+    if _CFG[2] == 3:
+        try:
+            seq = normalize_sequence_v3(crudo[idx], ancho, alto)
+        except ValueError as e:
+            return ("error", path.name, f"v3: {e}")
+    else:
+        seq = centrar(crudo[idx])
 
     partes = path.stem.split("_")
     return ("ok", seq.astype(np.float32), int(partes[0]), int(partes[1]),
-            int(partes[2]), len(crudo), float(np.mean(seq == 0)))
+            int(partes[2]), len(crudo), float(np.mean(seq == 0)), (ancho, alto))
 
 
 # --------------------------------------------------------------------------
@@ -237,6 +258,8 @@ def main() -> int:
     ap.add_argument("--signs", nargs="*", type=int, default=None)
     ap.add_argument("--workers", type=int, default=None)
     ap.add_argument("--min-conf", type=float, default=0.5)
+    ap.add_argument("--contract", type=int, choices=(2, 3), default=CONTRACT_VERSION,
+                    help="3 (vigente): pixeles y escala por hombros; 2: solo centrado")
     args = ap.parse_args()
 
     modelo = Path(args.model)
@@ -260,11 +283,11 @@ def main() -> int:
     print(f"Productor: MediaPipe Tasks HolisticLandmarker ({modelo.name})")
     print(f"Muestreo: entero exacto idx[i]=(i*(T-1))//({FRAMES_FIJOS}-1)")
 
-    X, y, sujetos, reps = [], [], [], []
+    X, y, sujetos, reps, sizes = [], [], [], [], []
     largos, ceros, errores = [], [], []
 
     with Pool(processes=workers, initializer=_init_worker,
-              initargs=(str(modelo), args.min_conf)) as pool:
+              initargs=(str(modelo), args.min_conf, args.contract)) as pool:
         # chunksize=1: los resultados vuelven de a un video, asi la barra avanza
         # de forma continua. Con chunksize=4 el worker no devolvia nada hasta
         # terminar los cuatro, y la barra quedaba clavada en 0 durante ~86s,
@@ -275,7 +298,8 @@ def main() -> int:
             if r[0] != "ok":
                 errores.append((r[1], r[2]))
                 continue
-            _, seq, sena, suj, rep, n_frames, ratio = r
+            _, seq, sena, suj, rep, n_frames, ratio, size = r
+            sizes.append(size)
             X.append(seq); y.append(sena); sujetos.append(suj); reps.append(rep)
             largos.append(n_frames); ceros.append(ratio)
 
@@ -291,16 +315,22 @@ def main() -> int:
     np.save(out_dir / "y.npy", y)
     np.save(out_dir / "subjects.npy", sujetos)
     np.save(out_dir / "reps.npy", reps)
+    np.save(out_dir / "sizes.npy", np.array(sizes, dtype=np.int32))
 
     meta = {
         "productor": "mediapipe.tasks.vision.HolisticLandmarker",
         "modeloTask": modelo.name,
         "muestreo": "entero_exacto: idx[i] = (i*(T-1))//(N-1)",
         "frames": FRAMES_FIJOS,
+        "contractVersion": args.contract,
         "coordenadas": N_COORDS,
         "bloques": {"mano_izq": [0, 63], "mano_der": [63, 126], "pose_11_24": [126, 168]},
         "poseDescartada": "0..10 (cara) y 25..32 (piernas)",
-        "centrado": "punto medio hombros (pose fuente 11,12) restado a x,y solo en landmarks detectados. z sin centrar.",
+        "normalizacion": (
+            "v3: pixeles (x*W, y*H, z*W), centro en hombros, / mediana del ancho de hombros"
+            if args.contract == 3 else
+            "v2: punto medio hombros restado a x,y solo en landmarks detectados. z sin centrar."),
+        "resoluciones": sorted({f"{w}x{h}" for w, h in sizes}),
         "minConfianza": args.min_conf,
         "videos": int(len(X)),
         "errores": len(errores),
@@ -333,7 +363,7 @@ def main() -> int:
         print("  *** ALERTA: pose mayormente en cero -> el centrado no es valido ***")
     cortos = sum(1 for l in largos if l < FRAMES_FIJOS)
     if cortos:
-        print(f"  aviso: {cortos} videos con menos de {FRAMES_FIJOS} frames (hubo padding)")
+        print(f"  aviso: {cortos} videos con menos de {FRAMES_FIJOS} frames (se estiraron repitiendo cuadros)")
     if errores:
         print(f"\n  {len(errores)} errores:")
         for nombre, msg in errores[:5]:

@@ -1,5 +1,8 @@
 # Eva LSA64 v2 — reentrenamiento sin pose facial
 
+> **Histórico.** El contrato vigente es v3: ver `EVA_V3_ENTRENAMIENTO.md`.
+> Los scripts actuales entrenan y procesan v3 por defecto.
+
 Este pipeline crea una nueva versión de Eva: `40 × 168` coordenadas por
 secuencia. Conserva las dos manos y Pose 11..24; descarta Pose 0..10 (nariz,
 ojos, orejas y boca) y Pose 25..32 (piernas).

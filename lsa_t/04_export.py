@@ -21,13 +21,39 @@ import torch
 from config import (
     CHECKPOINTS_DIR, EXPORTS_DIR, VOCAB_PATH,
     MAX_FRAMES, INPUT_DIM, CALIB_SAMPLES, MAX_DEC_LEN,
-    BOS_ID, EOS_ID,
+    PAD_ID, BOS_ID, EOS_ID,
 )
 from model import LSAModel
 from dataset import Vocabulary, LSADataset
 
 
 ARTIFACT_VERSION = "lsa-t-seq2seq-v1"
+# Cuantizar los MatMul de atención degrada de forma severa este Transformer.
+# Gemm reduce el único proyector que ONNX representa con ese operador y deja
+# las capas de atención en float32, manteniendo el error de embeddings < 0.05.
+QUANTIZED_OP_TYPES = ["Gemm"]
+
+
+class DecoderForExport(torch.nn.Module):
+    """Decoder autoregresivo con un buffer de tokens de longitud fija.
+
+    El exportador TorchScript de PyTorch fija formas internas de
+    ``MultiheadAttention`` aunque se declaren ejes dinámicos. Un decoder
+    exportado con ``S=1`` falla cuando recibe un prefijo más largo durante la
+    calibración o en Android. Mantener S=MAX_DEC_LEN evita esa inconsistencia y
+    la máscara causal asegura que cada posición sólo use los tokens previos.
+    """
+
+    def __init__(self, decoder: torch.nn.Module):
+        super().__init__()
+        self.decoder = decoder
+        self.register_buffer(
+            "causal_mask",
+            torch.nn.Transformer.generate_square_subsequent_mask(MAX_DEC_LEN),
+        )
+
+    def forward(self, tgt_tokens: torch.Tensor, memory: torch.Tensor) -> torch.Tensor:
+        return self.decoder(tgt_tokens, memory, tgt_mask=self.causal_mask)
 
 
 def sha256(path: Path) -> str:
@@ -73,10 +99,9 @@ def export_onnx(model: LSAModel, vocab_size: int):
         str(enc_path),
         input_names   = ["keypoints"],
         output_names  = ["embeddings", "ctc_logits"],
-        dynamic_axes  = {
-            "keypoints":  {0: "batch", 1: "T"},
-            "embeddings": {0: "batch", 1: "T"},
-        },
+        # El contrato de Android siempre usa un único clip de 75 cuadros.
+        # Una forma estática evita Slice/Squeeze dinámicos incompatibles con
+        # onnx2tf y LiteRT.
         opset_version = 17,
         export_params = True,
         dynamo        = False,  # exportador dynamo/onnxscript falla en el inliner pass
@@ -86,20 +111,17 @@ def export_onnx(model: LSAModel, vocab_size: int):
 
     # --- Decoder ---
     dummy_emb = torch.randn(1, MAX_FRAMES, 256)
-    dummy_tgt = torch.zeros(1, 1, dtype=torch.long)
+    # Ver DecoderForExport: la interfaz Android usa siempre [1, MAX_DEC_LEN]
+    # y selecciona el logit correspondiente al último token generado.
+    dummy_tgt = torch.zeros(1, MAX_DEC_LEN, dtype=torch.long)
     dec_path  = EXPORTS_DIR / "decoder.onnx"
 
     torch.onnx.export(
-        model.decoder,
+        DecoderForExport(model.decoder),
         (dummy_tgt, dummy_emb),
         str(dec_path),
         input_names   = ["tgt_tokens", "memory"],
         output_names  = ["logits"],
-        dynamic_axes  = {
-            "tgt_tokens": {0: "batch", 1: "S"},
-            "memory":     {0: "batch", 1: "T"},
-            "logits":     {0: "batch", 1: "S"},
-        },
         opset_version = 17,
         export_params = True,
         dynamo        = False,  # exportador dynamo/onnxscript falla en el inliner pass
@@ -115,6 +137,7 @@ def export_onnx(model: LSAModel, vocab_size: int):
 def quantize_int8(enc_onnx: Path, dec_onnx: Path, vocab: Vocabulary):
     """Cuantizacion INT8 estatica con calibracion sobre el val set de LSA-T."""
     try:
+        import onnxruntime as ort
         from onnxruntime.quantization import (
             quantize_static, CalibrationDataReader, QuantType, QuantFormat
         )
@@ -151,6 +174,7 @@ def quantize_int8(enc_onnx: Path, dec_onnx: Path, vocab: Vocabulary):
         quant_format            = QuantFormat.QDQ,
         weight_type             = QuantType.QInt8,
         per_channel             = False,
+        op_types_to_quantize    = QUANTIZED_OP_TYPES,
     )
     size_mb = enc_int8.stat().st_size / 1e6
     print(f"[quant] Encoder INT8: {enc_int8}  ({size_mb:.1f} MB)")
@@ -175,7 +199,9 @@ def quantize_int8(enc_onnx: Path, dec_onnx: Path, vocab: Vocabulary):
                 ["embeddings"],
                 {"keypoints": kps},
             )[0]
-            tokens = item["tgt_in"].numpy()[None].astype(np.int64)
+            prefix = item["tgt_in"].numpy().astype(np.int64)
+            tokens = np.full((1, MAX_DEC_LEN), PAD_ID, dtype=np.int64)
+            tokens[0, :len(prefix)] = prefix
             self.idx += 1
             return {
                 "tgt_tokens": tokens,
@@ -190,6 +216,7 @@ def quantize_int8(enc_onnx: Path, dec_onnx: Path, vocab: Vocabulary):
         quant_format            = QuantFormat.QDQ,
         weight_type             = QuantType.QInt8,
         per_channel             = False,
+        op_types_to_quantize    = QUANTIZED_OP_TYPES,
     )
     size_mb = dec_int8.stat().st_size / 1e6
     print(f"[quant] Decoder INT8: {dec_int8}  ({size_mb:.1f} MB)")
@@ -285,11 +312,17 @@ def select_float32_tflite(
                 f"{candidate.name}: entradas={actual_inputs}, salidas={actual_outputs}"
             )
 
+    # TF Converter puede emitir Float16 y Float32 con idénticas interfaces de
+    # entrada/salida. El nombre distingue la variante que pide este contrato.
+    float32_matches = [match for match in matches if match[0].stem.endswith("_float32")]
+    if len(float32_matches) == 1:
+        matches = float32_matches
+
     if len(matches) != 1:
         detail = "\n  ".join(rejected) or "sin archivos .tflite"
         raise RuntimeError(
             f"Se esperaba exactamente una variante TFLite compatible para {destination.name}; "
-            f"se encontraron {len(matches)}.\n  {detail}"
+            f"se encontraron {len(matches)} ({', '.join(path.name for path, _ in matches)}).\n  {detail}"
         )
 
     source, interface = matches[0]
@@ -299,7 +332,7 @@ def select_float32_tflite(
     return interface
 
 
-def _run_onnx2tf(onnx_path: Path, out_dir: Path) -> None:
+def _run_onnx2tf(onnx_path: Path, out_dir: Path, backend: str) -> None:
     import subprocess
 
     out_dir.mkdir(parents=True)
@@ -307,23 +340,50 @@ def _run_onnx2tf(onnx_path: Path, out_dir: Path) -> None:
         sys.executable, "-m", "onnx2tf",
         "-i", str(onnx_path),
         "-o", str(out_dir),
+        "--tflite_backend", backend,
         "--non_verbose",
     ]
     result = subprocess.run(cmd, capture_output=True, text=True)
     if result.returncode != 0:
+        detail = "\n".join(
+            part.strip() for part in (result.stdout, result.stderr) if part.strip()
+        )
         raise RuntimeError(
-            f"onnx2tf falló para {onnx_path.name}:\n{result.stderr[:1000]}"
+            f"onnx2tf falló para {onnx_path.name}:\n{detail[-4000:]}"
         )
 
 
+def _simplify_onnx_for_tflite(source: Path, destination: Path) -> Path:
+    """Elimina Expand constantes que tf_converter no puede materializar."""
+    try:
+        import onnx
+        from onnxsim import simplify
+    except ImportError as exc:
+        raise RuntimeError("Instalar onnxsim para convertir el decoder a TFLite") from exc
+
+    simplified, valid = simplify(str(source))
+    if not valid:
+        raise RuntimeError(f"El ONNX simplificado no es válido: {source.name}")
+    onnx.save(simplified, str(destination))
+    return destination
+
+
 def _run_encoder_tflite(model_path: Path, keypoints: np.ndarray) -> np.ndarray:
-    """Ejecuta el encoder con la transposición que exige el FlatBuffer final."""
+    """Ejecuta el encoder y normaliza su salida a la forma [B, T, 256]."""
     import tensorflow as tf
 
     interpreter = tf.lite.Interpreter(model_path=str(model_path))
     input_detail = interpreter.get_input_details()[0]
-    # El exportador ONNX->TF transforma [B,T,C] en [B,C,T].
-    model_input = np.transpose(keypoints[None].astype(np.float32), (0, 2, 1))
+    keypoints_btc = keypoints[None].astype(np.float32)
+    signature = input_detail["shape_signature"].tolist()
+    if signature[-1] == INPUT_DIM:
+        model_input = keypoints_btc
+    elif len(signature) == 3 and signature[1] == INPUT_DIM:
+        model_input = np.transpose(keypoints_btc, (0, 2, 1))
+    else:
+        raise RuntimeError(
+            f"Interfaz inesperada para el encoder: {input_detail['shape_signature']}"
+        )
     interpreter.resize_tensor_input(input_detail["index"], model_input.shape, strict=False)
     interpreter.allocate_tensors()
     interpreter.set_tensor(input_detail["index"], model_input)
@@ -331,10 +391,18 @@ def _run_encoder_tflite(model_path: Path, keypoints: np.ndarray) -> np.ndarray:
 
     outputs = interpreter.get_output_details()
     embedding_detail = next(
-        detail for detail in outputs if int(detail["shape"][-1]) == 256
+        (detail for detail in outputs if "embedding" in detail["name"].lower()),
+        next(
+            detail for detail in outputs
+            if 256 in detail["shape"]
+        ),
     )
-    embeddings_bct = interpreter.get_tensor(embedding_detail["index"])
-    return np.transpose(embeddings_bct, (0, 2, 1))  # vuelve a [B,T,256]
+    embeddings = interpreter.get_tensor(embedding_detail["index"])
+    if embeddings.shape[-1] == 256:
+        return embeddings.astype(np.float32)
+    if embeddings.shape[1] == 256:
+        return np.transpose(embeddings, (0, 2, 1)).astype(np.float32)
+    raise RuntimeError(f"Salida inesperada del encoder: {embeddings.shape}")
 
 
 def _run_decoder_tflite(
@@ -350,15 +418,33 @@ def _run_decoder_tflite(
     if np.dtype(token_detail["dtype"]).kind not in {"i", "u"}:
         token_detail, memory_detail = memory_detail, token_detail
 
-    memory_bdt = np.transpose(embeddings.astype(np.float32), (0, 2, 1))
-    interpreter.resize_tensor_input(token_detail["index"], token_ids.shape, strict=False)
-    interpreter.resize_tensor_input(memory_detail["index"], memory_bdt.shape, strict=False)
+    if token_ids.ndim != 2 or token_ids.shape[0] != 1 or token_ids.shape[1] > MAX_DEC_LEN:
+        raise ValueError(
+            f"Se esperaba una secuencia de tokens [1, S] con 1 <= S <= {MAX_DEC_LEN}; "
+            f"se recibió {token_ids.shape}"
+        )
+    active_length = token_ids.shape[1]
+    token_buffer = np.full((1, MAX_DEC_LEN), PAD_ID, dtype=np.int64)
+    token_buffer[:, :active_length] = token_ids.astype(np.int64)
+    memory_signature = memory_detail["shape_signature"].tolist()
+    if memory_signature[-1] == 256:
+        memory_input = embeddings.astype(np.float32)
+    elif memory_signature[1] == 256:
+        memory_input = np.transpose(embeddings.astype(np.float32), (0, 2, 1))
+    else:
+        raise RuntimeError(
+            f"Interfaz inesperada para la memoria del decoder: {memory_detail['shape_signature']}"
+        )
+    interpreter.resize_tensor_input(token_detail["index"], token_buffer.shape, strict=False)
+    interpreter.resize_tensor_input(memory_detail["index"], memory_input.shape, strict=False)
     interpreter.allocate_tensors()
-    interpreter.set_tensor(token_detail["index"], token_ids.astype(np.int64))
-    interpreter.set_tensor(memory_detail["index"], memory_bdt)
+    interpreter.set_tensor(token_detail["index"], token_buffer)
+    interpreter.set_tensor(memory_detail["index"], memory_input)
     interpreter.invoke()
     logits_bsv = interpreter.get_tensor(interpreter.get_output_details()[0]["index"])
-    return logits_bsv.astype(np.float32)
+    # La interfaz exportada devuelve el buffer completo; para el llamador se
+    # conserva la semántica anterior: logits hasta el último token activo.
+    return logits_bsv[:, :active_length, :].astype(np.float32)
 
 
 def write_android_fixture(
@@ -462,7 +548,13 @@ def write_artifact_manifest(
             "size": len(json.loads(vocab_file.read_text(encoding="utf-8"))),
             "specialTokenIds": {"pad": 0, "bos": BOS_ID, "eos": EOS_ID, "unk": 3},
         },
-        "decoderPolicy": {"algorithm": "greedy", "maxTokens": MAX_DEC_LEN},
+        "decoderPolicy": {
+            "algorithm": "greedy",
+            "maxTokens": MAX_DEC_LEN,
+            "inputTokenBufferLength": MAX_DEC_LEN,
+            "paddingTokenId": PAD_ID,
+            "selectLogitAt": "last generated token index",
+        },
         "fixture": {"file": fixture.name, "sha256": sha256(fixture)},
     }
     destination = EXPORTS_DIR / "android-manifest.json"
@@ -481,7 +573,8 @@ def convert_tflite(enc_int8: Path, dec_int8: Path, vocab: Vocabulary) -> None:
         dec_tflite_dir = work_dir / "decoder"
 
         print("[tflite] Convirtiendo encoder...")
-        _run_onnx2tf(enc_int8, enc_tflite_dir)
+        # tf_converter materializa los Squeeze del encoder con ops estándar.
+        _run_onnx2tf(enc_int8, enc_tflite_dir, backend="tf_converter")
         encoder_model = EXPORTS_DIR / "encoder_int8.tflite"
         encoder_interface = select_float32_tflite(
             enc_tflite_dir,
@@ -491,7 +584,11 @@ def convert_tflite(enc_int8: Path, dec_int8: Path, vocab: Vocabulary) -> None:
         )
 
         print("[tflite] Convirtiendo decoder...")
-        _run_onnx2tf(dec_int8, dec_tflite_dir)
+        dec_simplified = _simplify_onnx_for_tflite(
+            dec_int8,
+            work_dir / "decoder_int8_simplified.onnx",
+        )
+        _run_onnx2tf(dec_simplified, dec_tflite_dir, backend="tf_converter")
         decoder_model = EXPORTS_DIR / "decoder_int8.tflite"
         decoder_interface = select_float32_tflite(
             dec_tflite_dir,

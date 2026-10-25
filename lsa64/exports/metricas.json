@@ -1,101 +1,85 @@
 {
-  "testAccuracy": 0.8906,
-  "valAccuracyMejor": 0.9406,
-  "epocaMejor": 50,
-  "baselineAzar": 0.0156,
-  "split": "por_sujeto",
-  "sujetosVal": [
-    9
-  ],
-  "sujetosTest": [
+  "modo": "final_todos_los_sujetos",
+  "contractVersion": 3,
+  "sujetos": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
     10
   ],
-  "seed": 42,
+  "epocas": 44,
+  "trainAccuracyFinal": 1.0,
+  "nota": "Sin test propio: la estimacion de generalizacion sale del CV LOSO y de evaluar_videos.py sobre grabaciones del telefono.",
   "hiperparametros": {
-    "lr": 0.0003,
-    "batch": 16,
+    "arch": "conv_tx",
+    "lr": 0.001,
+    "batch": 64,
     "hidden": 128,
+    "dim": 192,
     "dropout": 0.3,
-    "epochs": 120,
-    "paciencia": 15,
-    "unroll": true,
-    "augmentFactor": 2
-  },
-  "contrato": {
-    "frames": 40,
-    "coords": 168,
-    "poseFuente": "11..24"
+    "weightDecay": 0.05,
+    "labelSmoothing": 0.1,
+    "epochs": 44,
+    "paciencia": 40,
+    "augment": {
+      "n_frames": 40,
+      "p_temporal_crop": 0.5,
+      "crop_max_frac": 0.2,
+      "p_time_warp": 0.7,
+      "warp_strength": 0.3,
+      "warp_control_points": 5,
+      "p_fps": 0.5,
+      "fps_min_frames": 18,
+      "p_mirror": 0.5,
+      "p_rotate": 0.8,
+      "rotate_deg": 15.0,
+      "p_aspect": 0.6,
+      "aspect_range": 0.08,
+      "p_arm_scale": 0.6,
+      "arm_scale_range": 0.12,
+      "p_hand_scale": 0.6,
+      "hand_scale_range": 0.15,
+      "p_yaw": 0.0,
+      "yaw_deg": 25.0,
+      "yaw_z_gain": 1.0,
+      "p_translate_z": 0.3,
+      "translate_z_range": 0.1,
+      "p_drop_hand": 0.3,
+      "drop_len_frac": [
+        0.1,
+        0.4
+      ],
+      "drop_fill": 0.0,
+      "p_drop_frames": 0.3,
+      "drop_frame_prob": 0.06,
+      "p_jitter": 0.7,
+      "jitter_sigma": [
+        0.01,
+        0.01,
+        0.02
+      ],
+      "enforce_contract": true
+    }
   },
   "catalogo": {
     "version": "2.0",
     "archivo": "D:\\2026-Politecnico\\helpi\\entrenamiento-modelo\\lsa64\\catalogo_lsa64.json"
   },
+  "entorno": {
+    "keras": "3.15.1",
+    "backend": "torch",
+    "torch": "2.11.0+cu128",
+    "dispositivo": "NVIDIA GeForce RTX 5050"
+  },
+  "equivalenciaBackendsMaxDiff": 4.76837158203125e-06,
   "tfVersion": "2.21.0",
-  "paresMasConfundidos": [
-    {
-      "veces": 5,
-      "real": "Opaco",
-      "predicho": "Cerrar"
-    },
-    {
-      "veces": 5,
-      "real": "Hombre",
-      "predicho": "Dulce"
-    },
-    {
-      "veces": 5,
-      "real": "Donde",
-      "predicho": "Paciencia"
-    },
-    {
-      "veces": 4,
-      "real": "Nacido",
-      "predicho": "Comprar"
-    },
-    {
-      "veces": 4,
-      "real": "Brillante",
-      "predicho": "Desnatador"
-    },
-    {
-      "veces": 3,
-      "real": "Cajon",
-      "predicho": "Dulce"
-    },
-    {
-      "veces": 2,
-      "real": "Dar",
-      "predicho": "Correr"
-    },
-    {
-      "veces": 2,
-      "real": "Bailar",
-      "predicho": "Moneda"
-    },
-    {
-      "veces": 1,
-      "real": "Rosa",
-      "predicho": "Enemigo"
-    },
-    {
-      "veces": 1,
-      "real": "Encontrar",
-      "predicho": "Cumpleaños"
-    },
-    {
-      "veces": 1,
-      "real": "Correr",
-      "predicho": "Yogurt"
-    },
-    {
-      "veces": 1,
-      "real": "Amargo",
-      "predicho": "Cerrar"
-    },
-    {
-      "veces": 1,
-      "real": "Agua",
-      "predicho": "Llamar"
-    }
-  ]
+  "modelVersion": "eva-lsa64-v3",
+  "tamanoKB": 6454,
+  "equivalenciaMaxDiff": 1.9073486328125e-06
 }
