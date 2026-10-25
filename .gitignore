@@ -82,3 +82,15 @@ Thumbs.db
 
 # Configuración local (copiar de .env.example)
 /.env
+
+# ---------------------------------------------------------------------------
+# Eva LSA-94 (lsa-94/): videos, keypoints, corridas y exports se regeneran o
+# se publican por release. Los videos del celular llegan como .MOV.
+# ---------------------------------------------------------------------------
+/lsa-94/data/
+/lsa-94/exports*/
+/lsa-94/runs/
+/lsa-94/ab_augment*.json
+/lsa64/eva-lsa64-v3.zip
+*.mov
+*.MOV
