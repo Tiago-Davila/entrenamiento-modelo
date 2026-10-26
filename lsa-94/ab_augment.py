@@ -22,6 +22,7 @@ Variantes (acumulativas, de v3 a LSA-94 completo):
     forma         + FeaturesEva94 (forma de mano)  = configuración por defecto
     forma_ema     + promedio exponencial de pesos
     forma_bal0    forma con balanceo total (--balance 0)
+    forma_sinperfil  forma sin el perfil fuerte (protege LSA64)
 
 Uso:
     cd lsa-94
@@ -59,6 +60,8 @@ VARIANTES = {
                   "sin_aug_mano": False, "ema": True},
     "forma_bal0": {"features": "forma", "balance": 0.0, "sin_perfil_fuerte": False,
                    "sin_aug_mano": False, "ema": False},
+    "forma_sinperfil": {"features": "forma", "balance": 0.5, "sin_perfil_fuerte": True,
+                        "sin_aug_mano": False, "ema": False},
 }
 
 
