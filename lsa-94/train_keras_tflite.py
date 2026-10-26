@@ -725,6 +725,12 @@ def exportar_tf(modelo, args, out_dir: Path, X_ref, y_ref, catalog, catalog_vers
 # Metricas
 # --------------------------------------------------------------------------
 
+def historia_redondeada(hist: dict) -> dict:
+    """loss/accuracy (y val_*) por época, para graficar el entrenamiento."""
+    claves = ("loss", "accuracy", "val_loss", "val_accuracy")
+    return {k: [round(float(v), 5) for v in hist[k]] for k in claves if k in hist}
+
+
 def _metricas_basicas(logits, y):
     pred = logits.argmax(1)
     top5 = np.argsort(-logits, axis=1)[:, :5]
@@ -967,7 +973,8 @@ def main() -> int:
             r = evaluar(modelo, X[m_te], y[m_te], n_clases, catalog, grupos)
             r.update({"fold": int(f), "mejorEpoca": int(np.argmax(curva)) + 1,
                       "mejorVal": round(float(max(curva)), 4),
-                      "minutos": round((time.time() - t0) / 60, 1)})
+                      "minutos": round((time.time() - t0) / 60, 1),
+                      "historia": historia_redondeada(hist)})
             resultados.append(r)
             parte.write_text(json.dumps({**r, "curva": [float(v) for v in curva]},
                                         ensure_ascii=False), encoding="utf-8")
@@ -1014,6 +1021,7 @@ def main() -> int:
             "sujetos": todos,
             "epocas": args.epochs,
             "trainAccuracyFinal": round(float(hist["accuracy"][-1]), 4),
+            "historia": historia_redondeada(hist),
             "nota": "Sin test propio: la estimacion de generalizacion sale de los CV "
                     "(loso para LSA64, reps para las clases de un solo señante) y de "
                     "evaluar_videos.py sobre grabaciones de otras personas.",
@@ -1059,6 +1067,7 @@ def main() -> int:
         "testPorGrupo": test["porGrupo"],
         "valAccuracyMejor": round(mejor_val, 4),
         "epocaMejor": mejor_ep,
+        "historia": historia_redondeada(hist),
         "baselineAzar": round(1 / n_clases, 4),
         "sujetosVal": sorted(val_s), "repsVal": args.val_reps,
         "sujetosTest": sorted(test_s), "repsTest": args.test_reps,

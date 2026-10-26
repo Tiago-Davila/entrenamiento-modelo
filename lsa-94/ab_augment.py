@@ -123,7 +123,7 @@ def main() -> int:
                 if clave in corridas:
                     continue
                 t0 = time.time()
-                modelo, _ = tk.entrenar(cfg, X[~m_te], y[~m_te], X[m_te], y[m_te], n,
+                modelo, hist = tk.entrenar(cfg, X[~m_te], y[~m_te], X[m_te], y[m_te], n,
                                         args.epochs, seed, early_stopping=False,
                                         sujetos_tr=sujetos[~m_te])
                 r = tk.evaluar(modelo, X[m_te], y[m_te], n, catalog, grupos)
@@ -134,6 +134,7 @@ def main() -> int:
                                  for g, v in r["porGrupo"].items()},
                     "paresMasConfundidos": r["paresMasConfundidos"][:5],
                     "minutos": round((time.time() - t0) / 60, 1),
+                    "historia": tk.historia_redondeada(hist),
                 }
                 args.out.write_text(json.dumps({"config": config, "corridas": corridas},
                                                ensure_ascii=False, indent=2), encoding="utf-8")
