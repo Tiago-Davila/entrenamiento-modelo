@@ -124,6 +124,6 @@ fixture_android.json                                        -> app/src/androidTe
 ```
 
 El manifiesto declara `numClasses: 94`, `catalogVersion: "3.0"` y
-`contractVersion: 3`. **No copiarlos todavía a la app**: helpi asume 64 señas
-en el léxico, el CI (`verify.py`), varios tests, el texto de la cuenta y el
-protocolo de evaluación con el backend. Esa integración es un trabajo aparte.
+`contractVersion: 3`. Integrados en helpi en la rama `feat/eva-lsa94-v4`:
+léxico v2 con las categorías `tiempo` y `letra`, plantillas v3 y protocolo de
+evaluación 2.0.0 (94 señas × 5 = 470 intentos en 5 bloques de 94).
