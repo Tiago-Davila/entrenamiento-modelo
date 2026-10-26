@@ -84,6 +84,38 @@ sujeto 9 + repetición 3 del 012, test = sujeto 10 + repetición 4 del 012.
 Flags para experimentos: `--features v3`, `--balance 1` (natural) o `0`
 (balanceado), `--sin-perfil-fuerte`, `--sin-aug-mano`, `--ema`, `--etiqueta`.
 
+## Resultados de eva-lsa94-v4 (2026-10-26)
+
+**A/B** (2 semillas, 80 épocas; folds de repeticiones del 012 + LOSO del sujeto 10):
+
+| Variante | LSA64 (sujeto 10 afuera) | Abecedario | Temporales |
+|---|---|---|---|
+| v3 | 99,4% | 96,8% | 95,8% |
+| + balance | 99,8% | 97,2% | 100% |
+| + perfil fuerte | 98,9% | 97,7% | 100% |
+| + augmentación de mano | 98,9% | 97,7% | 100% |
+| + forma de mano (**elegida**) | 98,8% | 98,6% | 100% |
+| forma sin perfil fuerte | 98,8% | 98,1% | 100% |
+
+**Validación cruzada** de la configuración elegida (100 épocas):
+
+- Repeticiones del 012: LSA64 100%, temporales 100%, abecedario 98,1% (top-5 100%).
+  Los dos errores son letras predichas como señas de LSA64: X → Foto, I → Hombre.
+- LOSO de LSA64 (10 sujetos): 98,25% ± 2,3% (top-5 99,5%). En los sujetos que
+  midió v3 (2, 4, 6, 8, 10): 98,81% contra 98,94% de v3, la misma precisión.
+  El sujeto 3 es el más difícil (91,6%). De los 56 errores de LSA64, 10 van a
+  "Hoy": la clase de un solo señante atrae señas cercanas a la cara.
+- La curva media de LOSO es máxima en la época 70; la de repeticiones toca
+  el techo desde la 19.
+
+**Modelo final:** 70 épocas, todos los sujetos. `modelo_lsa.tflite` 6,5 MB,
+sha256 `751eab8b…a46b`. La equivalencia entre Keras y TFLite coincide en 24/24
+casos. El fixture tiene 12 casos de los 3 grupos.
+
+Nota: en Windows cada worker de augmentación carga torch (~1,9 GB de memoria
+virtual). Si aparece `WinError 1455` (archivo de paginación chico), bajar
+`--workers` a 4.
+
 ## Artefactos para Android
 
 ```text
