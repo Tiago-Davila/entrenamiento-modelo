@@ -49,7 +49,6 @@ from __future__ import annotations
 import entorno  # noqa: F401  (carga ../.env: KERAS_BACKEND antes de importar keras)
 
 import argparse
-import hashlib
 import json
 import math
 import os
@@ -68,6 +67,13 @@ from keras import layers, ops
 from augment import AugmentConfig, Augmenter, perfil_un_senante
 from eva_contract import (CATALOG_PATH, CONTRACT_VERSION, COORDS, FRAMES, load_catalog,
                           load_groups)
+
+# El paquete multilengua (manifiesto compartido por lsa, asl y lse) vive en la
+# raiz del repo: se agrega a sys.path de forma explicita.
+RAIZ = Path(__file__).resolve().parent.parent
+if str(RAIZ) not in sys.path:
+    sys.path.insert(0, str(RAIZ))
+from multilengua.manifiesto import ORIGEN_LSA94, escribir_manifiesto  # noqa: E402
 
 
 def _tf():
@@ -697,17 +703,21 @@ def exportar_tf(modelo, args, out_dir: Path, X_ref, y_ref, catalog, catalog_vers
     catalog_bytes = json.dumps({"version": catalog_version, "glosas": catalog},
                                ensure_ascii=False, indent=2).encode("utf-8")
     (out_dir / "catalogo_senas.json").write_bytes(catalog_bytes)
-    (out_dir / "lsa-manifest.json").write_text(json.dumps({
-        "modelVersion": args.model_version,
-        "catalogVersion": catalog_version,
-        "modelSha256": hashlib.sha256(blob).hexdigest(),
-        "catalogSha256": hashlib.sha256(catalog_bytes).hexdigest(),
-        "numClasses": n_clases,
-        "outputsProbabilities": False,
-        "frames": FRAMES,
-        "coords": COORDS,
-        "contractVersion": CONTRACT_VERSION,
-    }, ensure_ascii=False, indent=2), encoding="utf-8")
+    escribir_manifiesto(
+        out_dir / "lsa-manifest.json",
+        language="lsa",
+        model_version=args.model_version,
+        catalog_version=catalog_version,
+        blob_modelo=blob,
+        catalog_bytes=catalog_bytes,
+        num_clases=n_clases,
+        dataset=ORIGEN_LSA94["dataset"],
+        license=ORIGEN_LSA94["license"],
+        attribution=ORIGEN_LSA94["attribution"],
+        frames=FRAMES,
+        coords=COORDS,
+        contract_version=CONTRACT_VERSION,
+    )
 
     metricas.update({
         "modelVersion": args.model_version,
