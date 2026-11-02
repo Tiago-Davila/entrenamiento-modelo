@@ -94,3 +94,11 @@ Thumbs.db
 /lsa64/eva-lsa64-v3.zip
 *.mov
 *.MOV
+
+# ---------------------------------------------------------------------------
+# lse-300/ (SWL-LSE convertido al contrato v3): convertir_swl.py regenera
+# data/processed_v3 desde MEDIAPIPE.zip. Las salidas no se versionan.
+# ---------------------------------------------------------------------------
+/lse-300/data/
+/lse-300/exports*/
+/lse-300/runs/

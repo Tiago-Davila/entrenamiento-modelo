@@ -124,10 +124,15 @@ class _AuditorDeClases(pickle.Unpickler):
         return _Objeto
 
 
-def cargar_pkl(ruta: Path):
-    """Carga un .pkl con la lista blanca. UnpicklingError si pide otra clase."""
-    with open(ruta, "rb") as f:
-        return _DesempaquetadorSeguro(f).load()
+def cargar_pkl(origen):
+    """Carga un .pkl con la lista blanca. origen: ruta o archivo binario abierto (p. ej. de un zip).
+
+    UnpicklingError si el pickle pide una clase fuera de la lista blanca.
+    """
+    if isinstance(origen, (str, Path)):
+        with open(origen, "rb") as f:
+            return _DesempaquetadorSeguro(f).load()
+    return _DesempaquetadorSeguro(origen).load()
 
 
 def clases_pedidas(ruta: Path) -> set[tuple[str, str]]:

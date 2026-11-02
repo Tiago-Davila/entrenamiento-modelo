@@ -12,14 +12,16 @@ HolisticLandmarker).
 
 | Dataset | Parte | Decisión |
 |---|---|---|
-| SWL-LSE, 300 secuencias de referencia (`rec…`) | Videos de 480×480 | **Convertible** con H/W = 1. Sin espejado, sin intercambio de manos. |
+| SWL-LSE, 300 secuencias de referencia (`rec…`) | Videos de 480×480 | **Convertible** con H/W = 1. Los pkl están espejados: la conversión deshace el espejado (x → 1−x, intercambio de manos y de pares de pose). Ver sección 2. |
 | SWL-LSE, 7 700 secuencias de señantes (IDs numéricos) | Resolución de origen desconocida | **Bloqueada.** W×H no se recupera por secuencia con error aceptable. |
-| Google ISLR (`asl-signs`), 40 parquet de 21 señantes | 40 secuencias, 706 cuadros | **Convertible** con W×H = 1944×2592 (H/W = 4/3), la resolución publicada de PopSign; concuerda con las estimaciones de los datos. Sin espejado, sin intercambio de manos (100%). |
+| Google ISLR (`asl-signs`), 40 parquet de 21 señantes | 40 secuencias, 706 cuadros | **Convertible** con W×H = 1944×2592 (H/W = 4/3), la resolución publicada de PopSign; concuerda con las estimaciones de los datos. **Espejado sin confirmar**: la prueba x11 > x12 no lo detecta. Queda por confirmar con la mano dominante en el workspace `asl-250` (#5). |
 
-Lo que sí sale de los datos: en SWL-LSE **no hay espejado** (x11 > x12 en el
-100% de los cuadros verificados) y las **manos están etiquetadas
-anatómicamente** (la mano izquierda queda junto a la muñeca 15 en ~98% de los
-cuadros). Por lo tanto, en SWL-LSE no hay que espejar ni intercambiar manos.
+Lo que sale de los datos: las pruebas de espejado de la primera versión (x11 > x12 en
+el 100% de los cuadros, mano izquierda junto a la muñeca 15 en ~98%) **no detectan
+un espejado**: MediaPipe asigna izquierda y derecha por la anatomía, y la
+corrección de espejado (sección 2) deja esas dos pruebas igual. Por lo tanto no
+sirven para afirmar que un cuadro no está espejado. El espejado de SWL-LSE se
+sabe por el código de los autores, y la conversión lo deshace (sección 2).
 
 ## Método
 
@@ -56,6 +58,25 @@ usa en la simulación.
 En un cuadro no espejado de frente, el hombro izquierdo del sujeto (pose 11)
 tiene x mayor que el derecho (pose 12). Se cuenta la proporción de cuadros con
 x11 > x12.
+
+**Esta prueba no detecta espejado.** MediaPipe asigna izquierda y derecha por la
+anatomía del sujeto. La transformación de corrección (x → 1−x, intercambio de los
+bloques de manos y de los pares de pose 11↔12, 13↔14, …, 23↔24) conserva
+x11 > x12 y la cercanía de la mano izquierda a la muñeca 15: las dos pruebas dan
+el mismo resultado con o sin espejado.
+
+**SWL-LSE sí está espejado.** El código de los autores
+(`mvazquezgts/SWL-LSE`, `mediapipe_keypoints/src/api/genKeypointsHolisticLegacy.py`,
+línea 30) hace `cv2.flip(image, 1)` antes de MediaPipe, así que los `.pkl` salen de
+cuadros espejados. La app (CameraX) y LSA64 entregan cuadros sin espejar. La
+conversión (`lse-300/convertir_swl.py`) deshace el espejado. Corroboración con la
+mano dominante (muestra de 50): la mano que MediaPipe llama "izquierda" aparece más
+(falta en 39% de los cuadros) que la "derecha" (falta en 53,7%). Tras la
+corrección la derecha pasa a dominar, como corresponde a señantes diestros; el
+número completo está en `lse-300/LSE300_DATOS.md`.
+
+**ISLR**: el espejado no se pudo confirmar con estas pruebas. Queda pendiente de
+verificar con la mano dominante en el workspace `asl-250` (#5).
 
 ### 3. Lateralidad (punto 3)
 
@@ -244,18 +265,18 @@ izquierda cerca de 15 en 593 / 593 (100%); derecha cerca de 16 en 334 / 347 (96.
 - **W×H = 480×480 (H/W = 1).** Verificado en 20 de 300 videos (los 20 medidos
   son 480×480) y en 20 pkl contra MediaPipe (cociente 1.047). Las otras 280 se
   asumen 480×480 por correspondencia de nombres, no están medidas.
-- **Sin espejado**: x11 > x12 en todos los cuadros verificados.
-- **Sin intercambio de manos**: la mano izquierda queda junto a 15 en 100% de los
-  cuadros (593/593 en los pkl de referencia).
+- **Espejado a deshacer**: `cv2.flip` del extractor de los autores (sección 2). La
+  conversión aplica x → 1−x, intercambia los bloques de manos y los pares de pose.
+  La prueba de la sección 2 no lo detecta, así que no se usa como control.
 - Faltantes: ceros según el contrato.
 - Como el contrato divide por el ancho de hombros, W sólo afecta a través de la
   relación de aspecto. Con H/W = 1 cualquier W da el mismo resultado.
 
-**Implicación para la app**: como SWL-LSE no está espejado y sus manos siguen la
-anatomía, el extractor de la app debe recibir cuadros sin espejar, incluso con la
-cámara frontal. Si CameraX entrega el cuadro espejado, la lateralidad se invierte
-y la traducción sale mal sin error. Esto conviene verificarlo en la app con un
-cuadro de prueba antes de la etapa 2 del `CLAUDE.md`.
+**Implicación para la app**: el extractor de la app debe recibir cuadros sin
+espejar, incluso con la cámara frontal, como LSA64. Si CameraX entregara el cuadro
+espejado, la lateralidad se invertiría y la traducción saldría mal sin error. La
+conversión de SWL-LSE lleva los datos a esa misma convención. Verificarlo en la app
+con un cuadro de prueba queda pendiente (etapa 2 de `CLAUDE.md`).
 
 ### SWL-LSE, parte de señantes (7 700 secuencias numéricas): bloqueada
 
@@ -268,8 +289,8 @@ cuadro de prueba antes de la etapa 2 del `CLAUDE.md`.
   estimador tiene sesgo y dispersión por secuencia.
 - **Propuesta para destrabar**: confirmar la resolución de origen con los autores
   de SWL-LSE (o con la publicación del dataset, Technologies 2024, DOI
-  10.3390/technologies12100205). Si es 1:1, convertir con H/W = 1 y sin espejado
-  ni intercambio de manos, igual que la parte de referencia. Si no es 1:1, hace
+  10.3390/technologies12100205). Si es 1:1, convertir con H/W = 1 y con la misma
+  corrección de espejado que la parte de referencia. Si no es 1:1, hace
   falta la resolución por secuencia (los videos originales no están en el record).
 
 ### Google ISLR (40 parquet, 21 señantes): convertible con W×H = 1944×2592
@@ -303,12 +324,12 @@ Evidencia previa, solo con los datos (sin la resolución publicada):
     secuencia, así que no es posible cerrar la relación con estos números.
   - **Lectura con baja confianza**: hay indicios de formato vertical (r entre ~1 y
     ~1.8), y 16:9 se descarta como el más improbable. No se puede afirmar 9:16 ni 3:4.
-- **Sin espejado**: x11 > x12 en 706 / 706 cuadros.
-- **Sin intercambio de manos**: mano izquierda junto a 15 en 197 / 197 cuadros;
-  derecha junto a 16 en 251 / 251 cuadros.
+- **Espejado sin confirmar**: x11 > x12 en 706 / 706 cuadros y la muñeca cercana
+  (197 / 197 y 251 / 251) no lo detectan (sección 2). Se convierte sin espejar y
+  queda pendiente la verificación con la mano dominante en `asl-250` (#5).
 - **Faltantes**: ISLR marca las manos ausentes como filas con `NaN` (no como filas
   faltantes). Se convierten a cero según el contrato.
-- **Conversión**: H/W = 4/3, sin espejar ni intercambiar manos, `NaN` → 0.
+- **Conversión**: H/W = 4/3, sin espejar ni intercambiar manos (supuesto, ver arriba), `NaN` → 0.
 
 ## Resultados Google ISLR
 
@@ -407,8 +428,10 @@ Se dibujó el cuadro central de cada uno con la mano en (x, y·r)
 | 1703627838147000 | PIS | 0.989 | sin espejar (24/24) | ok (14/14) | Sólo mano izquierda, cerca de 15. |
 | recx797OWsa63Z6R6 | VACUNA2 | 0.874 | sin espejar (49/49) | ok (29/29) | Trazo de la mano irregular (posible ruido de tracking). |
 
-Ninguna revisión visual distingue la relación de aspecto. Los cinco confirman el
-espejado y la lateralidad, no r.
+Ninguna revisión visual distingue la relación de aspecto. La columna "Espejado" de
+esta tabla se basó en la prueba x11 > x12, que no detecta espejado (sección 2): no
+confirma nada sobre el espejado. La lateralidad de la columna "Lateralidad (pose)"
+tampoco lo detecta.
 
 ## Reproducir
 
@@ -457,9 +480,23 @@ Salida de `test_verificar_datasets.py`: `Ran 21 tests ... OK`. El test de
 porque `multilengua/` no tiene `__init__.py` y el import es `multilengua.manifiesto`.
 No forma parte de este issue.
 
+## Resultado de la conversión completa (SWL-LSE)
+
+Con el zip completo (3 499 865 422 bytes, md5 verificado) se convirtieron las 8 000
+secuencias (300 referencias y 7 700 señantes), sin inválidas. Detalle en
+`lse-300/LSE300_DATOS.md`.
+
+- Mano dominante tras la corrección: la derecha falta en 34.8% de los cuadros
+  (antes, la izquierda faltaba en 34.8% y la derecha en 56.0%). Por secuencia, la
+  derecha tiene más cuadros con mano en 65.8% de los casos (LSA-94: 91.8%).
+- Escala ancho de hombros / torso: referencia 0.668; train, val y test a +7.7%, +7.8%
+  y +6.1%. Dentro de la tolerancia de 10%, pero no nula: H/W = 1 queda como supuesto.
+- Sesiones (umbral 1 h): 303 sesiones, 51 cruzan particiones (fuga probable).
+
 ## Limitaciones
 
 - La muestra es de 50 secuencias de SWL-LSE de 8000, sin identificador de señante.
+- El espejado de ISLR no está verificado; la mano dominante de `asl-250` (#5) lo decide.
 - El estimador de huesos no alcanza ±5% por secuencia con ruido real. Sólo sirve
   como indicio de población.
 - La comparación de pkl contra MediaPipe usa el task de la app, no el modelo Heavy
