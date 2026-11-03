@@ -1,10 +1,48 @@
-"""Pruebas rápidas del contrato que comparte el reentrenamiento Eva v2."""
+"""Pruebas rápidas del contrato Eva (v3 vigente, v2 histórico)."""
 
 import unittest
 
 import numpy as np
 
-from eva_contract import COORDS, FRAMES, center_frame, load_catalog, sample_indices
+from eva_contract import (
+    COORDS,
+    CONTRACT_VERSION,
+    FRAMES,
+    POINTS,
+    build_input_v3,
+    center_frame,
+    center_sequence,
+    load_catalog,
+    normalize_sequence_v3,
+    sample_indices,
+    v2_to_v3,
+)
+
+HL, HR = 126, 129          # offsets de hombro izquierdo y derecho
+
+
+def escena(T=40, seed=0):
+    """Escena física en metros: hombros a 0,40 m, manos moviéndose."""
+    rng = np.random.default_rng(seed)
+    pts = np.zeros((T, POINTS, 3))
+    t = np.linspace(0, 1, T)[:, None, None]
+    pts[:, 0:21, :2] = [-0.25, 0.10] + rng.normal(0, 0.03, (21, 2)) + t * [0.1, -0.2]
+    pts[:, 21:42, :2] = [0.20, 0.05] + rng.normal(0, 0.03, (21, 2)) - t * [0.05, 0.3]
+    pts[:, 0:42, 2] = rng.normal(0, 0.02, (T, 42))
+    pts[:, 42, :2] = [-0.20, 0.0]
+    pts[:, 43, :2] = [0.20, 0.0]
+    pts[:, 44:56, :2] = rng.normal(0, 0.2, (12, 2)) + [0.0, 0.3]
+    pts[:, 42:56, 2] = rng.normal(0, 0.05, (T, 14))
+    return pts
+
+
+def camara(pts_m, width, height, px_por_metro, centro_px):
+    """Proyecta la escena a coords normalizadas de MediaPipe para una cámara."""
+    raw = np.zeros_like(pts_m)
+    raw[..., 0] = (pts_m[..., 0] * px_por_metro + centro_px[0]) / width
+    raw[..., 1] = (pts_m[..., 1] * px_por_metro + centro_px[1]) / height
+    raw[..., 2] = pts_m[..., 2] * px_por_metro / width
+    return raw.reshape(len(pts_m), COORDS).astype(np.float32)
 
 
 class EvaContractTest(unittest.TestCase):
@@ -16,9 +54,8 @@ class EvaContractTest(unittest.TestCase):
         self.assertEqual("Amargo", glosas[18])
         self.assertEqual("Encontrar", glosas[63])
 
-    def test_contrato_descarta_cara_y_conserva_ceros_ausentes(self):
+    def test_v2_descarta_cara_y_conserva_ceros_ausentes(self):
         frame = np.zeros(COORDS, dtype=np.float32)
-        # hombros fuente 11/12, locales 0/1 en el bloque de pose reducido.
         frame[126:129] = [0.4, 0.5, 0.1]
         frame[129:132] = [0.6, 0.5, 0.1]
         frame[0:3] = [0.2, 0.3, 0.1]
@@ -32,6 +69,81 @@ class EvaContractTest(unittest.TestCase):
         self.assertEqual(40, FRAMES)
         self.assertEqual(15, sample_indices(46)[13])
         self.assertEqual(40, len(sample_indices(12)))
+
+    def test_secuencia_corta_se_estira_de_forma_pareja(self):
+        idx = sample_indices(12)
+        self.assertEqual(0, idx[0])
+        self.assertEqual(11, idx[-1])
+        self.assertEqual(list(range(12)), sorted(set(idx)))       # usa todos
+        conteo = [idx.count(k) for k in range(12)]
+        self.assertLessEqual(max(conteo) - min(conteo), 1)       # parejo
+        self.assertEqual([0] * 40, sample_indices(1))
+
+
+class ContratoV3Test(unittest.TestCase):
+    def test_version(self):
+        self.assertEqual(3, CONTRACT_VERSION)
+
+    def test_invariante_a_distancia(self):
+        pts = escena()
+        cerca = normalize_sequence_v3(camara(pts, 1280, 720, 900, (640, 360)), 1280, 720)
+        lejos = normalize_sequence_v3(camara(pts, 1280, 720, 300, (600, 300)), 1280, 720)
+        np.testing.assert_allclose(cerca, lejos, atol=1e-4)
+
+    def test_invariante_a_orientacion_y_aspecto(self):
+        pts = escena()
+        horizontal = normalize_sequence_v3(camara(pts, 1920, 1080, 400, (960, 500)), 1920, 1080)
+        vertical = normalize_sequence_v3(camara(pts, 480, 640, 700, (240, 300)), 480, 640)
+        np.testing.assert_allclose(horizontal, vertical, atol=1e-4)
+
+    def test_hombros_quedan_en_ancho_uno_y_centrados(self):
+        out = normalize_sequence_v3(camara(escena(), 960, 540, 500, (480, 270)), 960, 540)
+        p = out.reshape(FRAMES, POINTS, 3)
+        np.testing.assert_allclose(p[:, 42, 0] - p[:, 43, 0], -1.0, atol=1e-5)
+        np.testing.assert_allclose((p[:, 42, :2] + p[:, 43, :2]) / 2, 0.0, atol=1e-5)
+
+    def test_ausentes_siguen_en_cero(self):
+        raw = camara(escena(), 960, 540, 500, (480, 270))
+        raw[5:9, 0:63] = 0.0
+        out = normalize_sequence_v3(raw, 960, 540)
+        self.assertTrue(np.all(out[5:9, 0:63] == 0.0))
+        self.assertTrue(np.all(out[10, 0:63] != 0.0))
+
+    def test_mediana_par_promedia_los_centrales(self):
+        raw = camara(escena(T=4), 1000, 1000, 1000, (500, 500))
+        # anchos de hombro 0,40 / 0,40 / 0,60 / 0,80 m -> mediana 0,50 m = 500 px
+        for t, ancho in enumerate([0.40, 0.40, 0.60, 0.80]):
+            raw[t, HL] = (500 - ancho * 500) / 1000
+            raw[t, HR] = (500 + ancho * 500) / 1000
+        out = normalize_sequence_v3(raw, 1000, 1000)
+        self.assertAlmostEqual(-0.8, float(out[0, HL] - out[0, HR]), places=5)
+
+    def test_cuadro_sin_hombros_usa_el_centro_valido_mas_cercano(self):
+        raw = camara(escena(), 960, 540, 500, (480, 270))
+        raw[3, HL:HL + 3] = 0.0
+        out = normalize_sequence_v3(raw, 960, 540)
+        ref = normalize_sequence_v3(camara(escena(), 960, 540, 500, (480, 270)), 960, 540)
+        # la escena tiene hombros fijos: usar el centro del cuadro 2 no cambia nada
+        np.testing.assert_allclose(out[3, 0:126], ref[3, 0:126], atol=1e-5)
+        self.assertTrue(np.all(out[3, HL:HL + 3] == 0.0))
+
+    def test_sin_hombros_es_invalida(self):
+        raw = camara(escena(), 960, 540, 500, (480, 270))
+        raw[:, HR:HR + 3] = 0.0
+        with self.assertRaises(ValueError):
+            normalize_sequence_v3(raw, 960, 540)
+
+    def test_build_input_muestrea_antes_de_normalizar(self):
+        raw = camara(escena(T=46), 960, 540, 500, (480, 270))
+        out = build_input_v3(raw, 960, 540)
+        self.assertEqual((FRAMES, COORDS), out.shape)
+        np.testing.assert_array_equal(out, normalize_sequence_v3(raw[sample_indices(46)], 960, 540))
+
+    def test_v2_a_v3_coincide_con_v3_directo(self):
+        raw = camara(escena(), 1920, 1080, 400, (900, 520))
+        v2 = center_sequence(raw)
+        np.testing.assert_allclose(v2_to_v3(v2, 1920, 1080),
+                                   normalize_sequence_v3(raw, 1920, 1080), atol=1e-5)
 
 
 if __name__ == "__main__":

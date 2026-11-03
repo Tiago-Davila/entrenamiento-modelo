@@ -1,0 +1,145 @@
+# =============================================================================
+# Eva — pipeline de reconocimiento de LSA
+# Dependencias para: preprocess_tasks.py, augment.py, train_keras_tflite.py
+#
+# REQUIERE PYTHON 3.9 A 3.13. Recomendado: 3.12 (es donde se verifico todo).
+#
+# El techo lo pone TensorFlow, que no publica wheels para 3.14. Como muchas
+# distribuciones ya traen 3.14 por defecto, `python -m venv venv` toma esa
+# version y la instalacion falla con un mensaje que no explica nada:
+#
+#     ERROR: Could not find a version that satisfies the requirement
+#            tensorflow-cpu<3.0,>=2.17 (from versions: none)
+#
+# Ese "from versions: none" NO es un conflicto entre paquetes: significa que
+# para tu interprete no existe ninguna wheel. La guarda de abajo convierte eso
+# en un mensaje entendible. Verificado por version:
+#
+#     3.9   tensorflow-cpu 2.20.0   ok
+#     3.10  tensorflow-cpu 2.21.0   ok
+#     3.11  tensorflow-cpu 2.21.0   ok
+#     3.12  tensorflow-cpu 2.21.0   ok   <- recomendada
+#     3.13  tensorflow-cpu 2.21.0   ok
+#     3.14  ninguna                 FALLA
+#
+# mediapipe 0.10.33 si tiene wheel para 3.14, asi que el error aparece solo
+# al llegar a tensorflow y confunde: el problema es el interprete, no la lista.
+#
+# Crear el entorno con una version soportada:
+#
+#   python3.12 -m venv venv                    (si tenes 3.12 instalado)
+#   uv venv --python 3.12 venv                 (uv lo descarga solo)
+#
+#   source venv/bin/activate                   (Linux/macOS)
+#   venv\Scripts\activate                      (Windows)
+#   python -m pip install -r requirements.txt
+#
+# Confirmar la version del entorno antes de instalar:
+#   python --version     -> debe decir 3.9.x a 3.13.x
+#
+# Verificar la instalacion:
+#   python -c "import mediapipe as mp; from mediapipe.tasks.python import vision; \
+#     import tensorflow as tf; print(mp.__version__, tf.__version__, \
+#     'HolisticLandmarker' in dir(vision))"
+#   -> debe imprimir la version y True
+# =============================================================================
+
+# --- Guarda de version de Python ---------------------------------------------
+# Estos paquetes no existen. Son un mecanismo para abortar con un mensaje
+# legible cuando el interprete esta fuera del rango soportado: el nombre del
+# paquete ES el mensaje de error. Sin esto, pip falla mas adelante culpando a
+# tensorflow-cpu y parece un problema de dependencias.
+ERROR-este-proyecto-requiere-python-3-9-a-3-13-y-tu-python-es-3-14-o-superior; python_version >= "3.14"
+ERROR-este-proyecto-requiere-python-3-9-a-3-13-y-tu-python-es-demasiado-viejo; python_version < "3.9"
+
+# --- Extraccion de keypoints (preprocess_tasks.py) ---------------------------
+# Holistic es la misma task que corre en Android, por eso entrenamiento e
+# inferencia comparten productor de keypoints.
+#
+# FIJADA EN 0.10.33, NO usar rango abierto.
+# 0.10.33 es el minimo donde Tasks expone HolisticLandmarker en Python; no
+# bajar a 0.10.21 (la de la POC), que solo tenia mp.solutions.holistic, ya
+# eliminado. El techo tambien importa: con `mediapipe<2.0` pip resuelve a
+# 1.0.1, y ahi create_from_options(HolisticLandmarkerOptions) muere por
+# SIGKILL, sin traceback ni excepcion, con este mismo holistic_landmarker.task.
+# Verificado en la misma maquina: 0.10.33 crea el landmarker en ~500 MB y
+# devuelve exit 0; 1.0.1 llega a 682 MB y recibe SIGKILL. No es falta de
+# memoria (oom_kill 0 en el cgroup, 14 GB libres) ni el archivo del modelo
+# (bundle ZIP valido con los 7 .tflite): es una regresion de la 1.0.x.
+# Peor todavia: dentro de multiprocessing.Pool el worker muere en el
+# initializer y Pool lo respawnea en bucle infinito, sin error visible.
+# Antes de mover este pin, probar create_from_options a mano.
+mediapipe==0.10.33
+
+# OpenCV NO se declara aca: mediapipe ya depende de opencv-contrib-python, que
+# es un superconjunto de opencv-python y provee el mismo modulo 'cv2'.
+# Declarar ambos hace que se instalen los dos sobre el mismo directorio
+# site-packages/cv2/ y gane el ultimo en instalarse: el resultado depende del
+# orden y cualquier pin de version queda sin efecto.
+# Si necesitas OpenCV sin entorno grafico (servidor headless), instalar
+# opencv-contrib-python-headless y NO opencv-contrib-python.
+
+# --- Entrenamiento y exportacion (train_keras_tflite.py) ---------------------
+# TF 2.17+ por la API de conversion a TFLite y Keras 3.
+# TensorFlow no tiene soporte de GPU nativo en Windows desde la 2.11: se usa
+# SOLO para exportar a .tflite (y como backend CPU si no hay GPU).
+tensorflow-cpu>=2.17,<3.0
+
+# --- Entrenamiento en GPU (NVIDIA) -------------------------------------------
+# Keras 3 entrena con backend PyTorch, que si usa CUDA en Windows. El backend
+# se elige en entrenamiento-modelo/.env (KERAS_BACKEND=torch), que lee
+# lsa64/entorno.py. La exportacion corre sola en un subproceso con backend
+# tensorflow y verifica que el modelo reconstruido de lo mismo.
+#
+# torch NO se declara aca porque la wheel con CUDA sale de otro indice. Se
+# instala aparte, en el mismo venv:
+#
+#   python -m pip install torch --index-url https://download.pytorch.org/whl/cu128
+#
+# cu128 (CUDA 12.8) es el minimo que soporta la serie RTX 50 (Blackwell).
+# Verificado: torch 2.11.0+cu128 con RTX 5050, driver 617.14, Python 3.13.
+# Comprobar:
+#   python -c "import torch; print(torch.cuda.is_available(), torch.cuda.get_device_name(0))"
+# Sin GPU, poner KERAS_BACKEND=tensorflow en .env: todo funciona igual en CPU.
+
+scikit-learn>=1.4,<2.0
+
+# --- Comun (los tres modulos) ------------------------------------------------
+# numpy 2.x verificado con este stack. augment.py solo necesita numpy.
+numpy>=2.0,<3.0
+
+tqdm>=4.66,<5.0
+
+# =============================================================================
+# NOTAS
+#
+# 1. ARCHIVO DE MODELO REQUERIDO (no es un paquete de pip)
+#    preprocess_tasks.py necesita holistic_landmarker.task, que se descarga
+#    de la documentacion de MediaPipe (Holistic landmark detection > Models)
+#    y se pasa con --model. El mismo archivo va despues a los assets de
+#    Android, para que ambos extremos usen exactamente el mismo extractor.
+#
+# 2. PINES OBSOLETOS DE LA FASE EXPLORATORIA
+#    La POC estaba fijada en mediapipe==0.10.21 + numpy<2 + opencv<4.10 por el
+#    problema de Holistic. Esa deuda tecnica esta saldada: con >=0.10.33 se
+#    puede usar numpy 2.x y opencv actual.
+#
+# 3. GPU
+#    El preprocesamiento es CPU (MediaPipe en Python) y se paraleliza por
+#    procesos: rinde con nucleos, no con placa de video. El entrenamiento
+#    aprovecha GPU pero el modelo es tan chico que en CPU tambien es viable.
+#
+# 4. VERSIONES DE REFERENCIA (probadas juntas)
+#      mediapipe     0.10.33
+#      tensorflow    2.21.0  (keras 3.15.1)
+#      numpy         2.4.4
+#      opencv        4.13.0
+#      scikit-learn  1.8.0
+#    Si algo se rompe tras una actualizacion, fijar estas versiones exactas.
+#
+# 5. VERIFICACION FUNCIONAL despues de instalar
+#    Confirmar que la conversion a TFLite no necesita el delegado Flex:
+#      python train_keras_tflite.py --help
+#    y al entrenar, revisar que imprima las ops del grafo sin ninguna que
+#    mencione 'flex' o 'tensorlist'. El script aborta solo si las detecta.
+# =============================================================================

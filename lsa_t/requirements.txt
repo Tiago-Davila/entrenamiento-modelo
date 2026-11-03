@@ -47,10 +47,12 @@ rouge-score>=0.1.2        # ROUGE-L
 onnx>=1.15.0
 onnxruntime>=1.17.0       # CPU inference + cuantizacion
 onnxruntime-extensions>=0.9.0
+onnxsim>=0.4.36           # Simplifica el decoder ONNX antes de convertirlo a TFLite
 
 # ── Conversion a TFLite ──────────────────────────────────────
 onnx2tf>=1.20.0           # ONNX -> TFLite (requiere tensorflow)
 tensorflow>=2.15.0        # Para onnx2tf y verificacion TFLite
+tf_keras>=2.15.0          # Backend tf_converter de onnx2tf en Windows
 # Alternativa sin TF: ai-edge-torch (mas liviano, solo exportacion)
 # ai-edge-torch>=0.2.0
 

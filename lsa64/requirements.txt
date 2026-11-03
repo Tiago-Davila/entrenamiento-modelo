@@ -81,10 +81,26 @@ mediapipe==0.10.33
 
 # --- Entrenamiento y exportacion (train_keras_tflite.py) ---------------------
 # TF 2.17+ por la API de conversion a TFLite y Keras 3.
-# tensorflow-cpu alcanza: el modelo son ~309k parametros y entrena en minutos.
-# Para usar GPU, reemplazar por 'tensorflow[and-cuda]' en Linux o WSL2.
-# TensorFlow no tiene soporte de GPU nativo en Windows desde la 2.11.
+# TensorFlow no tiene soporte de GPU nativo en Windows desde la 2.11: se usa
+# SOLO para exportar a .tflite (y como backend CPU si no hay GPU).
 tensorflow-cpu>=2.17,<3.0
+
+# --- Entrenamiento en GPU (NVIDIA) -------------------------------------------
+# Keras 3 entrena con backend PyTorch, que si usa CUDA en Windows. El backend
+# se elige en entrenamiento-modelo/.env (KERAS_BACKEND=torch), que lee
+# lsa64/entorno.py. La exportacion corre sola en un subproceso con backend
+# tensorflow y verifica que el modelo reconstruido de lo mismo.
+#
+# torch NO se declara aca porque la wheel con CUDA sale de otro indice. Se
+# instala aparte, en el mismo venv:
+#
+#   python -m pip install torch --index-url https://download.pytorch.org/whl/cu128
+#
+# cu128 (CUDA 12.8) es el minimo que soporta la serie RTX 50 (Blackwell).
+# Verificado: torch 2.11.0+cu128 con RTX 5050, driver 617.14, Python 3.13.
+# Comprobar:
+#   python -c "import torch; print(torch.cuda.is_available(), torch.cuda.get_device_name(0))"
+# Sin GPU, poner KERAS_BACKEND=tensorflow en .env: todo funciona igual en CPU.
 
 scikit-learn>=1.4,<2.0
 

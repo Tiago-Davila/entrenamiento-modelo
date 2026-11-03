@@ -1,0 +1,101 @@
+{
+  "testAccuracy": 0.8906,
+  "valAccuracyMejor": 0.9406,
+  "epocaMejor": 50,
+  "baselineAzar": 0.0156,
+  "split": "por_sujeto",
+  "sujetosVal": [
+    9
+  ],
+  "sujetosTest": [
+    10
+  ],
+  "seed": 42,
+  "hiperparametros": {
+    "lr": 0.0003,
+    "batch": 16,
+    "hidden": 128,
+    "dropout": 0.3,
+    "epochs": 120,
+    "paciencia": 15,
+    "unroll": true,
+    "augmentFactor": 2
+  },
+  "contrato": {
+    "frames": 40,
+    "coords": 168,
+    "poseFuente": "11..24"
+  },
+  "catalogo": {
+    "version": "2.0",
+    "archivo": "D:\\2026-Politecnico\\helpi\\entrenamiento-modelo\\lsa64\\catalogo_lsa64.json"
+  },
+  "tfVersion": "2.21.0",
+  "paresMasConfundidos": [
+    {
+      "veces": 5,
+      "real": "Opaco",
+      "predicho": "Cerrar"
+    },
+    {
+      "veces": 5,
+      "real": "Hombre",
+      "predicho": "Dulce"
+    },
+    {
+      "veces": 5,
+      "real": "Donde",
+      "predicho": "Paciencia"
+    },
+    {
+      "veces": 4,
+      "real": "Nacido",
+      "predicho": "Comprar"
+    },
+    {
+      "veces": 4,
+      "real": "Brillante",
+      "predicho": "Desnatador"
+    },
+    {
+      "veces": 3,
+      "real": "Cajon",
+      "predicho": "Dulce"
+    },
+    {
+      "veces": 2,
+      "real": "Dar",
+      "predicho": "Correr"
+    },
+    {
+      "veces": 2,
+      "real": "Bailar",
+      "predicho": "Moneda"
+    },
+    {
+      "veces": 1,
+      "real": "Rosa",
+      "predicho": "Enemigo"
+    },
+    {
+      "veces": 1,
+      "real": "Encontrar",
+      "predicho": "Cumpleaños"
+    },
+    {
+      "veces": 1,
+      "real": "Correr",
+      "predicho": "Yogurt"
+    },
+    {
+      "veces": 1,
+      "real": "Amargo",
+      "predicho": "Cerrar"
+    },
+    {
+      "veces": 1,
+      "real": "Agua",
+      "predicho": "Llamar"
+    }
+  ]
+}

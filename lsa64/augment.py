@@ -1,42 +1,51 @@
 """
 augment.py — Aumentación en espacio de puntos clave para Eva (Helpi).
 
-Opera sobre el contrato Eva v2 de 168 coordenadas:
+Opera sobre el contrato Eva v3 de 168 coordenadas:
 
     [  0: 63)  mano izquierda   21 landmarks x 3
     [ 63:126)  mano derecha     21 landmarks x 3
     [126:168)  pose 11..24      14 landmarks x 3 (sin cara)
 
-Internamente todo se trabaja como (T, 56, 3), donde 56 = 21 + 21 + 14.
+en "anchos de hombro": centrado en el punto medio de los hombros y dividido
+por la mediana del ancho de hombros. Internamente se trabaja como (T, 56, 3).
 
 Reglas que el módulo respeta y que NO deben relajarse sin pensarlo:
 
   1. Toda transformación preserva la etiqueta. No hay reflexiones parciales,
      ni rotaciones grandes, ni inversión temporal.
-  2. Se aplica SOLO al split de entrenamiento.
-  3. Después de cada transformación se restablece el centrado en el punto
-     medio de los hombros en x,y (z NO se centra), que es el contrato.
+  2. Se aplica SOLO al split de entrenamiento, y en cada época una variante
+     nueva (ver train_keras_tflite.AugmentedSequence).
+  3. Al final se vuelve a aplicar la normalización v3 del contrato
+     (eva_contract.normalize_pixels_v3). Así ninguna muestra aumentada tiene
+     algo que la app no pueda producir: una escala global, por ejemplo,
+     dejaría hombros de ancho != 1 y el modelo aprendería de eso.
+     Por lo mismo, lo que tiene sentido variar son las PROPORCIONES (largo de
+     brazos, tamaño de mano, aspecto), no el tamaño total.
   4. Determinismo por semilla: la misma semilla produce la misma muestra.
+
+Magnitudes en unidades v3. Referencias medidas en LSA64 v3: manos en x entre
+-1,55 y +0,97 y en y entre -0,95 y +1,36 (percentiles 1 y 99).
 
 Uso típico:
 
     aug = Augmenter(AugmentConfig())
     rng = np.random.default_rng(1234)
-    x_aug = aug(x, rng)          # x: (T, 168) float32
-
-Nota sobre aritmética entera: el contrato de submuestreo con división entera
-rige el camino de INFERENCIA, donde hace falta reproducibilidad bit a bit
-entre plataformas. Acá estamos en entrenamiento, en Python, y la interpolación
-en punto flotante es correcta y deseable. El submuestreo entero se aplica
-después, sobre el resultado, igual que sobre una muestra sin aumentar.
+    x_aug = aug(x, rng)          # x: (40, 168) float32 v3
 """
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 import numpy as np
-from eva_contract import COORDS, FRAMES, POSE_LANDMARKS
+from eva_contract import (
+    COORDS,
+    FRAMES,
+    POSE_LANDMARKS,
+    normalize_pixels_v3,
+    sample_indices,
+)
 
 # ---------------------------------------------------------------------------
 # Layout del contrato
@@ -56,6 +65,7 @@ POSE_OFFSET = 2 * N_HAND                # los landmarks de pose arrancan acá
 # Pose fuente 11 y 12 son los puntos locales 0 y 1 del bloque reducido.
 POSE_LEFT_SHOULDER = 0
 POSE_RIGHT_SHOULDER = 1
+WRIST = 0                               # landmark 0 de cada mano
 
 # Pares simétricos del bloque de pose reducido (fuente 11..24).
 POSE_MIRROR_PAIRS = (
@@ -68,19 +78,15 @@ POSE_MIRROR_PAIRS = (
     (12, 13),  # cadera
 )
 
-
 def _build_mirror_permutation() -> np.ndarray:
-    """Permutación de los 67 puntos que corresponde a espejar el cuerpo.
+    """Permutación de los 56 puntos que corresponde a espejar el cuerpo.
 
     Intercambia los dos bloques de mano completos e intercambia los pares
     simétricos de pose. Se combina con la negación de x.
     """
     perm = np.arange(N_POINTS)
-    # Bloques de mano: izquierda <-> derecha, manteniendo el orden interno
-    # de los 21 landmarks (la topología de la mano es la misma en ambas).
     perm[IDX_LEFT_HAND] = np.arange(N_HAND) + N_HAND
     perm[IDX_RIGHT_HAND] = np.arange(N_HAND)
-    # Pares simétricos de pose.
     for a, b in POSE_MIRROR_PAIRS:
         perm[POSE_OFFSET + a] = POSE_OFFSET + b
         perm[POSE_OFFSET + b] = POSE_OFFSET + a
@@ -106,19 +112,15 @@ def to_flat(p: np.ndarray) -> np.ndarray:
     return p.reshape(p.shape[0], N_COORDS)
 
 
-def recenter(p: np.ndarray) -> np.ndarray:
-    """Restablece el contrato: origen en el punto medio de los hombros.
+def _present(p: np.ndarray) -> np.ndarray:
+    return np.any(p != 0.0, axis=-1)
 
-    Solo x,y. El eje z NO se centra, por definición del contrato.
-    """
-    ls = p[:, POSE_OFFSET + POSE_LEFT_SHOULDER, :2]
-    rs = p[:, POSE_OFFSET + POSE_RIGHT_SHOULDER, :2]
-    mid = ((ls + rs) * 0.5)[:, None, :]        # (T, 1, 2)
-    p = p.copy()
-    present = np.any(p != 0.0, axis=-1)
-    p[:, :, 0][present] -= np.broadcast_to(mid[..., 0], present.shape)[present]
-    p[:, :, 1][present] -= np.broadcast_to(mid[..., 1], present.shape)[present]
-    return p
+
+def _keep_absent(out: np.ndarray, present: np.ndarray) -> np.ndarray:
+    """Los landmarks ausentes vuelven a (0,0,0): una transformación afín los
+    movería y dejarían de representar ausencia."""
+    out[~present] = 0.0
+    return out
 
 
 # ---------------------------------------------------------------------------
@@ -128,50 +130,79 @@ def recenter(p: np.ndarray) -> np.ndarray:
 def rotate_in_plane(p: np.ndarray, degrees: float) -> np.ndarray:
     """Rotación alrededor del eje de la cámara (roll).
 
-    Modela: teléfono sostenido torcido, cámara inclinada.
-    Es la rotación segura: x e y comparten unidades, así que es exacta.
+    Modela: teléfono sostenido torcido, persona inclinada. En v3 x e y
+    comparten unidades (píxeles / ancho de hombro), así que es exacta.
     """
     a = np.deg2rad(degrees)
     c, s = np.cos(a), np.sin(a)
+    present = _present(p)
     out = p.copy()
     x, y = p[..., 0], p[..., 1]
     out[..., 0] = c * x - s * y
     out[..., 1] = s * x + c * y
-    return out
+    return _keep_absent(out, present)
 
 
 def rotate_yaw(p: np.ndarray, degrees: float, z_gain: float = 1.0) -> np.ndarray:
-    """Rotación alrededor del eje vertical. USAR CON CUIDADO.
+    """Rotación alrededor del eje vertical (persona no del todo de frente).
 
-    Modela: la persona no está exactamente de frente a la cámara. Es la
-    variación más frecuente en uso real, pero mezcla x con z, y en MediaPipe
-    esos ejes NO comparten escala: z de mano es relativo a la muñeca y z de
-    pose es relativo a la cadera, ambos en unidades distintas de x.
-
-    z_gain intenta compensar esa diferencia de escala. No hay un valor
-    correcto universal: hay que estimarlo empíricamente antes de usar esto
-    en serio. Por eso viene desactivada por defecto en la configuración.
+    Mezcla x con z. En v3 z está en la misma escala que x (z*W / ancho de
+    hombros), pero la z de MediaPipe es relativa (a la muñeca en la mano, a
+    la cadera en la pose) y ruidosa. Por eso es opcional y se evalúa en A/B.
+    Al girar, los hombros se acortan en x; la renormalización final los
+    devuelve a ancho 1 y agranda el resto, como pasa en la cámara real.
     """
     a = np.deg2rad(degrees)
     c, s = np.cos(a), np.sin(a)
+    present = _present(p)
     out = p.copy()
     x, z = p[..., 0], p[..., 2] * z_gain
     out[..., 0] = c * x + s * z
     out[..., 2] = (-s * x + c * z) / z_gain
-    return out
+    return _keep_absent(out, present)
 
 
-def scale(p: np.ndarray, sx: float, sy: float, sz: float) -> np.ndarray:
-    """Escalado por eje.
+def scale_aspect(p: np.ndarray, sx: float, sy: float) -> np.ndarray:
+    """Escalado anisotrópico x/y.
 
-    Isotrópico (sx == sy) modela distancia a la cámara o tamaño corporal.
-    Anisotrópico modela, de forma cruda, diferencias de contextura.
+    Una escala isotrópica no hace nada después de renormalizar; la diferencia
+    entre ejes sí sobrevive y modela contextura y errores de relación de
+    aspecto de la cámara.
     """
+    present = _present(p)
     out = p.copy()
     out[..., 0] *= sx
     out[..., 1] *= sy
-    out[..., 2] *= sz
-    return out
+    return _keep_absent(out, present)
+
+
+def scale_arms(p: np.ndarray, factor: float) -> np.ndarray:
+    """Alarga o acorta brazos y manos respecto de los hombros.
+
+    Modela la proporción brazo/hombros entre personas: cada punto del brazo
+    se aleja del hombro de su lado en [factor]. Hombros y caderas quedan fijos.
+    """
+    present = _present(p)
+    out = p.copy()
+    sides = (
+        (list(range(0, N_HAND)) + [POSE_OFFSET + i for i in (2, 4, 6, 8, 10)], POSE_LEFT_SHOULDER),
+        (list(range(N_HAND, 2 * N_HAND)) + [POSE_OFFSET + i for i in (3, 5, 7, 9, 11)], POSE_RIGHT_SHOULDER),
+    )
+    for idx, shoulder in sides:
+        anchor = p[:, POSE_OFFSET + shoulder, :2][:, None, :]
+        out[:, idx, :2] = anchor + (p[:, idx, :2] - anchor) * factor
+    return _keep_absent(out, present)
+
+
+def scale_hands(p: np.ndarray, factor_left: float, factor_right: float) -> np.ndarray:
+    """Agranda o achica cada mano alrededor de su muñeca (tamaño de mano)."""
+    present = _present(p)
+    out = p.copy()
+    for block, f in ((IDX_LEFT_HAND, factor_left), (IDX_RIGHT_HAND, factor_right)):
+        hand = p[:, block]
+        wrist = hand[:, WRIST:WRIST + 1]
+        out[:, block] = wrist + (hand - wrist) * f
+    return _keep_absent(out, present)
 
 
 def translate_z(p: np.ndarray, dz: float) -> np.ndarray:
@@ -181,7 +212,7 @@ def translate_z(p: np.ndarray, dz: float) -> np.ndarray:
     un no-op disfrazado de aumentación.
     """
     out = p.copy()
-    out[..., 2][np.any(out != 0.0, axis=-1)] += dz
+    out[..., 2][_present(out)] += dz
     return out
 
 
@@ -203,11 +234,7 @@ def mirror(p: np.ndarray) -> np.ndarray:
 def jitter(p: np.ndarray, sigma: np.ndarray | float, rng: np.random.Generator) -> np.ndarray:
     """Ruido gaussiano que modela el temblor del estimador.
 
-    sigma debe MEDIRSE, no inventarse: filmar una mano quieta, extraer
-    landmarks y calcular la desviación estándar por coordenada. Un sigma
-    arbitrario o no hace nada o destruye la señal.
-
-    Acepta un escalar o un array (3,) con un sigma por eje.
+    Acepta un escalar o un array (3,) con un sigma por eje, en anchos de hombro.
     """
     sigma = np.asarray(sigma, dtype=p.dtype)
     if sigma.ndim == 0:
@@ -215,7 +242,7 @@ def jitter(p: np.ndarray, sigma: np.ndarray | float, rng: np.random.Generator) -
     else:
         noise = rng.normal(0.0, 1.0, size=p.shape) * sigma.reshape(1, 1, 3)
     out = p.copy()
-    present = np.any(out != 0.0, axis=-1)
+    present = _present(out)
     out[present] += noise.astype(p.dtype)[present]
     return out
 
@@ -230,18 +257,22 @@ def drop_hand(
     """Simula la pérdida de una mano durante una ventana de cuadros.
 
     En LSA64 casi nunca pasa: hay trípode, pared blanca y guantes
-    fluorescentes. En uso real pasa todo el tiempo.
-
-    IMPORTANTE: `fill` debe coincidir con lo que emite tu extractor cuando
-    no detecta una mano. Si tu pipeline usa NaN, o repite el último cuadro
-    válido, o interpola, hay que replicar ESE comportamiento. Rellenar con
-    ceros cuando el extractor hace otra cosa le enseña al modelo una señal
-    de ausencia que nunca va a ver en producción.
+    fluorescentes. En uso real pasa todo el tiempo. El relleno es 0, que es
+    lo que emite el extractor (Python y Android) cuando no detecta una mano.
     """
     idx = IDX_LEFT_HAND if which == "left" else IDX_RIGHT_HAND
     out = p.copy()
     end = min(start + length, p.shape[0])
     out[start:end, idx, :] = fill
+    return out
+
+
+def drop_hand_frames(p: np.ndarray, prob: float, rng: np.random.Generator) -> np.ndarray:
+    """Pérdidas sueltas de una mano en cuadros aislados (parpadeo del detector)."""
+    out = p.copy()
+    for block in (IDX_LEFT_HAND, IDX_RIGHT_HAND):
+        mask = rng.random(p.shape[0]) < prob
+        out[mask, block, :] = 0.0
     return out
 
 
@@ -251,13 +282,21 @@ def drop_hand(
 
 def _resample(p: np.ndarray, positions: np.ndarray) -> np.ndarray:
     """Muestrea la secuencia en posiciones fraccionarias, con interpolación
-    lineal entre cuadros vecinos."""
+    lineal entre cuadros vecinos. Un landmark ausente en alguno de los dos
+    vecinos queda ausente (no se interpola contra el cero)."""
     T = p.shape[0]
     pos = np.clip(positions, 0.0, T - 1.0)
     lo = np.floor(pos).astype(np.int64)
     hi = np.minimum(lo + 1, T - 1)
     w = (pos - lo).astype(p.dtype)[:, None, None]
-    return (1.0 - w) * p[lo] + w * p[hi]
+    out = (1.0 - w) * p[lo] + w * p[hi]
+    # Si falta en algún vecino, se toma el vecino más cercano tal cual
+    # (presente o ausente) en lugar de interpolar contra (0,0,0).
+    present = _present(p)
+    both = present[lo] & present[hi]
+    nearest = np.where(w < 0.5, p[lo], p[hi])
+    out[~both] = nearest[~both]
+    return out
 
 
 def time_warp(
@@ -270,15 +309,10 @@ def time_warp(
     """Deformación temporal monótona no uniforme.
 
     Modela que la misma seña se ejecuta con aceleraciones desiguales: una
-    parte más lenta, otra más rápida. Probablemente la transformación de
-    mayor valor, porque es la variación más grande entre personas reales y
-    la que LSA64 tiene más subrepresentada (los diez sujetos imitaron el
-    mismo video de referencia).
-
-    Se construye una función de reparametrización monótona a partir de
-    incrementos aleatorios positivos, se normaliza a [0, T-1] y se remuestrea.
-    La monotonía es obligatoria: garantiza que no se invierte el orden de los
-    cuadros, que cambiaría la seña.
+    parte más lenta, otra más rápida. Es la variación más grande entre
+    personas reales y la que LSA64 tiene más subrepresentada (los diez
+    sujetos imitaron el mismo video de referencia). La monotonía es
+    obligatoria: garantiza que no se invierte el orden de los cuadros.
     """
     T = p.shape[0]
     knots = rng.uniform(1.0 - strength, 1.0 + strength, size=n_control)
@@ -298,8 +332,8 @@ def temporal_crop(
 ) -> np.ndarray:
     """Recorta un tramo de los extremos y remuestrea a n_out cuadros.
 
-    Modela que en producción no hay un video segmentado prolijamente: hay
-    una ventana deslizante que cae donde cae.
+    Modela que el segmentador de la app corta la seña en otro lugar que el
+    editor de LSA64 (que deja reposo antes y después).
     """
     T = p.shape[0]
     a = rng.uniform(0.0, max_frac) * (T - 1)
@@ -309,53 +343,77 @@ def temporal_crop(
     return _resample(p, np.linspace(a, b, n_out))
 
 
+def simulate_fps(p: np.ndarray, captured: int) -> np.ndarray:
+    """Simula una captura con menos cuadros y el muestreo del contrato.
+
+    LSA64 es 60 fps (40 cuadros de ~128); el teléfono captura a 12-24 fps y un
+    segmento trae ~20-40 cuadros. Se toman [captured] cuadros de los 40 y se
+    vuelven a llevar a 40 con la regla entera del contrato para T < 40
+    (repetición pareja, sin interpolar), exactamente como en Android.
+    """
+    T = p.shape[0]
+    if captured >= T:
+        return p.copy()
+    keep = [(i * (T - 1)) // (captured - 1) for i in range(captured)] if captured > 1 else [0]
+    short = p[keep]
+    return short[sample_indices(len(short))]
+
+
 # ---------------------------------------------------------------------------
 # Configuración
 # ---------------------------------------------------------------------------
 
 @dataclass
 class AugmentConfig:
-    """Magnitudes conservadoras por defecto.
+    """Magnitudes en unidades v3 (ancho de hombros = 1)."""
 
-    Los valores de rotación y escala siguen el orden de magnitud reportado
-    en la literatura de referencia del LIDI (±5°, ±5%). Subirlos sin medir
-    es la forma más común de degradar el entrenamiento en silencio.
-    """
+    n_frames: int = FRAMES              # largo de salida; contrato Eva
 
-    n_frames: int = FRAMES              # largo de salida; contrato Eva v2
+    # Temporales
+    p_temporal_crop: float = 0.5
+    crop_max_frac: float = 0.2
+
+    p_time_warp: float = 0.7
+    warp_strength: float = 0.3
+    warp_control_points: int = 5
+
+    p_fps: float = 0.5
+    fps_min_frames: int = 18            # ~12 fps en una seña de 1,5 s
+
+    # Espejado (diestro <-> zurdo)
+    p_mirror: float = 0.5
 
     # Espaciales
     p_rotate: float = 0.8
-    rotate_deg: float = 5.0
+    rotate_deg: float = 15.0
 
-    p_scale: float = 0.8
-    scale_range: float = 0.05           # ±5%
-    anisotropy: float = 0.02            # desviación extra por eje
+    p_aspect: float = 0.6
+    aspect_range: float = 0.08          # sx, sy independientes ±8%
 
-    p_translate_z: float = 0.3
-    translate_z_range: float = 0.02
+    p_arm_scale: float = 0.6
+    arm_scale_range: float = 0.12       # largo de brazo relativo ±12%
 
-    p_yaw: float = 0.0                  # DESACTIVADO: ver rotate_yaw()
-    yaw_deg: float = 8.0
+    p_hand_scale: float = 0.6
+    hand_scale_range: float = 0.15      # tamaño de mano ±15%
+
+    p_yaw: float = 0.0                  # opcional: evaluar en A/B (ver rotate_yaw)
+    yaw_deg: float = 25.0
     yaw_z_gain: float = 1.0
 
-    p_mirror: float = 0.5
+    p_translate_z: float = 0.3
+    translate_z_range: float = 0.1      # 0,02 de v2 * 1920/382
 
-    p_jitter: float = 0.7
-    # Placeholder: MEDIR sobre una mano quieta antes de confiar en esto.
-    jitter_sigma: tuple = (0.0015, 0.0015, 0.003)
-
-    p_drop_hand: float = 0.15
-    drop_len_frac: tuple = (0.1, 0.3)
+    # Degradaciones del extractor
+    p_drop_hand: float = 0.3
+    drop_len_frac: tuple = (0.1, 0.4)
     drop_fill: float = 0.0
 
-    # Temporales
-    p_time_warp: float = 0.7
-    warp_strength: float = 0.25
-    warp_control_points: int = 5
+    p_drop_frames: float = 0.3
+    drop_frame_prob: float = 0.06
 
-    p_temporal_crop: float = 0.5
-    crop_max_frac: float = 0.1
+    p_jitter: float = 0.7
+    # ~2-4 px de ruido del extractor sobre hombros de ~180 px en 960x540.
+    jitter_sigma: tuple = (0.01, 0.01, 0.02)
 
     # Seguridad
     enforce_contract: bool = True
@@ -379,7 +437,7 @@ class Augmenter:
         cfg = self.cfg
         p = to_points(np.asarray(x, dtype=np.float32))
 
-        # --- Temporales primero: cambian el largo de la secuencia ---
+        # --- Temporales con interpolación: cambian el largo ---
         if rng.random() < cfg.p_temporal_crop:
             p = temporal_crop(p, cfg.n_frames, cfg.crop_max_frac, rng)
         if rng.random() < cfg.p_time_warp:
@@ -387,29 +445,31 @@ class Augmenter:
                           cfg.warp_control_points, rng)
         if p.shape[0] != cfg.n_frames:
             p = _resample(p, np.linspace(0.0, p.shape[0] - 1.0, cfg.n_frames))
+        # --- Frecuencia de captura: al final, porque duplica cuadros ---
+        if rng.random() < cfg.p_fps:
+            p = simulate_fps(p, int(rng.integers(cfg.fps_min_frames, cfg.n_frames)))
 
         # --- Espejado: antes de las rotaciones, para no componer signos ---
         if rng.random() < cfg.p_mirror:
             p = mirror(p)
 
-        # --- Espaciales ---
-        if rng.random() < cfg.p_scale:
-            base = 1.0 + rng.uniform(-cfg.scale_range, cfg.scale_range)
-            sx = base + rng.uniform(-cfg.anisotropy, cfg.anisotropy)
-            sy = base + rng.uniform(-cfg.anisotropy, cfg.anisotropy)
-            sz = base
-            p = scale(p, sx, sy, sz)
+        # --- Proporciones del cuerpo ---
+        if rng.random() < cfg.p_arm_scale:
+            p = scale_arms(p, 1.0 + rng.uniform(-cfg.arm_scale_range, cfg.arm_scale_range))
+        if rng.random() < cfg.p_hand_scale:
+            r = cfg.hand_scale_range
+            p = scale_hands(p, 1.0 + rng.uniform(-r, r), 1.0 + rng.uniform(-r, r))
+        if rng.random() < cfg.p_aspect:
+            r = cfg.aspect_range
+            p = scale_aspect(p, 1.0 + rng.uniform(-r, r), 1.0 + rng.uniform(-r, r))
 
+        # --- Pose respecto de la cámara ---
         if cfg.p_yaw > 0.0 and rng.random() < cfg.p_yaw:
-            p = rotate_yaw(p, rng.uniform(-cfg.yaw_deg, cfg.yaw_deg),
-                           cfg.yaw_z_gain)
-
+            p = rotate_yaw(p, rng.uniform(-cfg.yaw_deg, cfg.yaw_deg), cfg.yaw_z_gain)
         if rng.random() < cfg.p_rotate:
             p = rotate_in_plane(p, rng.uniform(-cfg.rotate_deg, cfg.rotate_deg))
-
         if rng.random() < cfg.p_translate_z:
-            p = translate_z(p, rng.uniform(-cfg.translate_z_range,
-                                           cfg.translate_z_range))
+            p = translate_z(p, rng.uniform(-cfg.translate_z_range, cfg.translate_z_range))
 
         # --- Degradaciones del extractor ---
         if rng.random() < cfg.p_drop_hand:
@@ -418,17 +478,40 @@ class Augmenter:
             length = max(1, int(rng.uniform(lo, hi) * p.shape[0]))
             start = int(rng.integers(0, max(1, p.shape[0] - length + 1)))
             p = drop_hand(p, which, start, length, cfg.drop_fill)
-
+        if rng.random() < cfg.p_drop_frames:
+            p = drop_hand_frames(p, cfg.drop_frame_prob, rng)
         if rng.random() < cfg.p_jitter:
             p = jitter(p, np.asarray(cfg.jitter_sigma, dtype=np.float32), rng)
 
-        # --- Restablecer el contrato ---
-        p = recenter(p)
-
-        out = to_flat(p).astype(np.float32)
+        # --- Restablecer el contrato v3 (centro y ancho de hombros = 1) ---
+        out = normalize_pixels_v3(p.astype(np.float32))
         if cfg.enforce_contract:
             assert_contract(out)
         return out
+
+
+# ---------------------------------------------------------------------------
+# Workers de multiprocessing (entrenamiento)
+# ---------------------------------------------------------------------------
+# Van a nivel de módulo porque en Windows los procesos se crean con spawn y
+# solo pueden recibir funciones importables. Cada worker recibe X una vez.
+
+_WORKER_X: np.ndarray | None = None
+_WORKER_AUG: Augmenter | None = None
+
+
+def worker_init(X: np.ndarray, config: AugmentConfig) -> None:
+    global _WORKER_X, _WORKER_AUG
+    _WORKER_X = X
+    _WORKER_AUG = Augmenter(config)
+
+
+def worker_batch(tarea: tuple[np.ndarray, tuple[int, ...]]) -> np.ndarray:
+    """Aumenta un lote. La semilla (seed, época, lote) hace que el resultado no
+    dependa de qué worker lo procese."""
+    idx, semilla = tarea
+    rng = np.random.default_rng(list(semilla))
+    return np.stack([_WORKER_AUG(_WORKER_X[i], rng) for i in idx]).astype(np.float32)
 
 
 # ---------------------------------------------------------------------------
@@ -436,10 +519,7 @@ class Augmenter:
 # ---------------------------------------------------------------------------
 
 def assert_contract(x: np.ndarray, tol: float = 1e-4) -> None:
-    """Verifica que la salida sigue cumpliendo el contrato Eva v2.
-
-    Pensada para correr en CI junto con las pruebas existentes del contrato.
-    """
+    """Verifica que la salida sigue cumpliendo el contrato Eva v3."""
     if x.ndim != 2 or x.shape[1] != N_COORDS:
         raise AssertionError(f"Forma inválida: {x.shape}, se esperaba (T, {N_COORDS})")
     if not np.isfinite(x).all():
@@ -450,8 +530,10 @@ def assert_contract(x: np.ndarray, tol: float = 1e-4) -> None:
     mid = np.abs((ls + rs) * 0.5)
     if mid.max() > tol:
         raise AssertionError(
-            f"Centrado roto: |punto medio de hombros| = {mid.max():.6f} > {tol}"
-        )
+            f"Centrado roto: |punto medio de hombros| = {mid.max():.6f} > {tol}")
+    width = np.median(np.linalg.norm(ls - rs, axis=-1))
+    if abs(width - 1.0) > 1e-3:
+        raise AssertionError(f"Escala rota: mediana del ancho de hombros = {width:.5f}")
 
 
 def _self_test() -> None:
@@ -461,19 +543,17 @@ def _self_test() -> None:
     # La permutación de espejado debe ser una involución.
     assert np.array_equal(MIRROR_PERMUTATION[MIRROR_PERMUTATION],
                           np.arange(N_POINTS)), "El espejado no es involutivo"
-
-    # Los bloques de mano deben intercambiarse completos.
     assert np.array_equal(MIRROR_PERMUTATION[IDX_LEFT_HAND],
                           np.arange(N_HAND) + N_HAND)
 
-    # Muestra sintética con hombros separados y centrados.
-    T = 48
-    p = rng.normal(0.0, 0.1, size=(T, N_POINTS, 3)).astype(np.float32)
-    p[:, POSE_OFFSET + POSE_LEFT_SHOULDER, :2] = [0.2, 0.0]
-    p[:, POSE_OFFSET + POSE_RIGHT_SHOULDER, :2] = [-0.2, 0.0]
-    p = recenter(p)
-    x = to_flat(p)
+    # Muestra sintética v3: hombros en ±0,5, resto al azar.
+    T = FRAMES
+    p = rng.normal(0.0, 0.5, size=(T, N_POINTS, 3)).astype(np.float32)
+    p[:, POSE_OFFSET + POSE_LEFT_SHOULDER, :2] = [0.5, 0.0]
+    p[:, POSE_OFFSET + POSE_RIGHT_SHOULDER, :2] = [-0.5, 0.0]
+    x = normalize_pixels_v3(p)
     assert_contract(x)
+    p = to_points(x)
 
     # Espejar dos veces devuelve el original.
     assert np.allclose(to_flat(mirror(mirror(p))), x, atol=1e-6), \
@@ -482,24 +562,42 @@ def _self_test() -> None:
     # Rotar 0 grados es identidad.
     assert np.allclose(rotate_in_plane(p, 0.0), p)
 
+    # Brazos: hombros fijos, mano se aleja del hombro.
+    q = scale_arms(p, 1.2)
+    assert np.allclose(q[:, IDX_POSE][:, :2], p[:, IDX_POSE][:, :2])
+    assert not np.allclose(q[:, IDX_LEFT_HAND], p[:, IDX_LEFT_HAND])
+
+    # Tamaño de mano: la muñeca no se mueve.
+    q = scale_hands(p, 1.2, 0.8)
+    assert np.allclose(q[:, WRIST], p[:, WRIST])
+
+    # Frecuencia de captura: 40 cuadros, solo cuadros originales, en orden.
+    ramp = np.zeros((T, N_POINTS, 3), dtype=np.float32)
+    ramp[:, :, 0] = np.arange(1, T + 1)[:, None]
+    f = simulate_fps(ramp, 20)[:, 0, 0]
+    assert len(f) == T and np.all(np.diff(f) >= 0) and len(set(f.tolist())) == 20
+
+    # Ausentes siguen ausentes tras una rotación.
+    q = p.copy()
+    q[:10, IDX_LEFT_HAND] = 0.0
+    assert np.all(rotate_in_plane(q, 10.0)[:10, IDX_LEFT_HAND] == 0.0)
+
     # El aumentador respeta forma y contrato, y es determinista por semilla.
-    aug = Augmenter(AugmentConfig(n_frames=32))
+    aug = Augmenter(AugmentConfig())
     a = aug(x, np.random.default_rng(7))
     b = aug(x, np.random.default_rng(7))
-    assert a.shape == (32, N_COORDS), f"Forma inesperada: {a.shape}"
+    assert a.shape == (T, N_COORDS), f"Forma inesperada: {a.shape}"
     assert np.array_equal(a, b), "No es determinista con la misma semilla"
-
     c = aug(x, np.random.default_rng(8))
     assert not np.array_equal(a, c), "Semillas distintas dan el mismo resultado"
 
-    # Lote largo: ninguna combinación de transformaciones rompe el contrato.
+    # Lote largo, con yaw activado: ninguna combinación rompe el contrato.
+    aug = Augmenter(AugmentConfig(p_yaw=0.5))
     r = np.random.default_rng(123)
     for _ in range(500):
         assert_contract(aug(x, r))
 
     # La deformación temporal debe ser monótona (no invierte cuadros).
-    ramp = np.zeros((T, N_POINTS, 3), dtype=np.float32)
-    ramp[:, :, 0] = np.linspace(0.0, 1.0, T)[:, None]
     w = time_warp(ramp, 32, 0.4, 5, np.random.default_rng(3))[:, 0, 0]
     assert np.all(np.diff(w) >= -1e-6), "La deformación temporal no es monótona"
 
