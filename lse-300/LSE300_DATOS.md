@@ -125,9 +125,12 @@ La glosa legible sale del LABEL original: separadores `^`, `.`, `-` a espacios,
 variantes numéricas "2" a "(variante 2)", abreviaturas entre paréntesis en mayúscula.
 El campo `etiquetasOriginales` conserva el texto tal cual.
 
-- Clase 222 (`#N/A` en el original): probable celda vacía en el archivo de origen.
-  Queda como clase con glosa "No identificada (#N/A en el original)". Conviene revisarla
-  antes de entrenar.
+- Clase #N/A: **CLASS_ID 222 en base 0** (índice de `catalogo_lse300.json` y de
+  SWL-LSE) = **etiqueta 223 en base 1** (la de `y.npy` y la de la tabla de abajo).
+  Glosa original: "No identificada (#N/A en el original)", probable celda vacía en el
+  archivo de origen. Se excluye del entrenamiento (15 muestras: 14 secuencias y 1
+  referencia). Nunca se publica una glosa desconocida. El modelo `eva-lse300-v1` tiene
+  299 clases: `catalogo_senas.json` no la incluye.
 - **Regionalismos de España: no verificados** (`regionalismosVerificados: false`).
   Pendiente de revisión.
 - `relevantesHelpi`: **propuesta para revisar** (no validada por personal de salud ni
@@ -480,4 +483,5 @@ es coherente con la escala de hombros distinta (sección 3). No es una prueba de
 - 2 a 4 secuencias por clase en val y test: métricas de esas particiones muy ruidosas.
 - Glosas legibles pero no revisadas por personas sordas ni por personal de salud.
   Regionalismos sin verificar.
-- Clase 222 (`#N/A`) sin revisar.
+- Clase #N/A (CLASS_ID 222 base 0 = etiqueta 223 base 1) excluida del entrenamiento;
+  la celda de origen sin revisar.

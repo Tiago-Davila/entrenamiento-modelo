@@ -455,12 +455,35 @@ def compilar(modelo, args, pasos_por_epoca: int, epocas: int):
     )
 
 
+def transferir_pesos(modelo, args, pesos: Path, n_clases_origen: int) -> int:
+    """Copia a `modelo` los pesos guardados de otra corrida con la misma
+    arquitectura, salvo la capa de salida (distinto número de clases).
+    Devuelve la cantidad de capas copiadas."""
+    origen = construir(args, n_clases_origen)
+    origen.load_weights(pesos)
+    nuevas, viejas = modelo.layers, origen.layers
+    if len(nuevas) != len(viejas):
+        raise SystemExit(f"Arquitecturas distintas: {len(nuevas)} capas contra {len(viejas)}.")
+    copiadas = 0
+    for capa_nueva, capa_vieja in zip(nuevas, viejas):
+        if capa_nueva.name == "logits":
+            continue
+        if capa_nueva.get_weights() and [w.shape for w in capa_nueva.get_weights()] != \
+                [w.shape for w in capa_vieja.get_weights()]:
+            raise SystemExit(f"La capa {capa_nueva.name} no tiene la misma forma en {pesos}.")
+        capa_nueva.set_weights(capa_vieja.get_weights())
+        copiadas += bool(capa_nueva.get_weights())
+    return copiadas
+
+
 def entrenar(args, Xtr, ytr, Xva, yva, n_clases, epocas, seed, early_stopping,
-             sujetos_tr=None):
+             sujetos_tr=None, pesos_iniciales=None, n_clases_iniciales=None):
     """Entrena un modelo. Devuelve (modelo, historia).
 
     sujetos_tr permite detectar las clases de un solo señante, que usan el
     perfil de augmentación fuerte (salvo --sin-perfil-fuerte).
+    pesos_iniciales (con n_clases_iniciales): arranca de otro modelo de la
+    misma arquitectura; no copia la capa de salida.
     """
     keras.utils.set_random_seed(seed)
     augmenter = fuerte = perfil = None
@@ -473,6 +496,8 @@ def entrenar(args, Xtr, ytr, Xva, yva, n_clases, epocas, seed, early_stopping,
                               workers=args.workers, balance=args.balance,
                               augmenter_fuerte=fuerte, perfil=perfil)
     modelo = construir(args, n_clases)
+    if pesos_iniciales is not None:
+        transferir_pesos(modelo, args, pesos_iniciales, n_clases_iniciales)
     compilar(modelo, args, len(datos), epocas)
     callbacks = []
     if early_stopping:
@@ -613,21 +638,38 @@ def escribir_fixture(destino: Path, blob: bytes, X, y, catalog, grupos, n=12, se
     return len(casos)
 
 
+# Parámetros de exportación de LSA-94. Otras lenguas (train_lse.py) pasan los suyos.
+EXPORTACION_LSA94 = {
+    "nombre_tflite": "modelo_lsa.tflite",
+    "manifiesto": "lsa-manifest.json",
+    "language": "lsa",
+    "origen": ORIGEN_LSA94,
+}
+
+
 def exportar(modelo, args, out_dir: Path, X_ref, y_ref, catalog, catalog_version,
-             n_clases, metricas: dict):
+             n_clases, metricas: dict, grupos: dict | None = None,
+             exportacion: dict | None = None, script: Path | None = None):
     """Exporta el modelo. Con backend torch delega en un subproceso con
-    backend tensorflow (el conversor TFLite necesita un modelo TF)."""
+    backend tensorflow (el conversor TFLite necesita un modelo TF).
+
+    grupos por defecto sale de --catalog; exportacion por defecto es la de LSA-94;
+    script es el archivo que maneja --exportar-desde (por defecto, este mismo)."""
+    grupos = grupos if grupos is not None else load_groups(Path(args.catalog))
+    exportacion = exportacion or EXPORTACION_LSA94
     if keras.backend.backend() != "tensorflow":
-        exportar_via_tensorflow(modelo, args, out_dir, X_ref, y_ref, n_clases, metricas)
+        exportar_via_tensorflow(modelo, args, out_dir, X_ref, y_ref, n_clases, metricas,
+                                catalog, catalog_version, grupos, exportacion, script)
         return
     exportar_tf(modelo, args, out_dir, X_ref, y_ref, catalog, catalog_version,
-                n_clases, metricas)
+                n_clases, metricas, grupos, exportacion)
 
 
 N_REF_BACKENDS = 64
 
 
-def exportar_via_tensorflow(modelo, args, out_dir: Path, X_ref, y_ref, n_clases, metricas):
+def exportar_via_tensorflow(modelo, args, out_dir: Path, X_ref, y_ref, n_clases, metricas,
+                            catalog, catalog_version, grupos, exportacion, script=None):
     """Guarda pesos y salidas de referencia y exporta en un proceso con
     KERAS_BACKEND=tensorflow. El hijo reconstruye la misma arquitectura, carga
     los pesos y exige que sus salidas coincidan con las del modelo entrenado
@@ -640,11 +682,14 @@ def exportar_via_tensorflow(modelo, args, out_dir: Path, X_ref, y_ref, n_clases,
     config = {k: (str(v) if isinstance(v, Path) else v) for k, v in vars(args).items()}
     (trabajo / "job.json").write_text(json.dumps({
         "args": config, "nClases": n_clases, "metricas": metricas,
+        "catalogo": catalog, "catalogVersion": catalog_version,
+        "grupos": {k: list(v) for k, v in grupos.items()}, "exportacion": exportacion,
     }, ensure_ascii=False), encoding="utf-8")
 
     print("\n--- Exportacion: subproceso con backend tensorflow ---", flush=True)
     env = {**os.environ, "KERAS_BACKEND": "tensorflow"}
-    r = subprocess.run([sys.executable, str(Path(__file__).resolve()),
+    script = script or Path(__file__).resolve()
+    r = subprocess.run([sys.executable, str(script),
                         "--exportar-desde", str(trabajo)], env=env)
     if r.returncode != 0:
         raise SystemExit(f"La exportacion fallo (codigo {r.returncode}). "
@@ -661,7 +706,7 @@ def exportar_desde_pesos(trabajo: Path) -> int:
     args = argparse.Namespace(**job["args"])
     args.catalog = Path(args.catalog)
     n_clases = job["nClases"]
-    catalog_version, catalog = load_catalog(args.catalog)
+    catalog, catalog_version = job["catalogo"], job["catalogVersion"]
     ref = np.load(trabajo / "ref.npz")
 
     modelo = construir(args, n_clases)
@@ -679,14 +724,18 @@ def exportar_desde_pesos(trabajo: Path) -> int:
     metricas["equivalenciaBackendsMaxDiff"] = diff
     metricas["tfVersion"] = _tf().__version__
     exportar_tf(modelo, args, trabajo.parent, X_ref, ref["y"], catalog, catalog_version,
-                n_clases, metricas)
+                n_clases, metricas, {k: tuple(v) for k, v in job["grupos"].items()},
+                job["exportacion"])
     return 0
 
 
 def exportar_tf(modelo, args, out_dir: Path, X_ref, y_ref, catalog, catalog_version,
-                n_clases, metricas: dict):
+                n_clases, metricas: dict, grupos: dict | None = None,
+                exportacion: dict | None = None):
+    exportacion = exportacion or EXPORTACION_LSA94
+    grupos = grupos if grupos is not None else load_groups(Path(args.catalog))
     print("\n--- Exportacion a TFLite ---")
-    ruta_tflite = out_dir / "modelo_lsa.tflite"
+    ruta_tflite = out_dir / exportacion["nombre_tflite"]
     blob = exportar_tflite(modelo, ruta_tflite)
     print(f"  {ruta_tflite.name}: {len(blob)/1024:.0f} KB")
 
@@ -697,23 +746,24 @@ def exportar_tf(modelo, args, out_dir: Path, X_ref, y_ref, catalog, catalog_vers
         raise SystemExit("El .tflite NO es equivalente al modelo entrenado.")
 
     n_fix = escribir_fixture(out_dir / "fixture_android.json", blob, X_ref, y_ref, catalog,
-                             load_groups(Path(args.catalog)))
+                             grupos)
     print(f"  fixture_android.json: {n_fix} casos")
 
     catalog_bytes = json.dumps({"version": catalog_version, "glosas": catalog},
                                ensure_ascii=False, indent=2).encode("utf-8")
     (out_dir / "catalogo_senas.json").write_bytes(catalog_bytes)
+    origen = exportacion["origen"]
     escribir_manifiesto(
-        out_dir / "lsa-manifest.json",
-        language="lsa",
+        out_dir / exportacion["manifiesto"],
+        language=exportacion["language"],
         model_version=args.model_version,
         catalog_version=catalog_version,
         blob_modelo=blob,
         catalog_bytes=catalog_bytes,
         num_clases=n_clases,
-        dataset=ORIGEN_LSA94["dataset"],
-        license=ORIGEN_LSA94["license"],
-        attribution=ORIGEN_LSA94["attribution"],
+        dataset=origen["dataset"],
+        license=origen["license"],
+        attribution=origen["attribution"],
         frames=FRAMES,
         coords=COORDS,
         contract_version=CONTRACT_VERSION,
@@ -727,7 +777,8 @@ def exportar_tf(modelo, args, out_dir: Path, X_ref, y_ref, catalog, catalog_vers
     (out_dir / "metricas.json").write_text(
         json.dumps(metricas, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"\nListo. Archivos en {out_dir.resolve()}")
-    print("  modelo_lsa.tflite, catalogo_senas.json y lsa-manifest.json -> app/src/main/assets/lsa/")
+    print(f"  {exportacion['nombre_tflite']}, catalogo_senas.json y {exportacion['manifiesto']} "
+          f"-> app/src/main/assets/{exportacion['language']}/")
     print("  fixture_android.json   -> app/src/androidTest/assets/")
 
 
@@ -875,7 +926,8 @@ def resumir_por_grupo(resultados: list[dict], grupos: dict) -> dict:
 
 # --------------------------------------------------------------------------
 
-def main() -> int:
+def construir_parser() -> argparse.ArgumentParser:
+    """Argumentos de la receta de entrenamiento (la comparten LSA-94 y LSE-300)."""
     ap = argparse.ArgumentParser()
     ap.add_argument("--data")
     ap.add_argument("--out", default="./exports")
@@ -924,6 +976,11 @@ def main() -> int:
                     help="entrena con todos los sujetos --epochs epocas y exporta")
     ap.add_argument("--exportar-desde", type=Path, default=None,
                     help=argparse.SUPPRESS)  # uso interno: exportar_via_tensorflow
+    return ap
+
+
+def main() -> int:
+    ap = construir_parser()
     args = ap.parse_args()
     if args.exportar_desde:
         return exportar_desde_pesos(args.exportar_desde)

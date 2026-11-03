@@ -669,7 +669,13 @@ def assert_contract(x: np.ndarray, tol: float = 1e-4) -> None:
     if mid.max() > tol:
         raise AssertionError(
             f"Centrado roto: |punto medio de hombros| = {mid.max():.6f} > {tol}")
-    width = np.median(np.linalg.norm(ls - rs, axis=-1))
+    # Como normalize_pixels_v3 (paso 3 del contrato): la escala sale solo de los
+    # cuadros con ambos hombros. Con todos los cuadros, un cuadro sin hombros
+    # (cero) corre la mediana aunque la normalización esté bien (SWL-LSE).
+    valido = np.any(ls != 0.0, axis=-1) & np.any(rs != 0.0, axis=-1)
+    if not valido.any():
+        raise AssertionError("Ningún cuadro tiene ambos hombros: no hay escala que verificar")
+    width = np.median(np.linalg.norm(ls - rs, axis=-1)[valido])
     if abs(width - 1.0) > 1e-3:
         raise AssertionError(f"Escala rota: mediana del ancho de hombros = {width:.5f}")
 
